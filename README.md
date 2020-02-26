@@ -1,3 +1,3 @@
 # MinionMovies
 
-I created this app to study and implementing concepts of Swift Language.
+This repo it suits to test my evolution in studies.
