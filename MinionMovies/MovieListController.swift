@@ -12,10 +12,6 @@ class MovieListController: UIViewController {
 
     let moviesImages: [String] = ["jumanji", "reiLeão"]
     
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-       .lightContent
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

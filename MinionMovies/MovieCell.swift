@@ -10,14 +10,23 @@ import UIKit
 
 class MovieCell: UICollectionViewCell {
     
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet private weak var imageView: UIImageView!
     
-    func setImageSettings() {
-        imageView.layer.cornerRadius = 6
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    override func awakeFromNib() {
+        self.layoutIfNeeded()
+        layer.cornerRadius = 6
+        layer.masksToBounds = true
     }
     
     func populate(with image: UIImage) {
         imageView.image = image
-        setImageSettings()
     }
 }
