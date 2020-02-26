@@ -18,7 +18,6 @@ class MovieListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        preferredStatusBarStyle
     }
 
 }
