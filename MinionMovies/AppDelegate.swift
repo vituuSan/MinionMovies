@@ -2,7 +2,7 @@
 //  AppDelegate.swift
 //  MinionMovies
 //
-//  Created by Vitor Costa on 21/02/20.
+//  Created by Vitor Costa on 26/02/20.
 //  Copyright © 2020 Vitor Costa. All rights reserved.
 //
 

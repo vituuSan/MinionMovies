@@ -7,27 +7,29 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4AACD2312400446C00A4EAF6 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACD2302400446C00A4EAF6 /* AppDelegate.swift */; };
-		4AACD2332400446C00A4EAF6 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACD2322400446C00A4EAF6 /* SceneDelegate.swift */; };
-		4AACD2352400446C00A4EAF6 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AACD2342400446C00A4EAF6 /* ViewController.swift */; };
-		4AACD2382400446C00A4EAF6 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AACD2362400446C00A4EAF6 /* Main.storyboard */; };
-		4AACD23A2400447000A4EAF6 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AACD2392400447000A4EAF6 /* Assets.xcassets */; };
-		4AACD23D2400447000A4EAF6 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AACD23B2400447000A4EAF6 /* LaunchScreen.storyboard */; };
+		4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3982406B94600ACF001 /* AppDelegate.swift */; };
+		4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */; };
+		4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39C2406B94600ACF001 /* MovieListController.swift */; };
+		4AD8B3A02406B94600ACF001 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8B39E2406B94600ACF001 /* Main.storyboard */; };
+		4AD8B3A22406B94800ACF001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8B3A12406B94800ACF001 /* Assets.xcassets */; };
+		4AD8B3A52406B94800ACF001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */; };
+		4AD8B3AD2406BB1800ACF001 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		4AACD22D2400446C00A4EAF6 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AACD2302400446C00A4EAF6 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4AACD2322400446C00A4EAF6 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		4AACD2342400446C00A4EAF6 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4AACD2372400446C00A4EAF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4AACD2392400447000A4EAF6 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4AACD23C2400447000A4EAF6 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4AACD23E2400447000A4EAF6 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AD8B3952406B94600ACF001 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AD8B3982406B94600ACF001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		4AD8B39C2406B94600ACF001 /* MovieListController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieListController.swift; sourceTree = "<group>"; };
+		4AD8B39F2406B94600ACF001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4AD8B3A12406B94800ACF001 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4AD8B3A42406B94800ACF001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4AD8B3A62406B94800ACF001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4AACD22A2400446C00A4EAF6 /* Frameworks */ = {
+		4AD8B3922406B94600ACF001 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -37,32 +39,33 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4AACD2242400446C00A4EAF6 = {
+		4AD8B38C2406B94600ACF001 = {
 			isa = PBXGroup;
 			children = (
-				4AACD22F2400446C00A4EAF6 /* MinionMovies */,
-				4AACD22E2400446C00A4EAF6 /* Products */,
+				4AD8B3972406B94600ACF001 /* MinionMovies */,
+				4AD8B3962406B94600ACF001 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4AACD22E2400446C00A4EAF6 /* Products */ = {
+		4AD8B3962406B94600ACF001 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4AACD22D2400446C00A4EAF6 /* MinionMovies.app */,
+				4AD8B3952406B94600ACF001 /* MinionMovies.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4AACD22F2400446C00A4EAF6 /* MinionMovies */ = {
+		4AD8B3972406B94600ACF001 /* MinionMovies */ = {
 			isa = PBXGroup;
 			children = (
-				4AACD2302400446C00A4EAF6 /* AppDelegate.swift */,
-				4AACD2322400446C00A4EAF6 /* SceneDelegate.swift */,
-				4AACD2342400446C00A4EAF6 /* ViewController.swift */,
-				4AACD2362400446C00A4EAF6 /* Main.storyboard */,
-				4AACD2392400447000A4EAF6 /* Assets.xcassets */,
-				4AACD23B2400447000A4EAF6 /* LaunchScreen.storyboard */,
-				4AACD23E2400447000A4EAF6 /* Info.plist */,
+				4AD8B3982406B94600ACF001 /* AppDelegate.swift */,
+				4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */,
+				4AD8B39C2406B94600ACF001 /* MovieListController.swift */,
+				4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */,
+				4AD8B39E2406B94600ACF001 /* Main.storyboard */,
+				4AD8B3A12406B94800ACF001 /* Assets.xcassets */,
+				4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */,
+				4AD8B3A62406B94800ACF001 /* Info.plist */,
 			);
 			path = MinionMovies;
 			sourceTree = "<group>";
@@ -70,13 +73,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4AACD22C2400446C00A4EAF6 /* MinionMovies */ = {
+		4AD8B3942406B94600ACF001 /* MinionMovies */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4AACD2412400447000A4EAF6 /* Build configuration list for PBXNativeTarget "MinionMovies" */;
+			buildConfigurationList = 4AD8B3A92406B94800ACF001 /* Build configuration list for PBXNativeTarget "MinionMovies" */;
 			buildPhases = (
-				4AACD2292400446C00A4EAF6 /* Sources */,
-				4AACD22A2400446C00A4EAF6 /* Frameworks */,
-				4AACD22B2400446C00A4EAF6 /* Resources */,
+				4AD8B3912406B94600ACF001 /* Sources */,
+				4AD8B3922406B94600ACF001 /* Frameworks */,
+				4AD8B3932406B94600ACF001 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -84,25 +87,25 @@
 			);
 			name = MinionMovies;
 			productName = MinionMovies;
-			productReference = 4AACD22D2400446C00A4EAF6 /* MinionMovies.app */;
+			productReference = 4AD8B3952406B94600ACF001 /* MinionMovies.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4AACD2252400446C00A4EAF6 /* Project object */ = {
+		4AD8B38D2406B94600ACF001 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 1130;
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Vitor Costa";
 				TargetAttributes = {
-					4AACD22C2400446C00A4EAF6 = {
+					4AD8B3942406B94600ACF001 = {
 						CreatedOnToolsVersion = 11.3.1;
 					};
 				};
 			};
-			buildConfigurationList = 4AACD2282400446C00A4EAF6 /* Build configuration list for PBXProject "MinionMovies" */;
+			buildConfigurationList = 4AD8B3902406B94600ACF001 /* Build configuration list for PBXProject "MinionMovies" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -110,55 +113,56 @@
 				en,
 				Base,
 			);
-			mainGroup = 4AACD2242400446C00A4EAF6;
-			productRefGroup = 4AACD22E2400446C00A4EAF6 /* Products */;
+			mainGroup = 4AD8B38C2406B94600ACF001;
+			productRefGroup = 4AD8B3962406B94600ACF001 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4AACD22C2400446C00A4EAF6 /* MinionMovies */,
+				4AD8B3942406B94600ACF001 /* MinionMovies */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4AACD22B2400446C00A4EAF6 /* Resources */ = {
+		4AD8B3932406B94600ACF001 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AACD23D2400447000A4EAF6 /* LaunchScreen.storyboard in Resources */,
-				4AACD23A2400447000A4EAF6 /* Assets.xcassets in Resources */,
-				4AACD2382400446C00A4EAF6 /* Main.storyboard in Resources */,
+				4AD8B3A52406B94800ACF001 /* LaunchScreen.storyboard in Resources */,
+				4AD8B3A22406B94800ACF001 /* Assets.xcassets in Resources */,
+				4AD8B3A02406B94600ACF001 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4AACD2292400446C00A4EAF6 /* Sources */ = {
+		4AD8B3912406B94600ACF001 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4AACD2352400446C00A4EAF6 /* ViewController.swift in Sources */,
-				4AACD2312400446C00A4EAF6 /* AppDelegate.swift in Sources */,
-				4AACD2332400446C00A4EAF6 /* SceneDelegate.swift in Sources */,
+				4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */,
+				4AD8B3AD2406BB1800ACF001 /* MovieCell.swift in Sources */,
+				4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */,
+				4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		4AACD2362400446C00A4EAF6 /* Main.storyboard */ = {
+		4AD8B39E2406B94600ACF001 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4AACD2372400446C00A4EAF6 /* Base */,
+				4AD8B39F2406B94600ACF001 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		4AACD23B2400447000A4EAF6 /* LaunchScreen.storyboard */ = {
+		4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4AACD23C2400447000A4EAF6 /* Base */,
+				4AD8B3A42406B94800ACF001 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -166,7 +170,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4AACD23F2400447000A4EAF6 /* Debug */ = {
+		4AD8B3A72406B94800ACF001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -226,7 +230,7 @@
 			};
 			name = Debug;
 		};
-		4AACD2402400447000A4EAF6 /* Release */ = {
+		4AD8B3A82406B94800ACF001 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -280,7 +284,7 @@
 			};
 			name = Release;
 		};
-		4AACD2422400447000A4EAF6 /* Debug */ = {
+		4AD8B3AA2406B94800ACF001 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -297,7 +301,7 @@
 			};
 			name = Debug;
 		};
-		4AACD2432400447000A4EAF6 /* Release */ = {
+		4AD8B3AB2406B94800ACF001 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -317,25 +321,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4AACD2282400446C00A4EAF6 /* Build configuration list for PBXProject "MinionMovies" */ = {
+		4AD8B3902406B94600ACF001 /* Build configuration list for PBXProject "MinionMovies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4AACD23F2400447000A4EAF6 /* Debug */,
-				4AACD2402400447000A4EAF6 /* Release */,
+				4AD8B3A72406B94800ACF001 /* Debug */,
+				4AD8B3A82406B94800ACF001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4AACD2412400447000A4EAF6 /* Build configuration list for PBXNativeTarget "MinionMovies" */ = {
+		4AD8B3A92406B94800ACF001 /* Build configuration list for PBXNativeTarget "MinionMovies" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4AACD2422400447000A4EAF6 /* Debug */,
-				4AACD2432400447000A4EAF6 /* Release */,
+				4AD8B3AA2406B94800ACF001 /* Debug */,
+				4AD8B3AB2406B94800ACF001 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4AACD2252400446C00A4EAF6 /* Project object */;
+	rootObject = 4AD8B38D2406B94600ACF001 /* Project object */;
 }
