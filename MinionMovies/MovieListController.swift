@@ -10,7 +10,7 @@ import UIKit
 
 class MovieListController: UIViewController {
 
-    let moviesImages: [String] = ["jumanji", "reiLeão"]
+    private let moviesImages: [String] = ["jumanji", "reiLeão"]
     
     override func viewDidLoad() {
         super.viewDidLoad()
