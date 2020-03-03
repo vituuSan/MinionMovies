@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		4A88A738240DA08200B5746E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A88A737240DA08200B5746E /* Movie.swift */; };
 		4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3982406B94600ACF001 /* AppDelegate.swift */; };
 		4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */; };
 		4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39C2406B94600ACF001 /* MovieListController.swift */; };
@@ -17,6 +18,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		4A88A737240DA08200B5746E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4AD8B3952406B94600ACF001 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD8B3982406B94600ACF001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */,
 				4AD8B39C2406B94600ACF001 /* MovieListController.swift */,
 				4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */,
+				4A88A737240DA08200B5746E /* Movie.swift */,
 				4AD8B39E2406B94600ACF001 /* Main.storyboard */,
 				4AD8B3A12406B94800ACF001 /* Assets.xcassets */,
 				4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */,
@@ -141,6 +144,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4A88A738240DA08200B5746E /* Movie.swift in Sources */,
 				4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */,
 				4AD8B3AD2406BB1800ACF001 /* MovieCell.swift in Sources */,
 				4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */,
