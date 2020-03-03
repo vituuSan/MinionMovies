@@ -26,7 +26,13 @@ class MovieCell: UICollectionViewCell {
         layer.masksToBounds = true
     }
     
-    func populate(with image: UIImage) {
-        imageView.image = image
+    func populate(with textURL: String) {
+        if let url = URL(string: textURL) {
+            guard let imageData = try? Data(contentsOf: url) else {
+                return
+            }
+            let image = UIImage(data: imageData)
+            imageView.image = image
+        }
     }
 }
