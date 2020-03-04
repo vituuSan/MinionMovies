@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="DwM-yz-rAv">
-                                <rect key="frame" x="8" y="8" width="398" height="780"/>
+                                <rect key="frame" x="8" y="56" width="398" height="732"/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="r4L-sH-Lbn">
                                     <size key="itemSize" width="190" height="300"/>
@@ -58,12 +58,28 @@
                                     <outlet property="delegate" destination="BYZ-38-t0r" id="z7j-jX-iQ5"/>
                                 </connections>
                             </collectionView>
+                            <searchBar contentMode="redraw" placeholder="Type your search here..." translatesAutoresizingMaskIntoConstraints="NO" id="2pN-G9-JDF">
+                                <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <color key="barTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <textInputTraits key="textInputTraits"/>
+                                <scopeButtonTitles>
+                                    <string>Title</string>
+                                    <string>Title</string>
+                                </scopeButtonTitles>
+                                <connections>
+                                    <outlet property="delegate" destination="BYZ-38-t0r" id="lyt-q9-A6C"/>
+                                </connections>
+                            </searchBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
+                            <constraint firstItem="DwM-yz-rAv" firstAttribute="top" secondItem="2pN-G9-JDF" secondAttribute="bottom" symbolic="YES" id="1Ay-Zs-V4w"/>
+                            <constraint firstItem="2pN-G9-JDF" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="3rw-rI-fK4"/>
+                            <constraint firstItem="2pN-G9-JDF" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="ELn-6J-sqR"/>
                             <constraint firstAttribute="bottom" secondItem="DwM-yz-rAv" secondAttribute="bottom" constant="20" symbolic="YES" id="GQ2-oo-6BH"/>
                             <constraint firstItem="DwM-yz-rAv" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" constant="-8" id="GYG-TF-lhu"/>
-                            <constraint firstItem="DwM-yz-rAv" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="8" id="KMe-bf-JM4"/>
+                            <constraint firstItem="2pN-G9-JDF" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" id="OlT-sr-UXs"/>
                             <constraint firstItem="DwM-yz-rAv" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="8" id="YdX-Qv-eQf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -75,6 +91,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="DwM-yz-rAv" id="h58-YX-TcC"/>
+                        <outlet property="searchBar" destination="2pN-G9-JDF" id="9ck-NF-CYk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

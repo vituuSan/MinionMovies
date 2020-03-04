@@ -29,10 +29,13 @@ class MovieCell: UICollectionViewCell {
     func populate(with textURL: String) {
         if let url = URL(string: textURL) {
             guard let imageData = try? Data(contentsOf: url) else {
-                return
+                imageView.contentMode = .scaleAspectFit
+                return imageView.image = UIImage(named: "file-not-found")
             }
             let image = UIImage(data: imageData)
             imageView.image = image
+        } else {
+            imageView.image = UIImage(named: textURL)
         }
     }
 }
