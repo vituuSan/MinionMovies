@@ -13,10 +13,16 @@ class MovieListController: UIViewController {
     private let session = URLSession.shared
     private let url = URL(string: "http://localhost:8080/response.json")!
     private var movies: [Movie] = []
+    private var filteredMovies: [Movie] = []
+    private var searching = false
+    
+    @IBOutlet weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+         
+        searchBar.searchTextField.textColor = .white
         
         let task = session.dataTask(with: url) { data, response, error in
             if error == nil {
@@ -49,14 +55,32 @@ class MovieListController: UIViewController {
 
 extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies.count
+        if searching {
+            return filteredMovies.count
+        } else {
+            return movies.count
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
-            movieCell.populate(with: movies[indexPath.row].images.last!)
+            if searching {
+                movieCell.populate(with: filteredMovies[indexPath.row].images[0])
+            } else {
+                movieCell.populate(with: movies[indexPath.row].images[0])
+            }
+            
             return movieCell
         }
         return MovieCell()
+    }
+}
+
+extension MovieListController: UISearchBarDelegate {
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        filteredMovies = movies.filter({ $0.title.prefix(searchText.count) == searchText })
+        searching = true
+        
+        collectionView.reloadData()
     }
 }
