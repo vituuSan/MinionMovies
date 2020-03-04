@@ -21,7 +21,7 @@ class MovieListController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-         
+        
         searchBar.searchTextField.textColor = .white
         
         let task = session.dataTask(with: url) { data, response, error in
@@ -65,9 +65,9 @@ extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].images[0])
+                movieCell.populate(with: filteredMovies[indexPath.row].images.first ?? "file-not-found")
             } else {
-                movieCell.populate(with: movies[indexPath.row].images[0])
+                movieCell.populate(with: movies[indexPath.row].images.first ?? "file-not-found")
             }
             
             return movieCell

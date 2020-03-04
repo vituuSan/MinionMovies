@@ -34,6 +34,8 @@ class MovieCell: UICollectionViewCell {
             }
             let image = UIImage(data: imageData)
             imageView.image = image
+        } else {
+            imageView.image = UIImage(named: textURL)
         }
     }
 }
