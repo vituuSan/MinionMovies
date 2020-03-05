@@ -15,8 +15,9 @@ class MovieListController: UIViewController {
     private var movies: [Movie] = []
     private var filteredMovies: [Movie] = []
     private var searching = false
+    private let loading = Loading()
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
     override func viewDidLoad() {
@@ -25,6 +26,10 @@ class MovieListController: UIViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
+        
+        let activatedLoading = loading.loadingScene()
+
+        
         
         let task = session.dataTask(with: url) { data, response, error in
             if error == nil {
@@ -44,8 +49,25 @@ class MovieListController: UIViewController {
                 debugPrint(error?.localizedDescription)
             }
             self.reloadCollectionView()
+            self.loading.stopLoading(item: activatedLoading)
         }
         task.resume()
+    }
+    
+    func loadingScene() -> UIActivityIndicatorView {
+        let loadingIndicator: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 54.5, y: 172.5, width: 300, height: 300)) as UIActivityIndicatorView
+        loadingIndicator.hidesWhenStopped = true
+        loadingIndicator.style = UIActivityIndicatorView.Style.medium
+        loadingIndicator.startAnimating()
+        
+        self.view.addSubview(loadingIndicator)
+        return loadingIndicator
+    }
+    
+    func stopLoading(item: UIActivityIndicatorView) {
+        DispatchQueue.main.async {
+            item.stopAnimating()
+        }
     }
     
     func reloadCollectionView() {
