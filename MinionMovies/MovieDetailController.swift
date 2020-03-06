@@ -36,16 +36,16 @@ class MovieDetailController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        mountScreen()
+        createScreen()
     }
     
-    func mountScreen() {
+    func createScreen() {
         guard let checkedMovie = self.movie else { return }
-        mountBackground(with: checkedMovie.images)
-        mountPoster(with: checkedMovie.poster)
+        createBackground(with: checkedMovie.images)
+        createPoster(with: checkedMovie.poster)
         
         nameMovie.text = checkedMovie.title
-        mountEvaluation(with: checkedMovie.metascore)
+        createEvaluation(with: checkedMovie.metascore)
         evaluation.text = "(\(checkedMovie.metascore))"
         yearAndDuration.text = "\(checkedMovie.year)  \(checkedMovie.runtime)"
         
@@ -64,81 +64,54 @@ class MovieDetailController: UIViewController {
         plot.text = checkedMovie.plot
     }
     
-    func mountBackground(with urlsOfImages: [String]) {
+    func createBackground(with urlsOfImages: [String]) {
         if let checkedUrl = URL(string: urlsOfImages[0]) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             backgroundImage.image = UIImage(data: data)
         }
     }
     
-    func mountPoster(with urlOfPoster: String) {
+    func createPoster(with urlOfPoster: String) {
         if let checkedUrl = URL(string: urlOfPoster) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             posterMovie.image = UIImage(data: data)
         }
     }
     
-    func mountEvaluation(with metascore: String) {
+    func createEvaluation(with metascore: String) {
         guard let number = Int(metascore) else { return }
         
-        let image1 = {
-            if number < 20 {
-                self.star1.image = UIImage(named: "kindOfbright-star")
+        let star = UIImage(named: "bright-star")
+        let halfStar = UIImage(named: "kindOfbright-star")
+        
+        if number >= 60 {
+            star1.image = star
+            star2.image = star
+            star3.image = star
+            if number >= 80 {
+                star4.image = star
+                if number == 100 {
+                    star5.image = star
+                } else {
+                    star5.image = halfStar
+                }
             } else {
-                self.star1.image = UIImage(named: "bright-star")
+                star4.image = halfStar
             }
-        }
-        let image2 = {
-            if number < 40 {
-                self.star2.image = UIImage(named: "kindOfbright-star")
+        } else if number >= 20 {
+            star1.image = star
+            if number >= 40 {
+                star2.image = star
+                if number >= 50 {
+                    star3.image = star
+                } else {
+                    star3.image = halfStar
+                }
             } else {
-                self.star2.image = UIImage(named: "bright-star")
+                star2.image = halfStar
             }
-        }
-        let image3 = {
-            if number < 60 {
-                self.star3.image = UIImage(named: "kindOfbright-star")
-            } else {
-                self.star3.image = UIImage(named: "bright-star")
-            }
-        }
-        let image4 = {
-            if number < 80 {
-                self.star4.image = UIImage(named: "kindOfbright-star")
-            } else {
-                self.star4.image = UIImage(named: "bright-star")
-            }
-        }
-        let image5 = {
-            if number < 100 {
-                self.star5.image = UIImage(named: "kindOfbright-star")
-            } else {
-                self.star5.image = UIImage(named: "bright-star")
-            }
-        }
-        switch number {
-        case 10..<31:
-            image1()
-        case 30..<51:
-            image1()
-            image2()
-        case 50..<71:
-            image1()
-            image2()
-            image3()
-        case 70..<91:
-            image1()
-            image2()
-            image3()
-            image4()
-        case 90..<101:
-            image1()
-            image2()
-            image3()
-            image4()
-            image5()
-        default:
-            break
+        } else if number >= 10 {
+            star1.image = halfStar
         }
     }
 }
