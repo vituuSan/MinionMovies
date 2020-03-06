@@ -16,12 +16,10 @@ class MovieListController: UIViewController {
     private var filteredMovies: [Movie] = []
     private var searching = false
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
+    override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
         
         let task = session.dataTask(with: url) { data, response, error in
@@ -73,6 +71,17 @@ extension MovieListController: UICollectionViewDataSource {
             return movieCell
         }
         return MovieCell()
+    }
+}
+
+extension MovieListController: UICollectionViewDelegate {
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else {
+            return
+        }
+        movieDetail.movie = movies[indexPath.row]
+        
+        self.navigationController?.pushViewController(movieDetail, animated: true)
     }
 }
 
