@@ -13,14 +13,15 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var posterMovie: UIImageView!
     @IBOutlet private weak var nameMovie: UILabel!
+    @IBOutlet private weak var evaluation: UILabel!
     @IBOutlet private weak var yearAndDuration: UILabel!
     @IBOutlet private weak var resolution: UILabel!
     @IBOutlet private weak var plot: UITextView!
-    @IBOutlet weak var star1: UIImageView!
-    @IBOutlet weak var star2: UIImageView!
-    @IBOutlet weak var star3: UIImageView!
-    @IBOutlet weak var star4: UIImageView!
-    @IBOutlet weak var star5: UIImageView!
+    @IBOutlet private weak var star1: UIImageView!
+    @IBOutlet private weak var star2: UIImageView!
+    @IBOutlet private weak var star3: UIImageView!
+    @IBOutlet private weak var star4: UIImageView!
+    @IBOutlet private weak var star5: UIImageView!
     
     var movie: Movie?
     
@@ -45,6 +46,7 @@ class MovieDetailController: UIViewController {
         
         nameMovie.text = checkedMovie.title
         mountEvaluation(with: checkedMovie.metascore)
+        evaluation.text = "(\(checkedMovie.metascore))"
         yearAndDuration.text = "\(checkedMovie.year)  \(checkedMovie.runtime)"
         
         if checkedMovie.resolutionIs4k {

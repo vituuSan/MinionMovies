@@ -229,17 +229,25 @@
                                     </imageView>
                                 </subviews>
                             </stackView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ors-W8-M1W">
+                                <rect key="frame" x="128" y="372" width="0.0" height="0.0"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
                             <constraint firstItem="5K1-G4-Abb" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="328" id="3dx-wK-8cf"/>
                             <constraint firstItem="rJ3-sR-UTJ" firstAttribute="trailing" secondItem="80q-n5-CKB" secondAttribute="trailing" id="4LL-NG-0sI"/>
+                            <constraint firstItem="ors-W8-M1W" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="328" id="9U0-8d-Re6"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="rJ3-sR-UTJ" secondAttribute="bottom" constant="416" id="9Up-x7-AtW"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="vYJ-T5-Ksb" secondAttribute="trailing" constant="123" id="D77-c2-cC8"/>
                             <constraint firstAttribute="bottomMargin" secondItem="vYJ-T5-Ksb" secondAttribute="bottom" constant="495" id="NgK-Ow-vBE"/>
                             <constraint firstItem="vYJ-T5-Ksb" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="124" id="Pan-er-byN"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="RPK-VL-KCI" secondAttribute="bottom" constant="70" id="QI2-5I-wzE"/>
                             <constraint firstItem="EH9-Za-YSe" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="20" id="QzQ-kA-6vF"/>
+                            <constraint firstItem="ors-W8-M1W" firstAttribute="leading" secondItem="5K1-G4-Abb" secondAttribute="trailing" constant="8" id="R1s-vS-cKQ"/>
                             <constraint firstItem="5K1-G4-Abb" firstAttribute="leading" secondItem="WHy-3A-mIq" secondAttribute="leading" constant="20" id="RHq-yN-Es7"/>
                             <constraint firstItem="aty-ez-ZHl" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="Rdh-mi-qw8"/>
                             <constraint firstItem="lfR-3i-wTn" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="VIR-MB-kD4"/>
@@ -265,6 +273,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImage" destination="rJ3-sR-UTJ" id="Mad-QG-CWJ"/>
+                        <outlet property="evaluation" destination="ors-W8-M1W" id="lUI-vg-7CR"/>
                         <outlet property="nameMovie" destination="aty-ez-ZHl" id="hlZ-8g-3BG"/>
                         <outlet property="plot" destination="RPK-VL-KCI" id="yJd-sz-xeS"/>
                         <outlet property="posterMovie" destination="vYJ-T5-Ksb" id="ddM-nS-nD4"/>
