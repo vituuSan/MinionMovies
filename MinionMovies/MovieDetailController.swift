@@ -79,37 +79,57 @@ class MovieDetailController: UIViewController {
     func mountEvaluation(with metascore: String) {
         guard let number = Int(metascore) else { return }
         
-        let image1 = ({
-            self.star1.image = UIImage(named: "bright-star")
-        })
-        let image2 = ({
-            self.star2.image = UIImage(named: "bright-star")
-        })
-        let image3 = ({
-            self.star3.image = UIImage(named: "bright-star")
-        })
-        let image4 = ({
-            self.star4.image = UIImage(named: "bright-star")
-        })
-        let image5 = ({
-            self.star5.image = UIImage(named: "bright-star")
-        })
+        let image1 = {
+            if number < 20 {
+                self.star1.image = UIImage(named: "kindOfbright-star")
+            } else {
+                self.star1.image = UIImage(named: "bright-star")
+            }
+        }
+        let image2 = {
+            if number < 40 {
+                self.star2.image = UIImage(named: "kindOfbright-star")
+            } else {
+                self.star2.image = UIImage(named: "bright-star")
+            }
+        }
+        let image3 = {
+            if number < 60 {
+                self.star3.image = UIImage(named: "kindOfbright-star")
+            } else {
+                self.star3.image = UIImage(named: "bright-star")
+            }
+        }
+        let image4 = {
+            if number < 80 {
+                self.star4.image = UIImage(named: "kindOfbright-star")
+            } else {
+                self.star4.image = UIImage(named: "bright-star")
+            }
+        }
+        let image5 = {
+            if number < 100 {
+                self.star5.image = UIImage(named: "kindOfbright-star")
+            } else {
+                self.star5.image = UIImage(named: "bright-star")
+            }
+        }
         switch number {
-        case 20..<40:
+        case 10..<31:
             image1()
-        case 40..<60:
+        case 30..<51:
             image1()
             image2()
-        case 60..<80:
+        case 50..<71:
             image1()
             image2()
             image3()
-        case 80..<100:
+        case 70..<91:
             image1()
             image2()
             image3()
             image4()
-        case 100:
+        case 90..<101:
             image1()
             image2()
             image3()

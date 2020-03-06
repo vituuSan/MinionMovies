@@ -149,6 +149,46 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
+                            <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5K1-G4-Abb">
+                                <rect key="frame" x="20" y="372" width="100" height="20"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="va3-k0-FmE">
+                                        <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="qxy-Iu-slt"/>
+                                            <constraint firstAttribute="width" constant="20" id="rhy-tN-4CU"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="4tu-oH-WeI">
+                                        <rect key="frame" x="20" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="9Gb-DA-4eQ"/>
+                                            <constraint firstAttribute="width" constant="20" id="iAk-UD-spb"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="BBh-7g-yBr">
+                                        <rect key="frame" x="40" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="Jxv-1t-gtf"/>
+                                            <constraint firstAttribute="width" constant="20" id="mPn-5O-pGI"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="f79-4n-9Pp">
+                                        <rect key="frame" x="60" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="20" id="M9A-En-GZ6"/>
+                                            <constraint firstAttribute="width" constant="20" id="xVp-uB-6zc"/>
+                                        </constraints>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="rCO-HJ-Wr0">
+                                        <rect key="frame" x="80" y="0.0" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="GhC-Th-zdi"/>
+                                            <constraint firstAttribute="height" constant="20" id="POF-pb-W9z"/>
+                                        </constraints>
+                                    </imageView>
+                                </subviews>
+                            </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9O3-sZ-GaE">
                                 <rect key="frame" x="20" y="372" width="100" height="20"/>
                                 <subviews>
@@ -192,6 +232,7 @@
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
+                            <constraint firstItem="5K1-G4-Abb" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="328" id="3dx-wK-8cf"/>
                             <constraint firstItem="rJ3-sR-UTJ" firstAttribute="trailing" secondItem="80q-n5-CKB" secondAttribute="trailing" id="4LL-NG-0sI"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="rJ3-sR-UTJ" secondAttribute="bottom" constant="416" id="9Up-x7-AtW"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="vYJ-T5-Ksb" secondAttribute="trailing" constant="123" id="D77-c2-cC8"/>
@@ -199,6 +240,7 @@
                             <constraint firstItem="vYJ-T5-Ksb" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="124" id="Pan-er-byN"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="RPK-VL-KCI" secondAttribute="bottom" constant="70" id="QI2-5I-wzE"/>
                             <constraint firstItem="EH9-Za-YSe" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="20" id="QzQ-kA-6vF"/>
+                            <constraint firstItem="5K1-G4-Abb" firstAttribute="leading" secondItem="WHy-3A-mIq" secondAttribute="leading" constant="20" id="RHq-yN-Es7"/>
                             <constraint firstItem="aty-ez-ZHl" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="Rdh-mi-qw8"/>
                             <constraint firstItem="lfR-3i-wTn" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="VIR-MB-kD4"/>
                             <constraint firstItem="lfR-3i-wTn" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="20" id="Vkc-kf-7Hv"/>
