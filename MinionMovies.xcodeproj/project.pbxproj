@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4A832ED6241045F1005D8FB9 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A832ED5241045F1005D8FB9 /* MovieDetailController.swift */; };
 		4A832EDA24104659005D8FB9 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A832ED924104659005D8FB9 /* DesignableButton.swift */; };
-		4A8698AA241197FC006D79AB /* Loading.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8698A9241197FC006D79AB /* Loading.swift */; };
 		4A88A738240DA08200B5746E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A88A737240DA08200B5746E /* Movie.swift */; };
 		4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3982406B94600ACF001 /* AppDelegate.swift */; };
 		4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */; };
@@ -23,7 +22,6 @@
 /* Begin PBXFileReference section */
 		4A832ED5241045F1005D8FB9 /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
 		4A832ED924104659005D8FB9 /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
-		4A8698A9241197FC006D79AB /* Loading.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loading.swift; sourceTree = "<group>"; };
 		4A88A737240DA08200B5746E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4AD8B3952406B94600ACF001 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD8B3982406B94600ACF001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -77,7 +75,6 @@
 				4AD8B3A12406B94800ACF001 /* Assets.xcassets */,
 				4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */,
 				4AD8B3A62406B94800ACF001 /* Info.plist */,
-				4A8698A9241197FC006D79AB /* Loading.swift */,
 			);
 			path = MinionMovies;
 			sourceTree = "<group>";
@@ -159,7 +156,6 @@
 				4A832EDA24104659005D8FB9 /* DesignableButton.swift in Sources */,
 				4A832ED6241045F1005D8FB9 /* MovieDetailController.swift in Sources */,
 				4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */,
-				4A8698AA241197FC006D79AB /* Loading.swift in Sources */,
 				4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
