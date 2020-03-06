@@ -16,6 +16,11 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var yearAndDuration: UILabel!
     @IBOutlet private weak var resolution: UILabel!
     @IBOutlet private weak var plot: UITextView!
+    @IBOutlet weak var star1: UIImageView!
+    @IBOutlet weak var star2: UIImageView!
+    @IBOutlet weak var star3: UIImageView!
+    @IBOutlet weak var star4: UIImageView!
+    @IBOutlet weak var star5: UIImageView!
     
     var movie: Movie?
     
@@ -39,6 +44,7 @@ class MovieDetailController: UIViewController {
         mountPoster(with: checkedMovie.poster)
         
         nameMovie.text = checkedMovie.title
+        mountEvaluation(with: checkedMovie.metascore)
         yearAndDuration.text = "\(checkedMovie.year)  \(checkedMovie.runtime)"
         
         if checkedMovie.resolutionIs4k {
@@ -56,17 +62,61 @@ class MovieDetailController: UIViewController {
         plot.text = checkedMovie.plot
     }
     
-    func mountBackground(with urls: [String]) {
-        if let checkedUrl = URL(string: urls[0]) {
+    func mountBackground(with urlsOfImages: [String]) {
+        if let checkedUrl = URL(string: urlsOfImages[0]) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             backgroundImage.image = UIImage(data: data)
         }
     }
     
-    func mountPoster(with url: String) {
-        if let checkedUrl = URL(string: url) {
+    func mountPoster(with urlOfPoster: String) {
+        if let checkedUrl = URL(string: urlOfPoster) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             posterMovie.image = UIImage(data: data)
+        }
+    }
+    
+    func mountEvaluation(with metascore: String) {
+        guard let number = Int(metascore) else { return }
+        
+        let image1 = ({
+            self.star1.image = UIImage(named: "bright-star")
+        })
+        let image2 = ({
+            self.star2.image = UIImage(named: "bright-star")
+        })
+        let image3 = ({
+            self.star3.image = UIImage(named: "bright-star")
+        })
+        let image4 = ({
+            self.star4.image = UIImage(named: "bright-star")
+        })
+        let image5 = ({
+            self.star5.image = UIImage(named: "bright-star")
+        })
+        switch number {
+        case 20..<40:
+            image1()
+        case 40..<60:
+            image1()
+            image2()
+        case 60..<80:
+            image1()
+            image2()
+            image3()
+        case 80..<100:
+            image1()
+            image2()
+            image3()
+            image4()
+        case 100:
+            image1()
+            image2()
+            image3()
+            image4()
+            image5()
+        default:
+            break
         }
     }
 }
