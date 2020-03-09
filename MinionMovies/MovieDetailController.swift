@@ -79,39 +79,19 @@ class MovieDetailController: UIViewController {
     }
     
     func createEvaluation(with metascore: String) {
-        guard let number = Int(metascore) else { return }
-        
-        let star = UIImage(named: "bright-star")
-        let halfStar = UIImage(named: "kindOfbright-star")
-        
-        if number >= 60 {
-            star1.image = star
-            star2.image = star
-            star3.image = star
-            if number >= 80 {
-                star4.image = star
-                if number == 100 {
-                    star5.image = star
-                } else {
-                    star5.image = halfStar
-                }
-            } else {
-                star4.image = halfStar
+        guard var number = Double(metascore) else { return }
+        let images = [star1, star2, star3, star4, star5]
+        var i = 1
+
+        while i <= 5 {
+            if number / 20 >= 1 {
+                images[i - 1]?.image = UIImage(named: "bright-star")
+            } else if number / 20 >= 0.5 {
+                images[i - 1]?.image = UIImage(named: "kindOfbright-star")
             }
-        } else if number >= 20 {
-            star1.image = star
-            if number >= 40 {
-                star2.image = star
-                if number >= 50 {
-                    star3.image = star
-                } else {
-                    star3.image = halfStar
-                }
-            } else {
-                star2.image = halfStar
-            }
-        } else if number >= 10 {
-            star1.image = halfStar
+            
+            number -= 20
+            i += 1
         }
     }
 }
