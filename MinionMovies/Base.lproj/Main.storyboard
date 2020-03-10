@@ -110,7 +110,7 @@
                                 <rect key="frame" x="0.0" y="-60" width="414" height="506"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYJ-T5-Ksb">
-                                <rect key="frame" x="124" y="94" width="167" height="273"/>
+                                <rect key="frame" x="100" y="52" width="214" height="315"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aty-ez-ZHl">
                                 <rect key="frame" x="20" y="337" width="0.0" height="0.0"/>
@@ -118,13 +118,16 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-VD-Wqs">
-                                <rect key="frame" x="36" y="469" width="342" height="50"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-VD-Wqs">
+                                <rect key="frame" x="20" y="469" width="374" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3lR-ZI-tFE"/>
                                 </constraints>
-                                <state key="normal" title="Watch Trailler"/>
+                                <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <state key="normal" title="  Watch Trailler" image="play">
+                                    <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
                                 <userDefinedRuntimeAttributes>
                                     <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
                                         <real key="value" value="6"/>
@@ -188,6 +191,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9O3-sZ-GaE">
                                 <rect key="frame" x="20" y="372" width="100" height="20"/>
@@ -228,6 +232,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
+                                <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ors-W8-M1W">
                                 <rect key="frame" x="128" y="372" width="0.0" height="0.0"/>
@@ -242,9 +247,9 @@
                             <constraint firstItem="rJ3-sR-UTJ" firstAttribute="trailing" secondItem="80q-n5-CKB" secondAttribute="trailing" id="4LL-NG-0sI"/>
                             <constraint firstItem="ors-W8-M1W" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="328" id="9U0-8d-Re6"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="rJ3-sR-UTJ" secondAttribute="bottom" constant="416" id="9Up-x7-AtW"/>
-                            <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="vYJ-T5-Ksb" secondAttribute="trailing" constant="123" id="D77-c2-cC8"/>
+                            <constraint firstAttribute="trailing" secondItem="vYJ-T5-Ksb" secondAttribute="trailing" constant="100" id="D77-c2-cC8"/>
                             <constraint firstAttribute="bottomMargin" secondItem="vYJ-T5-Ksb" secondAttribute="bottom" constant="495" id="NgK-Ow-vBE"/>
-                            <constraint firstItem="vYJ-T5-Ksb" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="124" id="Pan-er-byN"/>
+                            <constraint firstItem="vYJ-T5-Ksb" firstAttribute="leading" secondItem="WHy-3A-mIq" secondAttribute="leading" constant="100" id="Pan-er-byN"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="bottom" secondItem="RPK-VL-KCI" secondAttribute="bottom" constant="70" id="QI2-5I-wzE"/>
                             <constraint firstItem="EH9-Za-YSe" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="20" id="QzQ-kA-6vF"/>
                             <constraint firstItem="ors-W8-M1W" firstAttribute="leading" secondItem="5K1-G4-Abb" secondAttribute="trailing" constant="8" id="R1s-vS-cKQ"/>
@@ -252,28 +257,33 @@
                             <constraint firstItem="aty-ez-ZHl" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="Rdh-mi-qw8"/>
                             <constraint firstItem="lfR-3i-wTn" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="VIR-MB-kD4"/>
                             <constraint firstItem="lfR-3i-wTn" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="20" id="Vkc-kf-7Hv"/>
-                            <constraint firstItem="hbl-VD-Wqs" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="36" id="WFJ-67-Pj9"/>
+                            <constraint firstItem="hbl-VD-Wqs" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="WFJ-67-Pj9"/>
                             <constraint firstItem="hbl-VD-Wqs" firstAttribute="top" secondItem="rJ3-sR-UTJ" secondAttribute="bottom" constant="23" id="Xej-32-1Sc"/>
                             <constraint firstItem="rJ3-sR-UTJ" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" id="Xhu-rv-AMk"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="EH9-Za-YSe" secondAttribute="trailing" constant="20" id="ZnT-r9-Zr0"/>
                             <constraint firstItem="aty-ez-ZHl" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="293" id="b6G-IK-01f"/>
-                            <constraint firstItem="vYJ-T5-Ksb" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="50" id="bq0-1R-oGf"/>
+                            <constraint firstItem="vYJ-T5-Ksb" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="8" id="bq0-1R-oGf"/>
                             <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="RPK-VL-KCI" secondAttribute="trailing" constant="20" id="fbA-5b-V6l"/>
                             <constraint firstItem="rJ3-sR-UTJ" firstAttribute="top" secondItem="WHy-3A-mIq" secondAttribute="top" constant="-60" id="hgo-Kq-bQU"/>
                             <constraint firstItem="RPK-VL-KCI" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="hsJ-Aa-XtP"/>
                             <constraint firstItem="9O3-sZ-GaE" firstAttribute="top" secondItem="80q-n5-CKB" secondAttribute="top" constant="328" id="klB-WY-UeB"/>
                             <constraint firstItem="RPK-VL-KCI" firstAttribute="top" secondItem="hbl-VD-Wqs" secondAttribute="bottom" constant="60" id="t1B-lP-jgt"/>
-                            <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="hbl-VD-Wqs" secondAttribute="trailing" constant="36" id="wjp-Eg-emn"/>
+                            <constraint firstItem="80q-n5-CKB" firstAttribute="trailing" secondItem="hbl-VD-Wqs" secondAttribute="trailing" constant="20" id="wjp-Eg-emn"/>
                             <constraint firstItem="9O3-sZ-GaE" firstAttribute="leading" secondItem="80q-n5-CKB" secondAttribute="leading" constant="20" id="zCl-rg-dXH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="80q-n5-CKB"/>
                     </view>
                     <navigationItem key="navigationItem" id="NQC-eY-ejb">
-                        <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="G6W-xg-AfF"/>
+                        <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="G6W-xg-AfF">
+                            <connections>
+                                <action selector="markButton:" destination="mI5-dc-kK4" id="DAE-7n-gHM"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImage" destination="rJ3-sR-UTJ" id="Mad-QG-CWJ"/>
                         <outlet property="evaluation" destination="ors-W8-M1W" id="lUI-vg-7CR"/>
+                        <outlet property="markOutlet" destination="G6W-xg-AfF" id="wyC-8k-7ju"/>
                         <outlet property="nameMovie" destination="aty-ez-ZHl" id="hlZ-8g-3BG"/>
                         <outlet property="plot" destination="RPK-VL-KCI" id="yJd-sz-xeS"/>
                         <outlet property="posterMovie" destination="vYJ-T5-Ksb" id="ddM-nS-nD4"/>
@@ -315,6 +325,7 @@
     </scenes>
     <resources>
         <image name="mark" width="15.5" height="17"/>
+        <image name="play" width="17" height="20"/>
         <image name="star" width="16" height="15"/>
     </resources>
 </document>
