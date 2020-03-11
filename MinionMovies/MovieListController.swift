@@ -16,6 +16,8 @@ class MovieListController: UIViewController {
     private var filteredMovies: [Movie] = []
     private var searching = false
     
+    @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
+    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
@@ -42,6 +44,24 @@ class MovieListController: UIViewController {
             self.reloadCollectionView()
         }
         task.resume()
+    }
+    
+    @IBAction func showSearchBar(_ sender: Any) {
+        if searchBar.isHidden {
+            UIView.animate(withDuration: 0.35) {
+                
+                self.searchBar.isHidden = false
+                self.constraintTopCollectionView.constant = 0
+                self.view.layoutIfNeeded()
+            }
+        } else if searchBar.isHidden == false {
+            UIView.animate(withDuration: 0.35) {
+                
+                self.searchBar.isHidden = true
+                self.constraintTopCollectionView.constant = -56
+                self.view.layoutIfNeeded()
+            }
+        }
     }
     
     func reloadCollectionView() {
