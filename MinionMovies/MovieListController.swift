@@ -48,19 +48,13 @@ class MovieListController: UIViewController {
     
     @IBAction func showSearchBar(_ sender: Any) {
         if searchBar.isHidden {
-            UIView.animate(withDuration: 0.35) {
-                
-                self.searchBar.isHidden = false
-                self.constraintTopCollectionView.constant = 0
-                self.view.layoutIfNeeded()
-            }
+            searchBar.isHidden = false
+            constraintTopCollectionView.constant = 0
+            view.layoutIfNeeded()
         } else if searchBar.isHidden == false {
-            UIView.animate(withDuration: 0.35) {
-                
-                self.searchBar.isHidden = true
-                self.constraintTopCollectionView.constant = -56
-                self.view.layoutIfNeeded()
-            }
+            searchBar.isHidden = true
+            constraintTopCollectionView.constant = -56
+            view.layoutIfNeeded()
         }
     }
     
