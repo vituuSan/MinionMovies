@@ -77,9 +77,9 @@ extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].images.first ?? "file-not-found")
+                movieCell.populate(with: filteredMovies[indexPath.row].poster)
             } else {
-                movieCell.populate(with: movies[indexPath.row].images.first ?? "file-not-found")
+                movieCell.populate(with: movies[indexPath.row].poster)
             }
             
             return movieCell
@@ -94,8 +94,12 @@ extension MovieListController: UICollectionViewDelegate {
             return
         }
         movieDetail.movie = movies[indexPath.row]
-        
+        searchBar.endEditing(true)
         self.navigationController?.pushViewController(movieDetail, animated: true)
+    }
+    
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        searchBar.endEditing(true)
     }
 }
 
@@ -105,5 +109,9 @@ extension MovieListController: UISearchBarDelegate {
         searching = true
         
         collectionView.reloadData()
+    }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
     }
 }
