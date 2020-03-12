@@ -110,4 +110,8 @@ extension MovieListController: UISearchBarDelegate {
         
         collectionView.reloadData()
     }
+    
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        searchBar.endEditing(true)
+    }
 }
