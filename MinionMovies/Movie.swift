@@ -26,11 +26,12 @@ struct Movie: Codable {
     let metascore: String
     let resolutionIs4k: Bool
     let hdr: Bool
+    let trailer: URL?
     let images: [String]
     
     enum CodingKeys: String, CodingKey {
         case title, year, rated, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, metascore
         case resolutionIs4k = "4k"
-        case hdr, images
+        case hdr, trailer, images
     }
 }
