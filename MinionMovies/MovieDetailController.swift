@@ -39,6 +39,12 @@ class MovieDetailController: UIViewController {
         createScreen()
     }
     
+    @IBAction func trailerButton(_ sender: UIButton) {
+        guard let checkedMovie = movie,
+            let url = checkedMovie.trailer else { return }
+        UIApplication.shared.open(url)
+    }
+    
     func createScreen() {
         guard let checkedMovie = self.movie else { return }
         createBackground(with: checkedMovie.images)
