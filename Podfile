@@ -6,5 +6,6 @@ target 'MinionMovies' do
   use_frameworks!
 
   # Pods for MinionMovies
+  pod 'MininMovies'
 
 end
