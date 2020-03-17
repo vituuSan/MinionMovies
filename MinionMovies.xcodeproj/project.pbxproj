@@ -17,6 +17,7 @@
 		4AD8B3A22406B94800ACF001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8B3A12406B94800ACF001 /* Assets.xcassets */; };
 		4AD8B3A52406B94800ACF001 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */; };
 		4AD8B3AD2406BB1800ACF001 /* MovieCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */; };
+		BB131D8B6659F8A0FFF2C49C /* Pods_MinionMovies.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A9094FDBA404F5AE90C11365 /* Pods_MinionMovies.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +33,9 @@
 		4AD8B3A42406B94800ACF001 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		4AD8B3A62406B94800ACF001 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieCell.swift; sourceTree = "<group>"; };
+		A9094FDBA404F5AE90C11365 /* Pods_MinionMovies.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MinionMovies.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		DD30C164A34A48366BC274CF /* Pods-MinionMovies.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinionMovies.debug.xcconfig"; path = "Target Support Files/Pods-MinionMovies/Pods-MinionMovies.debug.xcconfig"; sourceTree = "<group>"; };
+		F9D4910F090DED3A38617393 /* Pods-MinionMovies.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MinionMovies.release.xcconfig"; path = "Target Support Files/Pods-MinionMovies/Pods-MinionMovies.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -39,17 +43,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BB131D8B6659F8A0FFF2C49C /* Pods_MinionMovies.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		185BAB11DAA6560F34053EA6 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				A9094FDBA404F5AE90C11365 /* Pods_MinionMovies.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		4AD8B38C2406B94600ACF001 = {
 			isa = PBXGroup;
 			children = (
 				4AD8B3972406B94600ACF001 /* MinionMovies */,
 				4AD8B3962406B94600ACF001 /* Products */,
+				F0B024A52EC3423FB7495F97 /* Pods */,
+				185BAB11DAA6560F34053EA6 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -79,6 +94,16 @@
 			path = MinionMovies;
 			sourceTree = "<group>";
 		};
+		F0B024A52EC3423FB7495F97 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				DD30C164A34A48366BC274CF /* Pods-MinionMovies.debug.xcconfig */,
+				F9D4910F090DED3A38617393 /* Pods-MinionMovies.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -86,9 +111,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 4AD8B3A92406B94800ACF001 /* Build configuration list for PBXNativeTarget "MinionMovies" */;
 			buildPhases = (
+				7422B3BC318B390871E16F05 /* [CP] Check Pods Manifest.lock */,
 				4AD8B3912406B94600ACF001 /* Sources */,
 				4AD8B3922406B94600ACF001 /* Frameworks */,
 				4AD8B3932406B94600ACF001 /* Resources */,
+				EFED1D5692A7CBEA4828014D /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -144,6 +171,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7422B3BC318B390871E16F05 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MinionMovies-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		EFED1D5692A7CBEA4828014D /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MinionMovies/Pods-MinionMovies-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MinionMovies/Pods-MinionMovies-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MinionMovies/Pods-MinionMovies-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		4AD8B3912406B94600ACF001 /* Sources */ = {
@@ -298,6 +367,7 @@
 		};
 		4AD8B3AA2406B94800ACF001 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = DD30C164A34A48366BC274CF /* Pods-MinionMovies.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -315,6 +385,7 @@
 		};
 		4AD8B3AB2406B94800ACF001 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F9D4910F090DED3A38617393 /* Pods-MinionMovies.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
