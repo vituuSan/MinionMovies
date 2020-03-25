@@ -41,7 +41,7 @@ class MovieDetailController: UIViewController {
     
     @IBAction func trailerButton(_ sender: UIButton) {
         guard let checkedMovie = movie,
-            let url = checkedMovie.trailer else { return }
+            let url = URL(string: checkedMovie.trailer ?? "") else { return }
         UIApplication.shared.open(url)
     }
     
@@ -68,6 +68,7 @@ class MovieDetailController: UIViewController {
         }
         
         plot.text = checkedMovie.plot
+        print(movie?.id)
     }
     
     func createBackground(with urlsOfImages: [String]) {
