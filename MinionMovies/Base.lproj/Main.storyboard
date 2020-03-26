@@ -89,6 +89,7 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="showSearchBar:" destination="BYZ-38-t0r" id="GTs-bD-BKj"/>
+                                <segue destination="mI5-dc-kK4" kind="show" id="NeC-ys-CHt"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -108,23 +109,23 @@
             <objects>
                 <viewController storyboardIdentifier="MovieDetailController" interfaceStyle="dark" id="mI5-dc-kK4" customClass="MovieDetailController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WHy-3A-mIq">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="rJ3-sR-UTJ">
-                                <rect key="frame" x="0.0" y="-60" width="414" height="506"/>
+                                <rect key="frame" x="0.0" y="-60" width="414" height="418"/>
                             </imageView>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vYJ-T5-Ksb">
-                                <rect key="frame" x="124" y="94" width="167" height="273"/>
+                                <rect key="frame" x="124" y="50" width="167" height="229"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aty-ez-ZHl">
-                                <rect key="frame" x="20" y="337" width="0.0" height="0.0"/>
+                                <rect key="frame" x="20" y="293" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="25"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="hbl-VD-Wqs">
-                                <rect key="frame" x="36" y="469" width="342" height="50"/>
+                                <rect key="frame" x="36" y="381" width="342" height="50"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="3lR-ZI-tFE"/>
@@ -140,25 +141,25 @@
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lfR-3i-wTn">
-                                <rect key="frame" x="20" y="539" width="0.0" height="0.0"/>
+                                <rect key="frame" x="20" y="451" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EH9-Za-YSe">
-                                <rect key="frame" x="394" y="539" width="0.0" height="0.0"/>
+                                <rect key="frame" x="394" y="451" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" name="Futura-Bold" family="Futura" pointSize="14"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="RPK-VL-KCI">
-                                <rect key="frame" x="20" y="579" width="374" height="213"/>
+                                <rect key="frame" x="20" y="491" width="374" height="213"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="5K1-G4-Abb">
-                                <rect key="frame" x="20" y="372" width="100" height="20"/>
+                                <rect key="frame" x="20" y="328" width="100" height="20"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="va3-k0-FmE">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -198,7 +199,7 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9O3-sZ-GaE">
-                                <rect key="frame" x="20" y="372" width="100" height="20"/>
+                                <rect key="frame" x="20" y="328" width="100" height="20"/>
                                 <subviews>
                                     <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="star" translatesAutoresizingMaskIntoConstraints="NO" id="5La-KL-AJr">
                                         <rect key="frame" x="0.0" y="0.0" width="20" height="20"/>
@@ -238,7 +239,7 @@
                                 </subviews>
                             </stackView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ors-W8-M1W">
-                                <rect key="frame" x="128" y="372" width="0.0" height="0.0"/>
+                                <rect key="frame" x="128" y="328" width="0.0" height="0.0"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <nil key="highlightedColor"/>
@@ -277,11 +278,16 @@
                         <viewLayoutGuide key="safeArea" id="80q-n5-CKB"/>
                     </view>
                     <navigationItem key="navigationItem" id="NQC-eY-ejb">
-                        <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="G6W-xg-AfF"/>
+                        <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="G6W-xg-AfF">
+                            <connections>
+                                <action selector="toggleFavMovie:" destination="mI5-dc-kK4" id="jKJ-3n-sUW"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="backgroundImage" destination="rJ3-sR-UTJ" id="Mad-QG-CWJ"/>
                         <outlet property="evaluation" destination="ors-W8-M1W" id="lUI-vg-7CR"/>
+                        <outlet property="favButton" destination="G6W-xg-AfF" id="4Mx-9R-o7L"/>
                         <outlet property="nameMovie" destination="aty-ez-ZHl" id="hlZ-8g-3BG"/>
                         <outlet property="plot" destination="RPK-VL-KCI" id="yJd-sz-xeS"/>
                         <outlet property="posterMovie" destination="vYJ-T5-Ksb" id="ddM-nS-nD4"/>
