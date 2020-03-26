@@ -26,7 +26,6 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var movie: Movie?
-    var exist = false
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -39,12 +38,12 @@ class MovieDetailController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        createScreen()
+        setupLayout()
     }
     
     @IBAction func toggleFavMovie(_ sender: Any) {
         guard let checkedMovie = movie else { return }
-        if !exist {
+        if checkMovieInDB(id: checkedMovie.id) {
             addMovieInFavDB(id: checkedMovie.id)
             favButton.image = UIImage(named: "marked")
         } else {
@@ -57,6 +56,23 @@ class MovieDetailController: UIViewController {
         guard let checkedMovie = movie,
             let url = checkedMovie.trailer else { return }
         UIApplication.shared.open(url)
+    }
+    
+    func checkMovieInDB(id: String) -> Bool {
+        var exist = false
+        do {
+            let realm = try Realm()
+            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
+            
+            if result.count > 0 {
+                exist = true
+            } else {
+                exist = false
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+        return exist
     }
     
     func addMovieInFavDB(id: String) {
@@ -87,10 +103,10 @@ class MovieDetailController: UIViewController {
         print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
-    func createScreen() {
+    func setupLayout() {
         guard let checkedMovie = self.movie else { return }
         createBackground(with: checkedMovie.images)
-        putImageOnFavButton(with: checkedMovie.id)
+        chooseImageOfFavButton(with: checkedMovie.id)
         createPoster(with: checkedMovie.poster)
         
         nameMovie.text = checkedMovie.title
@@ -113,16 +129,14 @@ class MovieDetailController: UIViewController {
         plot.text = checkedMovie.plot
     }
     
-    func putImageOnFavButton(with id: String) {
+    func chooseImageOfFavButton(with id: String) {
             let realm = try! Realm()
             let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
             
             if result.count > 0 {
                 favButton.image = UIImage(named: "marked")
-                exist = true
             } else {
                 favButton.image = UIImage(named: "mark")
-                exist = false
             }
     }
     
