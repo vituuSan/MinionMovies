@@ -43,6 +43,7 @@ class MovieListController: UIViewController {
                 debugPrint(error?.localizedDescription)
             }
             self.reloadCollectionView()
+            self.saveMovieInDB()
         }
         task.resume()
     }
@@ -68,8 +69,8 @@ class MovieListController: UIViewController {
     func saveMovieInDB() {
         for movie in movies {
             let movieDB = MovieDB()
-            let realm = try! Realm()
             
+            movieDB.id = movie.id
             movieDB.title = movie.title
             movieDB.year = movie.year
             movieDB.rated = movie.rated
@@ -88,14 +89,15 @@ class MovieListController: UIViewController {
             movieDB.image = movie.images.first
             
             do {
+                let realm = try Realm()
+                
                 try realm.write {
-                    realm.add(movieDB)
+                    realm.add(movieDB, update: .modified)
                 }
             } catch let error as NSError {
                 print(error)
             }
         }
-        print(Realm.Configuration.defaultConfiguration.fileURL)
     }
 }
 

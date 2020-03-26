@@ -10,6 +10,7 @@ import Foundation
 import RealmSwift
 
 @objcMembers class MovieDB: Object {
+    dynamic var id: String = ""
     dynamic var title: String?
     dynamic var year: String?
     dynamic var rated: String?
@@ -29,4 +30,8 @@ import RealmSwift
     dynamic var hdr: Bool = false
     dynamic var trailer: String?
     dynamic var image: String?
+    
+    override class func primaryKey() -> String? {
+        return "id"
+    }
 }
