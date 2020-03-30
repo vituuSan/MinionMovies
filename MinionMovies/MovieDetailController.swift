@@ -48,7 +48,7 @@ class MovieDetailController: UIViewController {
         } else {
             deleteMovieInFavDB(id: checkedMovie.id)
         }
-        chooseImageOfFavButton(with: checkedMovie.id)
+        chooseImageOfFavButton()
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
@@ -57,18 +57,17 @@ class MovieDetailController: UIViewController {
         UIApplication.shared.open(url)
     }
     
+    //to check if movie exists in FavMovieDB
     func checkMovieInDB(id: String) -> Bool {
-        var exist = false
         do {
             let realm = try Realm()
             let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
             
             if result.count > 0 {
-                exist = true
+                return true
             } else {
-                exist = false
+                return false
             }
-            return exist
         } catch let error as NSError {
             print(error)
             return false
@@ -100,13 +99,12 @@ class MovieDetailController: UIViewController {
         } catch let error as NSError {
             print(error)
         }
-        print(Realm.Configuration.defaultConfiguration.fileURL)
     }
     
     func setupLayout() {
         guard let checkedMovie = self.movie else { return }
         createBackground(with: checkedMovie.images)
-        chooseImageOfFavButton(with: checkedMovie.id)
+        chooseImageOfFavButton()
         createPoster(with: checkedMovie.poster)
         
         nameMovie.text = checkedMovie.title
@@ -129,15 +127,14 @@ class MovieDetailController: UIViewController {
         plot.text = checkedMovie.plot
     }
     
-    func chooseImageOfFavButton(with id: String) {
-            let realm = try! Realm()
-            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
-            
-            if result.count > 0 {
-                favButton.image = UIImage(named: "marked")
-            } else {
-                favButton.image = UIImage(named: "mark")
-            }
+    func chooseImageOfFavButton() {
+        guard let checkedMovie = movie else { return }
+        
+        if checkMovieInDB(id: checkedMovie.id) {
+            favButton.image = UIImage(named: "marked")
+        } else {
+            favButton.image = UIImage(named: "mark")
+        }
     }
     
     func createBackground(with urlsOfImages: [String]) {
