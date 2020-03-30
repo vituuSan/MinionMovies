@@ -43,13 +43,12 @@ class MovieDetailController: UIViewController {
     
     @IBAction func toggleFavMovie(_ sender: Any) {
         guard let checkedMovie = movie else { return }
-        if checkMovieInDB(id: checkedMovie.id) {
+        if !checkMovieInDB(id: checkedMovie.id) {
             addMovieInFavDB(id: checkedMovie.id)
-            favButton.image = UIImage(named: "marked")
         } else {
             deleteMovieInFavDB(id: checkedMovie.id)
-            favButton.image = UIImage(named: "mark")
         }
+        chooseImageOfFavButton(with: checkedMovie.id)
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
@@ -69,10 +68,11 @@ class MovieDetailController: UIViewController {
             } else {
                 exist = false
             }
+            return exist
         } catch let error as NSError {
             print(error)
+            return false
         }
-        return exist
     }
     
     func addMovieInFavDB(id: String) {
