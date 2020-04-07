@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MovieDetailController: UIViewController {
 
@@ -22,6 +23,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var star3: UIImageView!
     @IBOutlet private weak var star4: UIImageView!
     @IBOutlet private weak var star5: UIImageView!
+    @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var movie: Movie?
     
@@ -36,7 +38,17 @@ class MovieDetailController: UIViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        createScreen()
+        setupLayout()
+    }
+    
+    @IBAction func toggleFavMovie(_ sender: Any) {
+        guard let checkedMovie = movie else { return }
+        if !checkMovieInDB(id: checkedMovie.id) {
+            addMovieInFavDB(id: checkedMovie.id)
+        } else {
+            deleteMovieInFavDB(id: checkedMovie.id)
+        }
+        chooseImageOfFavButton()
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
@@ -45,9 +57,54 @@ class MovieDetailController: UIViewController {
         UIApplication.shared.open(url)
     }
     
-    func createScreen() {
+    //to check if movie exists in FavMovieDB
+    func checkMovieInDB(id: String) -> Bool {
+        do {
+            let realm = try Realm()
+            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
+            
+            if result.count > 0 {
+                return true
+            } else {
+                return false
+            }
+        } catch let error as NSError {
+            print(error)
+            return false
+        }
+    }
+    
+    func addMovieInFavDB(id: String) {
+        do {
+            let realm = try Realm()
+            let movieFav = FavMovieDB()
+            
+            movieFav.id = id
+            try realm.write{
+                realm.add(movieFav)
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    func deleteMovieInFavDB(id: String) {
+        do {
+            let realm = try Realm()
+            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
+            
+            try realm.write{
+                realm.delete(result)
+            }
+        } catch let error as NSError {
+            print(error)
+        }
+    }
+    
+    func setupLayout() {
         guard let checkedMovie = self.movie else { return }
         createBackground(with: checkedMovie.images)
+        chooseImageOfFavButton()
         createPoster(with: checkedMovie.poster)
         
         nameMovie.text = checkedMovie.title
@@ -68,6 +125,16 @@ class MovieDetailController: UIViewController {
         }
         
         plot.text = checkedMovie.plot
+    }
+    
+    func chooseImageOfFavButton() {
+        guard let checkedMovie = movie else { return }
+        
+        if checkMovieInDB(id: checkedMovie.id) {
+            favButton.image = UIImage(named: "marked")
+        } else {
+            favButton.image = UIImage(named: "mark")
+        }
     }
     
     func createBackground(with urlsOfImages: [String]) {
