@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import RealmSwift
 
 class MovieListController: UIViewController {
 
@@ -42,6 +43,7 @@ class MovieListController: UIViewController {
                 debugPrint(error?.localizedDescription)
             }
             self.reloadCollectionView()
+            self.saveMovieInDB()
         }
         task.resume()
     }
@@ -61,6 +63,40 @@ class MovieListController: UIViewController {
     func reloadCollectionView() {
         DispatchQueue.main.async {
             self.collectionView.reloadData()
+        }
+    }
+    
+    func saveMovieInDB() {
+        for movie in movies {
+            let movieDB = MovieDB()
+
+            movieDB.id = movie.id
+            movieDB.title = movie.title
+            movieDB.year = movie.year
+            movieDB.rated = movie.rated
+            movieDB.released = movie.released
+            movieDB.runtime = movie.runtime
+            movieDB.genre = movie.genre
+            movieDB.director = movie.director
+            movieDB.writer = movie.writer
+            movieDB.actors = movie.actors
+            movieDB.plot = movie.plot
+            movieDB.awards = movie.awards
+            movieDB.metascore = movie.metascore
+            movieDB.resolutionIs4k = movie.resolutionIs4k
+            movieDB.hdr = movie.hdr
+            movieDB.trailer = movie.trailer
+            movieDB.image = movie.images.first
+
+            do {
+                let realm = try Realm()
+
+                try realm.write {
+                    realm.add(movieDB, update: .modified)
+                }
+            } catch let error as NSError {
+                print(error)
+            }
         }
     }
 }

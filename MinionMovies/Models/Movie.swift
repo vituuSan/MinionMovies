@@ -27,7 +27,7 @@ struct Movie: Codable {
     let metascore: String
     let resolutionIs4k: Bool
     let hdr: Bool
-    let trailer: URL?
+    let trailer: String?
     let images: [String]
     
     enum CodingKeys: String, CodingKey {
