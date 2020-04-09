@@ -53,7 +53,7 @@ class MovieDetailController: UIViewController {
     
     @IBAction func trailerButton(_ sender: UIButton) {
         guard let checkedMovie = movie,
-            let url = checkedMovie.trailer else { return }
+            let url = URL(string: checkedMovie.trailer ?? "") else { return }
         UIApplication.shared.open(url)
     }
     
@@ -81,7 +81,7 @@ class MovieDetailController: UIViewController {
             
             movieFav.id = id
             try realm.write{
-                realm.add(movieFav)
+                realm.add(movieFav, update: .modified)
             }
         } catch let error as NSError {
             print(error)
