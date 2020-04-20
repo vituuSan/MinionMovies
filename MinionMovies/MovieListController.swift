@@ -25,16 +25,23 @@ class MovieListController: UIViewController {
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
         
+        request()
+    }
+    
+    func request() {
         let task = session.dataTask(with: url) { data, response, error in
             if error == nil {
                 guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode),
                 let mime = response?.mimeType, mime == "application/json" else {
-                        return
+                    return
                 }
                 
                 do {
                     if let dataChecked = data {
                         self.movies = try JSONDecoder().decode([Movie].self, from: dataChecked)
+                        for movie in self.movies {
+                            DBManagerAllMovies().add(movie: movie)
+                        }
                     }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
@@ -43,7 +50,7 @@ class MovieListController: UIViewController {
                 debugPrint(error?.localizedDescription)
             }
             self.reloadCollectionView()
-            self.saveMovieInDB()
+//            self.saveMovieInDB()
         }
         task.resume()
     }

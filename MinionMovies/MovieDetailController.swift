@@ -43,10 +43,12 @@ class MovieDetailController: UIViewController {
     
     @IBAction func toggleFavMovie(_ sender: Any) {
         guard let checkedMovie = movie else { return }
-        if !checkMovieInDB(id: checkedMovie.id) {
-            addMovieInFavDB(id: checkedMovie.id)
+        if !DBManagerFavorites().check(movie: checkedMovie) {
+            DBManagerFavorites().add(movie: checkedMovie)
+//            addMovieInFavDB(id: checkedMovie.id)
         } else {
-            deleteMovieInFavDB(id: checkedMovie.id)
+            DBManagerFavorites().delete(movie: checkedMovie)
+//            deleteMovieInFavDB(id: checkedMovie.id)
         }
         chooseImageOfFavButton()
     }
@@ -55,50 +57,6 @@ class MovieDetailController: UIViewController {
         guard let checkedMovie = movie,
             let url = URL(string: checkedMovie.trailer ?? "") else { return }
         UIApplication.shared.open(url)
-    }
-    
-    //to check if movie exists in FavMovieDB
-    func checkMovieInDB(id: String) -> Bool {
-        do {
-            let realm = try Realm()
-            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
-            
-            if result.count > 0 {
-                return true
-            } else {
-                return false
-            }
-        } catch let error as NSError {
-            print(error)
-            return false
-        }
-    }
-    
-    func addMovieInFavDB(id: String) {
-        do {
-            let realm = try Realm()
-            let movieFav = FavMovieDB()
-            
-            movieFav.id = id
-            try realm.write{
-                realm.add(movieFav, update: .modified)
-            }
-        } catch let error as NSError {
-            print(error)
-        }
-    }
-    
-    func deleteMovieInFavDB(id: String) {
-        do {
-            let realm = try Realm()
-            let result = realm.objects(FavMovieDB.self).filter("id = \"\(id)\"")
-            
-            try realm.write{
-                realm.delete(result)
-            }
-        } catch let error as NSError {
-            print(error)
-        }
     }
     
     func setupLayout() {
@@ -130,7 +88,7 @@ class MovieDetailController: UIViewController {
     func chooseImageOfFavButton() {
         guard let checkedMovie = movie else { return }
         
-        if checkMovieInDB(id: checkedMovie.id) {
+        if DBManagerFavorites().check(movie: checkedMovie) {
             favButton.image = UIImage(named: "marked")
         } else {
             favButton.image = UIImage(named: "mark")
