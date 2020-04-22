@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MovieDetailController: UIViewController {
+class MovieDetailController: UIViewController, ViewProtocol {
 
     @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var posterMovie: UIImageView!
@@ -26,6 +26,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var movie: Movie?
+    internal var dbManager: DBManagerProtocol = DBManagerFavorites()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,11 +44,11 @@ class MovieDetailController: UIViewController {
     
     @IBAction func toggleFavMovie(_ sender: Any) {
         guard let checkedMovie = movie else { return }
-        if !DBManagerFavorites().check(movie: checkedMovie) {
-            DBManagerFavorites().add(movie: checkedMovie)
+        if !dbManager.check(movie: checkedMovie) {
+            dbManager.add(movie: checkedMovie)
 //            addMovieInFavDB(id: checkedMovie.id)
         } else {
-            DBManagerFavorites().delete(movie: checkedMovie)
+            dbManager.delete(movie: checkedMovie)
 //            deleteMovieInFavDB(id: checkedMovie.id)
         }
         chooseImageOfFavButton()
@@ -88,7 +89,7 @@ class MovieDetailController: UIViewController {
     func chooseImageOfFavButton() {
         guard let checkedMovie = movie else { return }
         
-        if DBManagerFavorites().check(movie: checkedMovie) {
+        if dbManager.check(movie: checkedMovie) {
             favButton.image = UIImage(named: "marked")
         } else {
             favButton.image = UIImage(named: "mark")

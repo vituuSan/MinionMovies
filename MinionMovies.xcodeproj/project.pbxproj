@@ -15,6 +15,7 @@
 		4A832EDA24104659005D8FB9 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A832ED924104659005D8FB9 /* DesignableButton.swift */; };
 		4A88A738240DA08200B5746E /* Movie.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A88A737240DA08200B5746E /* Movie.swift */; };
 		4AA29CA9242D180500C50AF9 /* FavMovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA29CA8242D180500C50AF9 /* FavMovieDB.swift */; };
+		4AC86AC92450A2B700B45A9D /* ViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC86AC82450A2B700B45A9D /* ViewProtocol.swift */; };
 		4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3982406B94600ACF001 /* AppDelegate.swift */; };
 		4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */; };
 		4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39C2406B94600ACF001 /* MovieListController.swift */; };
@@ -34,6 +35,7 @@
 		4A832ED924104659005D8FB9 /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
 		4A88A737240DA08200B5746E /* Movie.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Movie.swift; sourceTree = "<group>"; };
 		4AA29CA8242D180500C50AF9 /* FavMovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavMovieDB.swift; sourceTree = "<group>"; };
+		4AC86AC82450A2B700B45A9D /* ViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocol.swift; sourceTree = "<group>"; };
 		4AD8B3952406B94600ACF001 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD8B3982406B94600ACF001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -68,12 +70,13 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		4A7FBDBF244E45DD0076739C /* DBManagersProtocols */ = {
+		4A7FBDBF244E45DD0076739C /* Protocols */ = {
 			isa = PBXGroup;
 			children = (
 				4A7FBDC0244E461F0076739C /* DBManagerProtocol.swift */,
+				4AC86AC82450A2B700B45A9D /* ViewProtocol.swift */,
 			);
-			path = DBManagersProtocols;
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 		4A822464243CFD42002DBB1C /* Models */ = {
@@ -107,7 +110,7 @@
 		4AD8B3972406B94600ACF001 /* MinionMovies */ = {
 			isa = PBXGroup;
 			children = (
-				4A7FBDBF244E45DD0076739C /* DBManagersProtocols */,
+				4A7FBDBF244E45DD0076739C /* Protocols */,
 				4A822464243CFD42002DBB1C /* Models */,
 				4AD8B3982406B94600ACF001 /* AppDelegate.swift */,
 				4A7FBDC2244E46A00076739C /* DBManagerAllMovies.swift */,
@@ -253,6 +256,7 @@
 				4A7FBDC1244E461F0076739C /* DBManagerProtocol.swift in Sources */,
 				4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */,
 				4AD8B3AD2406BB1800ACF001 /* MovieCell.swift in Sources */,
+				4AC86AC92450A2B700B45A9D /* ViewProtocol.swift in Sources */,
 				4A832EDA24104659005D8FB9 /* DesignableButton.swift in Sources */,
 				4A832ED6241045F1005D8FB9 /* MovieDetailController.swift in Sources */,
 				4A7FBDC3244E46A00076739C /* DBManagerAllMovies.swift in Sources */,

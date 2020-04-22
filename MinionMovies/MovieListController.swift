@@ -9,13 +9,15 @@
 import UIKit
 import RealmSwift
 
-class MovieListController: UIViewController {
-
+class MovieListController: UIViewController, ViewProtocol {
+    
     private let session = URLSession.shared
     private let url = URL(string: "http://localhost:8080/response.json")!
     private var movies: [Movie] = []
     private var filteredMovies: [Movie] = []
     private var searching = false
+    internal var dbManager: DBManagerProtocol = DBManagerAllMovies()
+    
     
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
@@ -40,7 +42,7 @@ class MovieListController: UIViewController {
                     if let dataChecked = data {
                         self.movies = try JSONDecoder().decode([Movie].self, from: dataChecked)
                         for movie in self.movies {
-                            DBManagerAllMovies().add(movie: movie)
+                            self.dbManager.add(movie: movie)
                         }
                     }
                 } catch {
