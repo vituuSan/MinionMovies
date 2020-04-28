@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		4A7FBDC1244E461F0076739C /* DBManagerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7FBDC0244E461F0076739C /* DBManagerProtocol.swift */; };
 		4A7FBDC3244E46A00076739C /* DBManagerAllMovies.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7FBDC2244E46A00076739C /* DBManagerAllMovies.swift */; };
-		4A7FBDC5244E47290076739C /* DBManagerFavorites.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A7FBDC4244E47290076739C /* DBManagerFavorites.swift */; };
 		4A822463243CFD3D002DBB1C /* MovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A822462243CFD3D002DBB1C /* MovieDB.swift */; };
 		4A832ED6241045F1005D8FB9 /* MovieDetailController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A832ED5241045F1005D8FB9 /* MovieDetailController.swift */; };
 		4A832EDA24104659005D8FB9 /* DesignableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A832ED924104659005D8FB9 /* DesignableButton.swift */; };
@@ -47,7 +46,6 @@
 /* Begin PBXFileReference section */
 		4A7FBDC0244E461F0076739C /* DBManagerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerProtocol.swift; sourceTree = "<group>"; };
 		4A7FBDC2244E46A00076739C /* DBManagerAllMovies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerAllMovies.swift; sourceTree = "<group>"; };
-		4A7FBDC4244E47290076739C /* DBManagerFavorites.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DBManagerFavorites.swift; sourceTree = "<group>"; };
 		4A822462243CFD3D002DBB1C /* MovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDB.swift; sourceTree = "<group>"; };
 		4A832ED5241045F1005D8FB9 /* MovieDetailController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieDetailController.swift; sourceTree = "<group>"; };
 		4A832ED924104659005D8FB9 /* DesignableButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DesignableButton.swift; sourceTree = "<group>"; };
@@ -118,7 +116,6 @@
 		4A822464243CFD42002DBB1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4A7FBDC4244E47290076739C /* DBManagerFavorites.swift */,
 				4A7FBDC2244E46A00076739C /* DBManagerAllMovies.swift */,
 				4A88A737240DA08200B5746E /* Movie.swift */,
 				4A822462243CFD3D002DBB1C /* MovieDB.swift */,
@@ -395,7 +392,6 @@
 				4A822463243CFD3D002DBB1C /* MovieDB.swift in Sources */,
 				4AA29CA9242D180500C50AF9 /* FavMovieDB.swift in Sources */,
 				4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */,
-				4A7FBDC5244E47290076739C /* DBManagerFavorites.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

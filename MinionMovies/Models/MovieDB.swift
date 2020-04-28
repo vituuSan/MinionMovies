@@ -26,12 +26,17 @@ import RealmSwift
     dynamic var awards: String?
     dynamic var poster: String?
     dynamic var metascore: String?
-    dynamic var resolutionIs4k: Bool = false
-    dynamic var hdr: Bool = false
+    dynamic var resolutionIs4k: Bool?
+    dynamic var hdr: Bool?
     dynamic var trailer: String?
     dynamic var image: String?
+    dynamic var images: [String] = []
 
     override class func primaryKey() -> String? {
         return "id"
+    }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["images"]
     }
 }

@@ -7,28 +7,29 @@
 //
 
 import Foundation
+import RealmSwift
 
-struct Movie: Codable {
-    let id: String
-    let title: String
-    let year: String
-    let rated: String
-    let released: String
-    let runtime: String
-    let genre: String
-    let director: String
-    let writer: String
-    let actors: String
-    let plot: String
-    let language: String
-    let country: String
-    let awards: String
-    let poster: String
-    let metascore: String
-    let resolutionIs4k: Bool
-    let hdr: Bool
+class Movie: Object, Codable {
+    let id: String = ""
+    let title: String?
+    let year: String?
+    let rated: String?
+    let released: String?
+    let runtime: String?
+    let genre: String?
+    let director: String?
+    let writer: String?
+    let actors: String?
+    let plot: String?
+    let language: String?
+    let country: String?
+    let awards: String?
+    let poster: String?
+    let metascore: String?
+    let resolutionIs4k: Bool?
+    let hdr: Bool?
     let trailer: String?
-    let images: [String]
+    let images: [String] = []
     
     enum CodingKeys: String, CodingKey {
         case id, title, year, rated, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, metascore

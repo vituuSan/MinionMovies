@@ -41,8 +41,9 @@ class MovieListController: UIViewController, ViewProtocol {
                 do {
                     if let dataChecked = data {
                         self.movies = try JSONDecoder().decode([Movie].self, from: dataChecked)
-                        for movie in self.movies {
-                            self.dbManager.add(movie: movie)
+                        
+                        for firstMovie in self.movies {
+                            self.dbManager.add(movie: firstMovie)
                         }
                     }
                 } catch {
@@ -74,42 +75,9 @@ class MovieListController: UIViewController, ViewProtocol {
             self.collectionView.reloadData()
         }
     }
-    
-    func saveMovieInDB() {
-        for movie in movies {
-            let movieDB = MovieDB()
-
-            movieDB.id = movie.id
-            movieDB.title = movie.title
-            movieDB.year = movie.year
-            movieDB.rated = movie.rated
-            movieDB.released = movie.released
-            movieDB.runtime = movie.runtime
-            movieDB.genre = movie.genre
-            movieDB.director = movie.director
-            movieDB.writer = movie.writer
-            movieDB.actors = movie.actors
-            movieDB.plot = movie.plot
-            movieDB.awards = movie.awards
-            movieDB.metascore = movie.metascore
-            movieDB.resolutionIs4k = movie.resolutionIs4k
-            movieDB.hdr = movie.hdr
-            movieDB.trailer = movie.trailer
-            movieDB.image = movie.images.first
-
-            do {
-                let realm = try Realm()
-
-                try realm.write {
-                    realm.add(movieDB, update: .modified)
-                }
-            } catch let error as NSError {
-                print(error)
-            }
-        }
-    }
 }
 
+// MARK: UICollectionViewDataSource
 extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
@@ -122,9 +90,9 @@ extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].poster)
+                movieCell.populate(with: filteredMovies[indexPath.row].poster ?? "")
             } else {
-                movieCell.populate(with: movies[indexPath.row].poster)
+                movieCell.populate(with: movies[indexPath.row].poster ?? "")
             }
             
             return movieCell
@@ -133,6 +101,7 @@ extension MovieListController: UICollectionViewDataSource {
     }
 }
 
+// MARK: UICollectionViewDelegate
 extension MovieListController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else {
@@ -148,9 +117,10 @@ extension MovieListController: UICollectionViewDelegate {
     }
 }
 
+// MARK: UISearchBarDelegate
 extension MovieListController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredMovies = movies.filter({ $0.title.prefix(searchText.count) == searchText })
+        filteredMovies = movies.filter({ $0.title!.prefix(searchText.count) == searchText })
         searching = true
         
         collectionView.reloadData()

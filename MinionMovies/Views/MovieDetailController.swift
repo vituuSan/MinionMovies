@@ -26,7 +26,7 @@ class MovieDetailController: UIViewController, ViewProtocol {
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var movie: Movie?
-    internal var dbManager: DBManagerProtocol = DBManagerFavorites()
+    internal var dbManager: DBManagerProtocol = DBManagerAllMovies()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +46,8 @@ class MovieDetailController: UIViewController, ViewProtocol {
         guard let checkedMovie = movie else { return }
         if !dbManager.check(movie: checkedMovie) {
             dbManager.add(movie: checkedMovie)
-//            addMovieInFavDB(id: checkedMovie.id)
         } else {
             dbManager.delete(movie: checkedMovie)
-//            deleteMovieInFavDB(id: checkedMovie.id)
         }
         chooseImageOfFavButton()
     }
@@ -64,20 +62,20 @@ class MovieDetailController: UIViewController, ViewProtocol {
         guard let checkedMovie = self.movie else { return }
         createBackground(with: checkedMovie.images)
         chooseImageOfFavButton()
-        createPoster(with: checkedMovie.poster)
+        createPoster(with: checkedMovie.poster ?? "")
         
         nameMovie.text = checkedMovie.title
-        createEvaluation(with: checkedMovie.metascore)
-        evaluation.text = "(\(checkedMovie.metascore))"
-        yearAndDuration.text = "\(checkedMovie.year)  \(checkedMovie.runtime)"
+        createEvaluation(with: checkedMovie.metascore ?? "")
+        evaluation.text = "(\(checkedMovie.metascore ?? ""))"
+        yearAndDuration.text = "\(checkedMovie.year ?? "")  \(checkedMovie.runtime ?? "")"
         
-        if checkedMovie.resolutionIs4k {
-            if checkedMovie.hdr {
+        if checkedMovie.resolutionIs4k ?? false {
+            if checkedMovie.hdr ?? false {
                 resolution.text = "4k  HDR"
             } else {
                 resolution.text = "4k"
             }
-        } else if checkedMovie.hdr {
+        } else if checkedMovie.hdr ?? false {
             resolution.text = "HDR"
         } else {
             resolution.text = ""
