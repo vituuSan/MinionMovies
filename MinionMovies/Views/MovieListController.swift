@@ -10,13 +10,16 @@ import UIKit
 import RealmSwift
 
 class MovieListController: UIViewController, ViewProtocol {
+    var interactor: InteractorProtocol? = HomeViewInteractor()
+    var presenter: PresenterProtocol? = HomeViewPresenter()
+    
     
     private let session = URLSession.shared
     private let url = URL(string: "http://localhost:8080/response.json")!
-    private var movies: [Movie] = []
-    private var filteredMovies: [Movie] = []
+    private var movies: [MovieDB] = []
+    private var filteredMovies: [MovieDB] = []
     private var searching = false
-    internal var dbManager: DBManagerProtocol = DBManagerAllMovies()
+    internal var dbManager: DBManagerProtocol = DBManager(config: Realm.Configuration())
     
     
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
@@ -26,7 +29,7 @@ class MovieListController: UIViewController, ViewProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
-        
+        interactor?.theScreenIsLoading()
         request()
     }
     
@@ -40,11 +43,11 @@ class MovieListController: UIViewController, ViewProtocol {
                 
                 do {
                     if let dataChecked = data {
-                        self.movies = try JSONDecoder().decode([Movie].self, from: dataChecked)
+                        self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
                         
-                        for firstMovie in self.movies {
-                            self.dbManager.add(movie: firstMovie)
-                        }
+//                        for firstMovie in self.movies {
+//                            self.dbManager.add(object: firstMovie)
+//                        }
                     }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
@@ -83,8 +86,10 @@ extension MovieListController: UICollectionViewDataSource {
         if searching {
             return filteredMovies.count
         } else {
+            print(presenter?.sizeList())
             return movies.count
         }
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

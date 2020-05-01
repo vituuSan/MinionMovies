@@ -9,5 +9,6 @@
 import Foundation
 
 protocol ViewProtocol {
-    var dbManager: DBManagerProtocol { get set }
+    var interactor: InteractorProtocol? { get }
+    var presenter: PresenterProtocol? { get }
 }

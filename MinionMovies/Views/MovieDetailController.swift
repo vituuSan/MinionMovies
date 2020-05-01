@@ -9,7 +9,7 @@
 import UIKit
 import RealmSwift
 
-class MovieDetailController: UIViewController, ViewProtocol {
+class MovieDetailController: UIViewController {
 
     @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var posterMovie: UIImageView!
@@ -25,8 +25,8 @@ class MovieDetailController: UIViewController, ViewProtocol {
     @IBOutlet private weak var star5: UIImageView!
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
-    var movie: Movie?
-    internal var dbManager: DBManagerProtocol = DBManagerAllMovies()
+    var movie: MovieDB?
+    internal var dbManager: DBManagerProtocol = DBManager(config: Realm.Configuration.defaultConfiguration)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,10 +44,10 @@ class MovieDetailController: UIViewController, ViewProtocol {
     
     @IBAction func toggleFavMovie(_ sender: Any) {
         guard let checkedMovie = movie else { return }
-        if !dbManager.check(movie: checkedMovie) {
-            dbManager.add(movie: checkedMovie)
+        if !dbManager.check(object: checkedMovie) {
+            dbManager.add(object: checkedMovie)
         } else {
-            dbManager.delete(movie: checkedMovie)
+            dbManager.delete(object: checkedMovie)
         }
         chooseImageOfFavButton()
     }
@@ -60,7 +60,7 @@ class MovieDetailController: UIViewController, ViewProtocol {
     
     func setupLayout() {
         guard let checkedMovie = self.movie else { return }
-        createBackground(with: checkedMovie.images)
+        createBackground(with: checkedMovie.images ?? List<String>())
         chooseImageOfFavButton()
         createPoster(with: checkedMovie.poster ?? "")
         
@@ -87,14 +87,14 @@ class MovieDetailController: UIViewController, ViewProtocol {
     func chooseImageOfFavButton() {
         guard let checkedMovie = movie else { return }
         
-        if dbManager.check(movie: checkedMovie) {
+        if dbManager.check(object: checkedMovie) {
             favButton.image = UIImage(named: "marked")
         } else {
             favButton.image = UIImage(named: "mark")
         }
     }
     
-    func createBackground(with urlsOfImages: [String]) {
+    func createBackground(with urlsOfImages: List<String>) {
         if let checkedUrl = URL(string: urlsOfImages[0]) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             backgroundImage.image = UIImage(data: data)

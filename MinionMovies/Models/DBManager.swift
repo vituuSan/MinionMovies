@@ -9,36 +9,42 @@
 import Foundation
 import RealmSwift
 
-class DBManagerAllMovies: DBManagerProtocol {
+class DBManager: DBManagerProtocol {
     
-    func add(movie: Object) {
+    var config = Realm.Configuration()
+    
+    init(config: Realm.Configuration) {
+        self.config = config
+    }
+    
+    func add(object: Object) {
         do {
             let realm = try Realm()
             
             try realm.write {
-                realm.add(movie, update: .modified)
+                realm.add(object, update: .modified)
             }
         } catch let error as NSError {
             print(error)
         }
     }
     
-    func delete(movie: Object) {
+    func delete(object: Object) {
         do {
             let realm = try Realm()
             
             try realm.write{
-                realm.delete(movie)
+                realm.delete(object)
             }
         } catch let error as NSError {
             print(error)
         }
     }
     
-    func check(movie: Object) -> Bool {
+    func check(object: Object) -> Bool {
         
         // nao vai dar certo, provavelmente
-        if movie.isEqual(MovieDB()) || movie.isEqual(FavMovieDB()) {
+        if object.isEqual(MovieDB()) || object.isEqual(FavMovieDB()) {
             return true
         } else {
             return false

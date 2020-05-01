@@ -10,7 +10,7 @@ import Foundation
 import RealmSwift
 
 protocol DBManagerProtocol {
-    func add(movie: Object)
-    func delete(movie: Object)
-    func check(movie: Object) -> Bool
+    func add(object: Object)
+    func delete(object: Object)
+    func check(object: Object) -> Bool
 }

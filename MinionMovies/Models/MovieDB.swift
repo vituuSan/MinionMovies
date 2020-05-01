@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class MovieDB: Object {
+@objcMembers class MovieDB: Object, Codable {
     dynamic var id: String = ""
     dynamic var title: String?
     dynamic var year: String?
@@ -29,14 +29,9 @@ import RealmSwift
     dynamic var resolutionIs4k: Bool?
     dynamic var hdr: Bool?
     dynamic var trailer: String?
-    dynamic var image: String?
-    dynamic var images: [String] = []
+    dynamic var images: List<String>?
 
     override class func primaryKey() -> String? {
         return "id"
-    }
-    
-    override class func ignoredProperties() -> [String] {
-        return ["images"]
     }
 }
