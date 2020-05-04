@@ -9,7 +9,7 @@
 import Foundation
 import RealmSwift
 
-@objcMembers class MovieDB: Object {
+@objcMembers class MovieDB: Object, Codable {
     dynamic var id: String = ""
     dynamic var title: String?
     dynamic var year: String?
@@ -30,8 +30,19 @@ import RealmSwift
     dynamic var hdr: Bool = false
     dynamic var trailer: String?
     dynamic var image: String?
+    dynamic var images = List<String>()
+    
+    enum CodingKeys: String, CodingKey {
+        case id, title, year, rated, released, runtime, genre, director, writer, actors, plot, language, country, awards, poster, metascore
+        case resolutionIs4k = "4k"
+        case hdr, trailer, images
+    }
 
     override class func primaryKey() -> String? {
         return "id"
+    }
+    
+    override class func ignoredProperties() -> [String] {
+        return ["images"]
     }
 }

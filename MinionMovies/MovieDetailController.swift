@@ -25,7 +25,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var star5: UIImageView!
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
-    var movie: Movie?
+    var movie: MovieDB?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -103,12 +103,12 @@ class MovieDetailController: UIViewController {
     
     func setupLayout() {
         guard let checkedMovie = self.movie else { return }
-        createBackground(with: checkedMovie.images)
+        createBackground(with: checkedMovie.images.first ?? "")
         chooseImageOfFavButton()
-        createPoster(with: checkedMovie.poster)
+        createPoster(with: checkedMovie.poster ?? "")
         
         nameMovie.text = checkedMovie.title
-        createEvaluation(with: checkedMovie.metascore)
+        createEvaluation(with: checkedMovie.metascore ?? "")
         evaluation.text = "(\(checkedMovie.metascore))"
         yearAndDuration.text = "\(checkedMovie.year)  \(checkedMovie.runtime)"
         
@@ -137,8 +137,8 @@ class MovieDetailController: UIViewController {
         }
     }
     
-    func createBackground(with urlsOfImages: [String]) {
-        if let checkedUrl = URL(string: urlsOfImages[0]) {
+    func createBackground(with urlsOfImages: String) {
+        if let checkedUrl = URL(string: urlsOfImages) {
             guard let data = try? Data(contentsOf: checkedUrl) else { return }
             backgroundImage.image = UIImage(data: data)
         }

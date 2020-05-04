@@ -13,8 +13,8 @@ class MovieListController: UIViewController {
 
     private let session = URLSession.shared
     private let url = URL(string: "http://localhost:8080/response.json")!
-    private var movies: [Movie] = []
-    private var filteredMovies: [Movie] = []
+    private var movies: [MovieDB] = []
+    private var filteredMovies: [MovieDB] = []
     private var searching = false
     
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
@@ -34,7 +34,7 @@ class MovieListController: UIViewController {
                 
                 do {
                     if let dataChecked = data {
-                        self.movies = try JSONDecoder().decode([Movie].self, from: dataChecked)
+                        self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
                     }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
@@ -70,29 +70,11 @@ class MovieListController: UIViewController {
         for movie in movies {
             let movieDB = MovieDB()
 
-            movieDB.id = movie.id
-            movieDB.title = movie.title
-            movieDB.year = movie.year
-            movieDB.rated = movie.rated
-            movieDB.released = movie.released
-            movieDB.runtime = movie.runtime
-            movieDB.genre = movie.genre
-            movieDB.director = movie.director
-            movieDB.writer = movie.writer
-            movieDB.actors = movie.actors
-            movieDB.plot = movie.plot
-            movieDB.awards = movie.awards
-            movieDB.metascore = movie.metascore
-            movieDB.resolutionIs4k = movie.resolutionIs4k
-            movieDB.hdr = movie.hdr
-            movieDB.trailer = movie.trailer
-            movieDB.image = movie.images.first
-
             do {
                 let realm = try Realm()
 
                 try realm.write {
-                    realm.add(movieDB, update: .modified)
+                    realm.add(movie, update: .modified)
                 }
             } catch let error as NSError {
                 print(error)
@@ -113,9 +95,9 @@ extension MovieListController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].poster)
+                movieCell.populate(with: filteredMovies[indexPath.row].poster ?? "")
             } else {
-                movieCell.populate(with: movies[indexPath.row].poster)
+                movieCell.populate(with: movies[indexPath.row].poster ?? "")
             }
             
             return movieCell
@@ -141,7 +123,7 @@ extension MovieListController: UICollectionViewDelegate {
 
 extension MovieListController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredMovies = movies.filter({ $0.title.prefix(searchText.count) == searchText })
+        filteredMovies = movies.filter({ $0.title!.prefix(searchText.count) == searchText })
         searching = true
         
         collectionView.reloadData()
