@@ -18,8 +18,8 @@
 		4A8DCD462459C9F600A5A617 /* HomeViewPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DCD452459C9F600A5A617 /* HomeViewPresenter.swift */; };
 		4A8DCD482459CAC500A5A617 /* HomeViewDataProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4A8DCD472459CAC500A5A617 /* HomeViewDataProvider.swift */; };
 		4AA29CA9242D180500C50AF9 /* FavMovieDB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AA29CA8242D180500C50AF9 /* FavMovieDB.swift */; };
+		4AB123342461D146009959B7 /* MinionMoviesTests2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AB123332461D146009959B7 /* MinionMoviesTests2.swift */; };
 		4AC86AC92450A2B700B45A9D /* ViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC86AC82450A2B700B45A9D /* ViewProtocol.swift */; };
-		4AC8893F2450E82E00672055 /* MinionMoviesTests2.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AC8893E2450E82E00672055 /* MinionMoviesTests2.swift */; };
 		4AD8B3992406B94600ACF001 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B3982406B94600ACF001 /* AppDelegate.swift */; };
 		4AD8B39B2406B94600ACF001 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */; };
 		4AD8B39D2406B94600ACF001 /* MovieListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4AD8B39C2406B94600ACF001 /* MovieListController.swift */; };
@@ -31,14 +31,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4AC889332450E7D900672055 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = 4AD8B38D2406B94600ACF001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = 4AD8B3942406B94600ACF001;
-			remoteInfo = MinionMovies;
-		};
-		4AC889412450E82E00672055 /* PBXContainerItemProxy */ = {
+		4AB123362461D146009959B7 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4AD8B38D2406B94600ACF001 /* Project object */;
 			proxyType = 1;
@@ -59,11 +52,10 @@
 		4A8DCD452459C9F600A5A617 /* HomeViewPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewPresenter.swift; sourceTree = "<group>"; };
 		4A8DCD472459CAC500A5A617 /* HomeViewDataProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewDataProvider.swift; sourceTree = "<group>"; };
 		4AA29CA8242D180500C50AF9 /* FavMovieDB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavMovieDB.swift; sourceTree = "<group>"; };
+		4AB123312461D146009959B7 /* MinionMoviesTests2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinionMoviesTests2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4AB123332461D146009959B7 /* MinionMoviesTests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionMoviesTests2.swift; sourceTree = "<group>"; };
+		4AB123352461D146009959B7 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AC86AC82450A2B700B45A9D /* ViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewProtocol.swift; sourceTree = "<group>"; };
-		4AC8892E2450E7D900672055 /* MinionMoviesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinionMoviesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AC8893C2450E82E00672055 /* MinionMoviesTests2.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MinionMoviesTests2.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4AC8893E2450E82E00672055 /* MinionMoviesTests2.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MinionMoviesTests2.swift; sourceTree = "<group>"; };
-		4AC889402450E82E00672055 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4AD8B3952406B94600ACF001 /* MinionMovies.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MinionMovies.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		4AD8B3982406B94600ACF001 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -79,14 +71,7 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4AC8892B2450E7D900672055 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4AC889392450E82E00672055 /* Frameworks */ = {
+		4AB1232E2461D146009959B7 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -143,6 +128,15 @@
 			path = HomeView;
 			sourceTree = "<group>";
 		};
+		4AB123322461D146009959B7 /* MinionMoviesTests2 */ = {
+			isa = PBXGroup;
+			children = (
+				4AB123332461D146009959B7 /* MinionMoviesTests2.swift */,
+				4AB123352461D146009959B7 /* Info.plist */,
+			);
+			path = MinionMoviesTests2;
+			sourceTree = "<group>";
+		};
 		4AC86ACA2450BFE100B45A9D /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -152,20 +146,11 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		4AC8893D2450E82E00672055 /* MinionMoviesTests2 */ = {
-			isa = PBXGroup;
-			children = (
-				4AC8893E2450E82E00672055 /* MinionMoviesTests2.swift */,
-				4AC889402450E82E00672055 /* Info.plist */,
-			);
-			path = MinionMoviesTests2;
-			sourceTree = "<group>";
-		};
 		4AD8B38C2406B94600ACF001 = {
 			isa = PBXGroup;
 			children = (
 				4AD8B3972406B94600ACF001 /* MinionMovies */,
-				4AC8893D2450E82E00672055 /* MinionMoviesTests2 */,
+				4AB123322461D146009959B7 /* MinionMoviesTests2 */,
 				4AD8B3962406B94600ACF001 /* Products */,
 				F0B024A52EC3423FB7495F97 /* Pods */,
 				185BAB11DAA6560F34053EA6 /* Frameworks */,
@@ -176,8 +161,7 @@
 			isa = PBXGroup;
 			children = (
 				4AD8B3952406B94600ACF001 /* MinionMovies.app */,
-				4AC8892E2450E7D900672055 /* MinionMoviesTests.xctest */,
-				4AC8893C2450E82E00672055 /* MinionMoviesTests2.xctest */,
+				4AB123312461D146009959B7 /* MinionMoviesTests2.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -213,40 +197,22 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		4AC8892D2450E7D900672055 /* MinionMoviesTests */ = {
+		4AB123302461D146009959B7 /* MinionMoviesTests2 */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4AC889352450E7D900672055 /* Build configuration list for PBXNativeTarget "MinionMoviesTests" */;
+			buildConfigurationList = 4AB123382461D146009959B7 /* Build configuration list for PBXNativeTarget "MinionMoviesTests2" */;
 			buildPhases = (
-				4AC8892A2450E7D900672055 /* Sources */,
-				4AC8892B2450E7D900672055 /* Frameworks */,
-				4AC8892C2450E7D900672055 /* Resources */,
+				4AB1232D2461D146009959B7 /* Sources */,
+				4AB1232E2461D146009959B7 /* Frameworks */,
+				4AB1232F2461D146009959B7 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4AC889342450E7D900672055 /* PBXTargetDependency */,
-			);
-			name = MinionMoviesTests;
-			productName = MinionMoviesTests;
-			productReference = 4AC8892E2450E7D900672055 /* MinionMoviesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
-		4AC8893B2450E82E00672055 /* MinionMoviesTests2 */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = 4AC889432450E82E00672055 /* Build configuration list for PBXNativeTarget "MinionMoviesTests2" */;
-			buildPhases = (
-				4AC889382450E82E00672055 /* Sources */,
-				4AC889392450E82E00672055 /* Frameworks */,
-				4AC8893A2450E82E00672055 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				4AC889422450E82E00672055 /* PBXTargetDependency */,
+				4AB123372461D146009959B7 /* PBXTargetDependency */,
 			);
 			name = MinionMoviesTests2;
 			productName = MinionMoviesTests2;
-			productReference = 4AC8893C2450E82E00672055 /* MinionMoviesTests2.xctest */;
+			productReference = 4AB123312461D146009959B7 /* MinionMoviesTests2.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		4AD8B3942406B94600ACF001 /* MinionMovies */ = {
@@ -278,11 +244,7 @@
 				LastUpgradeCheck = 1130;
 				ORGANIZATIONNAME = "Vitor Costa";
 				TargetAttributes = {
-					4AC8892D2450E7D900672055 = {
-						CreatedOnToolsVersion = 11.4.1;
-						TestTargetID = 4AD8B3942406B94600ACF001;
-					};
-					4AC8893B2450E82E00672055 = {
+					4AB123302461D146009959B7 = {
 						CreatedOnToolsVersion = 11.4.1;
 						TestTargetID = 4AD8B3942406B94600ACF001;
 					};
@@ -305,21 +267,13 @@
 			projectRoot = "";
 			targets = (
 				4AD8B3942406B94600ACF001 /* MinionMovies */,
-				4AC8892D2450E7D900672055 /* MinionMoviesTests */,
-				4AC8893B2450E82E00672055 /* MinionMoviesTests2 */,
+				4AB123302461D146009959B7 /* MinionMoviesTests2 */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4AC8892C2450E7D900672055 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4AC8893A2450E82E00672055 /* Resources */ = {
+		4AB1232F2461D146009959B7 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -381,18 +335,11 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4AC8892A2450E7D900672055 /* Sources */ = {
+		4AB1232D2461D146009959B7 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		4AC889382450E82E00672055 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				4AC8893F2450E82E00672055 /* MinionMoviesTests2.swift in Sources */,
+				4AB123342461D146009959B7 /* MinionMoviesTests2.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -422,15 +369,10 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4AC889342450E7D900672055 /* PBXTargetDependency */ = {
+		4AB123372461D146009959B7 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 4AD8B3942406B94600ACF001 /* MinionMovies */;
-			targetProxy = 4AC889332450E7D900672055 /* PBXContainerItemProxy */;
-		};
-		4AC889422450E82E00672055 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = 4AD8B3942406B94600ACF001 /* MinionMovies */;
-			targetProxy = 4AC889412450E82E00672055 /* PBXContainerItemProxy */;
+			targetProxy = 4AB123362461D146009959B7 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -454,47 +396,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4AC889362450E7D900672055 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MinionMoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vitor.Involves.MinionMoviesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MinionMovies.app/MinionMovies";
-			};
-			name = Debug;
-		};
-		4AC889372450E7D900672055 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = MinionMoviesTests/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 13.4;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.vitor.Involves.MinionMoviesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MinionMovies.app/MinionMovies";
-			};
-			name = Release;
-		};
-		4AC889442450E82E00672055 /* Debug */ = {
+		4AB123392461D146009959B7 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -514,7 +416,7 @@
 			};
 			name = Debug;
 		};
-		4AC889452450E82E00672055 /* Release */ = {
+		4AB1233A2461D146009959B7 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
@@ -689,20 +591,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4AC889352450E7D900672055 /* Build configuration list for PBXNativeTarget "MinionMoviesTests" */ = {
+		4AB123382461D146009959B7 /* Build configuration list for PBXNativeTarget "MinionMoviesTests2" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4AC889362450E7D900672055 /* Debug */,
-				4AC889372450E7D900672055 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		4AC889432450E82E00672055 /* Build configuration list for PBXNativeTarget "MinionMoviesTests2" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				4AC889442450E82E00672055 /* Debug */,
-				4AC889452450E82E00672055 /* Release */,
+				4AB123392461D146009959B7 /* Debug */,
+				4AB1233A2461D146009959B7 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

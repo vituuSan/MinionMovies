@@ -50,4 +50,18 @@ class DBManager: DBManagerProtocol {
             return false
         }
     }
+    
+    func retrieveAllObjects(type: Object.Type) -> [Object] {
+        
+        let realm = try! Realm()
+        var allObjects: [Object] = []
+        
+        var realmResults = realm.objects(type)
+        
+        for object in realmResults {
+            allObjects.append(object)
+        }
+        
+        return allObjects
+    }
 }

@@ -45,9 +45,9 @@ class MovieListController: UIViewController, ViewProtocol {
                     if let dataChecked = data {
                         self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
                         
-//                        for firstMovie in self.movies {
-//                            self.dbManager.add(object: firstMovie)
-//                        }
+                        for movie in self.movies {
+                            self.dbManager.add(object: movie)
+                        }
                     }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
