@@ -9,12 +9,28 @@
 import Foundation
 import RealmSwift
 
+protocol DBManagerProtocol {
+    func add(object: Object)
+    func delete(object: Object)
+    func check(object: Object) -> Bool
+}
+
+enum ConfigurationType {
+    case basic
+    case inMemory
+}
+
 class DBManager: DBManagerProtocol {
     
     var config = Realm.Configuration()
     
-    init(config: Realm.Configuration) {
-        self.config = config
+    init(config: ConfigurationType) {
+        switch config {
+        case .basic:
+            self.config = Realm.Configuration()
+        case .inMemory:
+            self.config = Realm.Configuration(inMemoryIdentifier: "inMemory")
+        }
     }
     
     func add(object: Object) {

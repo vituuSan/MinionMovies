@@ -8,7 +8,6 @@
 
 import XCTest
 @testable import MinionMovies
-import RealmSwift
 
 class MinionMoviesTests2: XCTestCase {
 
@@ -37,7 +36,7 @@ class MinionMoviesTests2: XCTestCase {
     
     func testIfTheDatabaseIsAddingCorrectly() {
         
-        let dbManager = DBManager(config: Realm.Configuration(inMemoryIdentifier: "inMemory"))
+        let dbManager = DBManager(config: .inMemory)
         
         for movie in self.movies {
             //Use an in-memory Realm
@@ -51,7 +50,6 @@ class MinionMoviesTests2: XCTestCase {
         XCTAssertEqual(allObjects[1].title, "Interstellar")
         XCTAssertEqual(allObjects[2].title, "Assassin's Creed")
         XCTAssertEqual(allObjects[3].title, "Rogue One: A Star Wars Story")
-        
         
     }
 

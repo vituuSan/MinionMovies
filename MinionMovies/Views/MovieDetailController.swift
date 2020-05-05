@@ -26,7 +26,7 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var movie: MovieDB?
-    internal var dbManager: DBManagerProtocol = DBManager(config: Realm.Configuration.defaultConfiguration)
+    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
     
     override func viewDidLoad() {
         super.viewDidLoad()

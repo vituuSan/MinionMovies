@@ -10,22 +10,26 @@ import Foundation
 
 protocol PresenterProtocol {
 //    var view: ViewProtocol? { get }
-//    var interactor: InteractorProtocol? { get }
     
     func sizeList() -> Int
     func receiveItems(items: [MovieDB]?)
+    func retrieveItems() -> [MovieDB]
 }
 
 class HomeViewPresenter: PresenterProtocol {
-//    var view: ViewProtocol?
-//    var interactor: InteractorProtocol? = HomeViewInteractor()
+//    var view: ViewProtocol? = MovieListController()
     private var items: [MovieDB] = []
     
     func sizeList() -> Int {
         return items.count
     }
     
+    func retrieveItems() -> [MovieDB] {
+        return items
+    }
+    
     func receiveItems(items: [MovieDB]?) {
-        guard self.items == items else { return }
+        guard let checkedItems = items else { return }
+        self.items = checkedItems
     }
 }

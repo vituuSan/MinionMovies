@@ -9,6 +9,13 @@
 import UIKit
 import RealmSwift
 
+protocol ViewProtocol {
+    var interactor: InteractorProtocol? { get }
+    var presenter: PresenterProtocol? { get }
+    
+    func reloadCollectionView()
+}
+
 class MovieListController: UIViewController, ViewProtocol {
     var interactor: InteractorProtocol? = HomeViewInteractor()
     var presenter: PresenterProtocol? = HomeViewPresenter()
@@ -19,7 +26,7 @@ class MovieListController: UIViewController, ViewProtocol {
     private var movies: [MovieDB] = []
     private var filteredMovies: [MovieDB] = []
     private var searching = false
-    internal var dbManager: DBManagerProtocol = DBManager(config: Realm.Configuration())
+    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
     
     
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
@@ -30,7 +37,9 @@ class MovieListController: UIViewController, ViewProtocol {
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
         interactor?.theScreenIsLoading()
-        request()
+        movies = presenter!.retrieveItems()
+        print(movies.count)
+        //request()
     }
     
     func request() {
@@ -48,7 +57,7 @@ class MovieListController: UIViewController, ViewProtocol {
                         for movie in self.movies {
                             self.dbManager.add(object: movie)
                         }
-                    }
+                }
                 } catch {
                     print("JSON error: \(error.localizedDescription)")
                 }
@@ -86,7 +95,7 @@ extension MovieListController: UICollectionViewDataSource {
         if searching {
             return filteredMovies.count
         } else {
-            print(presenter?.sizeList())
+            print(movies.count)
             return movies.count
         }
         

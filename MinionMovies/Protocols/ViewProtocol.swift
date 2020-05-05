@@ -8,7 +8,4 @@
 
 import Foundation
 
-protocol ViewProtocol {
-    var interactor: InteractorProtocol? { get }
-    var presenter: PresenterProtocol? { get }
-}
+

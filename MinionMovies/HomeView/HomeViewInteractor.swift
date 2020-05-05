@@ -18,7 +18,6 @@ protocol InteractorProtocol {
 class HomeViewInteractor: InteractorProtocol {
     var presenter: PresenterProtocol? = HomeViewPresenter()
     var worker: WorkerProtocol? = HomeViewWorker()
-    var movies = [MovieDB]()
     
     func theScreenIsLoading() {
         worker?.makeGetRequest(urlString: "http://localhost:8080/response.json", completionHandler: { [weak self] result in
@@ -26,10 +25,10 @@ class HomeViewInteractor: InteractorProtocol {
             case .failure(let error):
                 print(error)
             case .success(let receivedMovies):
-                self?.movies = receivedMovies
+                self?.presenter?.receiveItems(items: receivedMovies)
             }
             
         })
-        presenter?.receiveItems(items: movies)
+        
     }
 }
