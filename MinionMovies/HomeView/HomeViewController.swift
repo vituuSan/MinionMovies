@@ -11,16 +11,12 @@ import RealmSwift
 
 protocol ViewProtocol {
     var interactor: InteractorProtocol? { get }
-    var presenter: PresenterProtocol? { get }
     
     func reloadCollectionView()
 }
 
-class MovieListController: UIViewController, ViewProtocol {
-    var interactor: InteractorProtocol? = HomeViewInteractor()
-    var presenter: PresenterProtocol? = HomeViewPresenter()
-    
-    
+class HomeViewController: UIViewController, ViewProtocol {
+    var interactor: InteractorProtocol?
     private let session = URLSession.shared
     private let url = URL(string: "http://localhost:8080/response.json")!
     private var movies: [MovieDB] = []
@@ -28,16 +24,24 @@ class MovieListController: UIViewController, ViewProtocol {
     private var searching = false
     internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
     
+    convenience init(interactor: InteractorProtocol?) {
+        self.init()
+        self.interactor = interactor
+    }
     
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
+    override func viewDidLoad() {
+        interactor = HomeViewInteractor(presenter: HomeViewPresenter(view: self), worker: HomeViewWorker())
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
         interactor?.theScreenIsLoading()
-        movies = presenter!.retrieveItems()
+//        movies = presenter!.retrieveItems()
         print(movies.count)
         //request()
     }
@@ -90,7 +94,7 @@ class MovieListController: UIViewController, ViewProtocol {
 }
 
 // MARK: UICollectionViewDataSource
-extension MovieListController: UICollectionViewDataSource {
+extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
             return filteredMovies.count
@@ -116,7 +120,7 @@ extension MovieListController: UICollectionViewDataSource {
 }
 
 // MARK: UICollectionViewDelegate
-extension MovieListController: UICollectionViewDelegate {
+extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else {
             return
@@ -132,7 +136,7 @@ extension MovieListController: UICollectionViewDelegate {
 }
 
 // MARK: UISearchBarDelegate
-extension MovieListController: UISearchBarDelegate {
+extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         filteredMovies = movies.filter({ $0.title!.prefix(searchText.count) == searchText })
         searching = true

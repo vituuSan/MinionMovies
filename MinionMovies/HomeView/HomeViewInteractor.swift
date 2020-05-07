@@ -16,8 +16,18 @@ protocol InteractorProtocol {
 }
 
 class HomeViewInteractor: InteractorProtocol {
-    var presenter: PresenterProtocol? = HomeViewPresenter()
-    var worker: WorkerProtocol? = HomeViewWorker()
+    var presenter: PresenterProtocol?
+    var worker: WorkerProtocol?
+    
+    init(presenter: PresenterProtocol?, worker: WorkerProtocol?) {
+        self.presenter = presenter
+        self.worker = worker
+    }
+    
+    func setup() {
+        presenter = HomeViewPresenter(view: HomeViewController(interactor: self))
+        worker = HomeViewWorker()
+    }
     
     func theScreenIsLoading() {
         worker?.makeGetRequest(urlString: "http://localhost:8080/response.json", completionHandler: { [weak self] result in
@@ -27,7 +37,6 @@ class HomeViewInteractor: InteractorProtocol {
             case .success(let receivedMovies):
                 self?.presenter?.receiveItems(items: receivedMovies)
             }
-            
         })
         
     }

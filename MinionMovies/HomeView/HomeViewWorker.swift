@@ -12,7 +12,6 @@ protocol WorkerProtocol {
 //    var dataProvider: DataProviderProtocol? { get }
 //    var interactor: InteractorProtocol? { get }
     
-    func fetch(url: String)
     func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void)
 }
 
@@ -37,7 +36,18 @@ class HomeViewWorker: WorkerProtocol {
             } catch {
                 completionHandler(.failure(error))
             }
+        })
+        task.resume()
+    }
+    
+//    func fetch(url: String) {
+//        guard let checkedUrl = URL(string: url) else { return }
+//        let task = session.dataTask(with: checkedUrl) { data, response, error in
 //            if error == nil {
+//                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode),
+//                let mime = response?.mimeType, mime == "application/json" else {
+//                    return
+//                }
 //                do {
 //                    if let dataChecked = data {
 //                        self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
@@ -48,32 +58,9 @@ class HomeViewWorker: WorkerProtocol {
 //            } else {
 //                debugPrint(error?.localizedDescription)
 //            }
-            print(data)
-        })
-        task.resume()
-    }
-    
-    func fetch(url: String) {
-        guard let checkedUrl = URL(string: url) else { return }
-        let task = session.dataTask(with: checkedUrl) { data, response, error in
-            if error == nil {
-                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode),
-                let mime = response?.mimeType, mime == "application/json" else {
-                    return
-                }
-                do {
-                    if let dataChecked = data {
-                        self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
-                    }
-                } catch {
-                    print("JSON error: \(error.localizedDescription)")
-                }
-            } else {
-                debugPrint(error?.localizedDescription)
-            }
-        }
-        task.resume()
-    }
+//        }
+//        task.resume()
+//    }
     
     func setItems() -> [MovieDB]? {
         return movies

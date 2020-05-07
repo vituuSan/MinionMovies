@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PresenterProtocol {
-//    var view: ViewProtocol? { get }
+    var view: ViewProtocol? { get }
     
     func sizeList() -> Int
     func receiveItems(items: [MovieDB]?)
@@ -17,8 +17,16 @@ protocol PresenterProtocol {
 }
 
 class HomeViewPresenter: PresenterProtocol {
-//    var view: ViewProtocol? = MovieListController()
+    var view: ViewProtocol?
     private var items: [MovieDB] = []
+    
+    init(view: ViewProtocol?) {
+        self.view = view
+    }
+    
+    func setup() {
+        view = HomeViewController(interactor: HomeViewInteractor(presenter: self, worker: HomeViewWorker()))
+    }
     
     func sizeList() -> Int {
         return items.count
