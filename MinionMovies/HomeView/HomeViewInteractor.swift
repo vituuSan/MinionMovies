@@ -18,15 +18,11 @@ protocol InteractorProtocol {
 class HomeViewInteractor: InteractorProtocol {
     var presenter: PresenterProtocol?
     var worker: WorkerProtocol?
+    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
     
     init(presenter: PresenterProtocol?, worker: WorkerProtocol?) {
         self.presenter = presenter
         self.worker = worker
-    }
-    
-    func setup() {
-        presenter = HomeViewPresenter(view: HomeViewController(interactor: self))
-        worker = HomeViewWorker()
     }
     
     func theScreenIsLoading() {
@@ -36,8 +32,11 @@ class HomeViewInteractor: InteractorProtocol {
                 print(error)
             case .success(let receivedMovies):
                 self?.presenter?.receiveItems(items: receivedMovies)
+                
+                for item in receivedMovies {
+                    self?.dbManager.add(object: item)
+                }
             }
         })
-        
     }
 }

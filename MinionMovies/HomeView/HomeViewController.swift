@@ -11,67 +11,48 @@ import RealmSwift
 
 protocol ViewProtocol {
     var interactor: InteractorProtocol? { get }
+    var movies: [HomeViewModel]? { get set }
     
-    func reloadCollectionView()
 }
 
 class HomeViewController: UIViewController, ViewProtocol {
-    var interactor: InteractorProtocol?
-    private let session = URLSession.shared
-    private let url = URL(string: "http://localhost:8080/response.json")!
-    private var movies: [MovieDB] = []
-    private var filteredMovies: [MovieDB] = []
-    private var searching = false
-    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
-    
-    convenience init(interactor: InteractorProtocol?) {
-        self.init()
-        self.interactor = interactor
-    }
-    
     @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
     @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    override func viewDidLoad() {
-        interactor = HomeViewInteractor(presenter: HomeViewPresenter(view: self), worker: HomeViewWorker())
+    private var filteredMovies: [HomeViewModel] = []
+    private var searching = false
+    var interactor: InteractorProtocol?
+    var movies: [HomeViewModel]? = [HomeViewModel]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
+    // MARK: Initializers
+    init(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
+        super.init(nibName: nil, bundle: nil)
+        
+        configure(configurator: configurator)
+    }
+    
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+        
+        configure(configurator: HomeViewConfigurator.sharedInstance)
+    }
+    
+    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
+        configurator.configure(viewController: self)
     }
     
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
+        
         interactor?.theScreenIsLoading()
-//        movies = presenter!.retrieveItems()
-        print(movies.count)
-        //request()
-    }
-    
-    func request() {
-        let task = session.dataTask(with: url) { data, response, error in
-            if error == nil {
-                guard let httpResponse = response as? HTTPURLResponse, (200...299).contains(httpResponse.statusCode),
-                let mime = response?.mimeType, mime == "application/json" else {
-                    return
-                }
-                
-                do {
-                    if let dataChecked = data {
-                        self.movies = try JSONDecoder().decode([MovieDB].self, from: dataChecked)
-                        
-                        for movie in self.movies {
-                            self.dbManager.add(object: movie)
-                        }
-                }
-                } catch {
-                    print("JSON error: \(error.localizedDescription)")
-                }
-            } else {
-                debugPrint(error?.localizedDescription)
-            }
-            self.reloadCollectionView()
-//            self.saveMovieInDB()
-        }
-        task.resume()
     }
     
     @IBAction func showSearchBar(_ sender: Any) {
@@ -85,12 +66,6 @@ class HomeViewController: UIViewController, ViewProtocol {
             view.layoutIfNeeded()
         }
     }
-    
-    func reloadCollectionView() {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -99,18 +74,16 @@ extension HomeViewController: UICollectionViewDataSource {
         if searching {
             return filteredMovies.count
         } else {
-            print(movies.count)
-            return movies.count
+            return movies?.count ?? 0
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].poster ?? "")
+                movieCell.populate(with: filteredMovies[indexPath.row].image)
             } else {
-                movieCell.populate(with: movies[indexPath.row].poster ?? "")
+                movieCell.populate(with: movies?[indexPath.row].image ?? "")
             }
             
             return movieCell
@@ -125,7 +98,7 @@ extension HomeViewController: UICollectionViewDelegate {
         guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else {
             return
         }
-        movieDetail.movie = movies[indexPath.row]
+//        movieDetail.movie = movies[indexPath.row]
         searchBar.endEditing(true)
         self.navigationController?.pushViewController(movieDetail, animated: true)
     }
@@ -138,7 +111,7 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredMovies = movies.filter({ $0.title!.prefix(searchText.count) == searchText })
+        filteredMovies = movies!.filter({ $0.title.prefix(searchText.count) == searchText })
         searching = true
         
         collectionView.reloadData()

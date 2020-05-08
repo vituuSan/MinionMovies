@@ -24,10 +24,6 @@ class HomeViewPresenter: PresenterProtocol {
         self.view = view
     }
     
-    func setup() {
-        view = HomeViewController(interactor: HomeViewInteractor(presenter: self, worker: HomeViewWorker()))
-    }
-    
     func sizeList() -> Int {
         return items.count
     }
@@ -38,6 +34,12 @@ class HomeViewPresenter: PresenterProtocol {
     
     func receiveItems(items: [MovieDB]?) {
         guard let checkedItems = items else { return }
+        
         self.items = checkedItems
+        
+        for item in self.items {
+            let homeViewModel = HomeViewModel(title: item.title!, size: self.items.count, image: item.poster!)
+            view?.movies?.append(homeViewModel)
+        }
     }
 }
