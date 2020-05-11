@@ -10,6 +10,5 @@ import Foundation
 
 struct HomeViewModel {
     var title: String
-    var size: Int
-    var image: String
+    var poster: String
 }

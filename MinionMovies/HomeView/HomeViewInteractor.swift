@@ -13,6 +13,8 @@ protocol InteractorProtocol {
     var worker: WorkerProtocol? { get }
     
     func theScreenIsLoading()
+    func searching(string: String)
+    func doingResearch(boolean: Bool)
 }
 
 class HomeViewInteractor: InteractorProtocol {
@@ -30,13 +32,23 @@ class HomeViewInteractor: InteractorProtocol {
             switch result {
             case .failure(let error):
                 print(error)
-            case .success(let receivedMovies):
-                self?.presenter?.receiveItems(items: receivedMovies)
+            case .success(let receivedItems):
+                self?.presenter?.receiveItems(items: receivedItems)
                 
-                for item in receivedMovies {
+                for item in receivedItems {
                     self?.dbManager.add(object: item)
                 }
             }
         })
+    }
+    
+    func searching(string: String) {
+        presenter?.searchResult(string: string)
+    }
+    
+    func  doingResearch(boolean: Bool) {
+        if boolean {
+            
+        }
     }
 }

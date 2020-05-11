@@ -12,19 +12,26 @@ import RealmSwift
 protocol ViewProtocol {
     var interactor: InteractorProtocol? { get }
     var movies: [HomeViewModel]? { get set }
-    
+    var filteredMovies: [HomeViewModel]? { get set }
 }
 
 class HomeViewController: UIViewController, ViewProtocol {
-    @IBOutlet weak var constraintTopCollectionView: NSLayoutConstraint!
-    @IBOutlet weak var searchBarTopConstraint: NSLayoutConstraint!
+    @IBOutlet private weak var constraintTopCollectionView: NSLayoutConstraint!
+    @IBOutlet private weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    private var filteredMovies: [HomeViewModel] = []
+    
     private var searching = false
     var interactor: InteractorProtocol?
     var movies: [HomeViewModel]? = [HomeViewModel]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    var filteredMovies: [HomeViewModel]? = [HomeViewModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -45,10 +52,6 @@ class HomeViewController: UIViewController, ViewProtocol {
         configure(configurator: HomeViewConfigurator.sharedInstance)
     }
     
-    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
-        configurator.configure(viewController: self)
-    }
-    
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
         
@@ -66,13 +69,17 @@ class HomeViewController: UIViewController, ViewProtocol {
             view.layoutIfNeeded()
         }
     }
+    
+    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
+        configurator.configure(viewController: self)
+    }
 }
 
 // MARK: UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         if searching {
-            return filteredMovies.count
+            return filteredMovies?.count ?? 0
         } else {
             return movies?.count ?? 0
         }
@@ -81,9 +88,9 @@ extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
             if searching {
-                movieCell.populate(with: filteredMovies[indexPath.row].image)
+                movieCell.populate(with: filteredMovies?[indexPath.row].poster ?? "")
             } else {
-                movieCell.populate(with: movies?[indexPath.row].image ?? "")
+                movieCell.populate(with: movies?[indexPath.row].poster ?? "")
             }
             
             return movieCell
@@ -95,11 +102,10 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else {
-            return
-        }
+        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else { return }
 //        movieDetail.movie = movies[indexPath.row]
         searchBar.endEditing(true)
+        
         self.navigationController?.pushViewController(movieDetail, animated: true)
     }
     
@@ -111,10 +117,9 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        filteredMovies = movies!.filter({ $0.title.prefix(searchText.count) == searchText })
-        searching = true
+        interactor?.searching(string: searchText)
         
-        collectionView.reloadData()
+        searching = true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

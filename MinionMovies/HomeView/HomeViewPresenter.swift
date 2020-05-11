@@ -11,9 +11,8 @@ import Foundation
 protocol PresenterProtocol {
     var view: ViewProtocol? { get }
     
-    func sizeList() -> Int
     func receiveItems(items: [MovieDB]?)
-    func retrieveItems() -> [MovieDB]
+    func searchResult(string: String)
 }
 
 class HomeViewPresenter: PresenterProtocol {
@@ -24,22 +23,20 @@ class HomeViewPresenter: PresenterProtocol {
         self.view = view
     }
     
-    func sizeList() -> Int {
-        return items.count
-    }
-    
-    func retrieveItems() -> [MovieDB] {
-        return items
-    }
-    
     func receiveItems(items: [MovieDB]?) {
         guard let checkedItems = items else { return }
         
         self.items = checkedItems
         
         for item in self.items {
-            let homeViewModel = HomeViewModel(title: item.title!, size: self.items.count, image: item.poster!)
+            let homeViewModel = HomeViewModel(title: item.title!, poster: item.poster!)
             view?.movies?.append(homeViewModel)
         }
+    }
+    
+    func searchResult(string: String) {
+        let auxItems = view?.movies
+        
+        view?.filteredMovies = auxItems?.filter({ $0.title.prefix(string.count) == string })
     }
 }
