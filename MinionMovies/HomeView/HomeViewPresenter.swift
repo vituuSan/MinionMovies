@@ -11,32 +11,25 @@ import Foundation
 protocol PresenterProtocol {
     var view: ViewProtocol? { get }
     
-    func receiveItems(items: [MovieDB]?)
-    func searchResult(string: String)
+    func show(items: [MovieDB]?)
 }
 
 class HomeViewPresenter: PresenterProtocol {
     var view: ViewProtocol?
-    private var items: [MovieDB] = []
     
     init(view: ViewProtocol?) {
         self.view = view
     }
     
-    func receiveItems(items: [MovieDB]?) {
+    func show(items: [MovieDB]?) {
         guard let checkedItems = items else { return }
         
-        self.items = checkedItems
+        var homeViewModel = [HomeViewModel]()
         
-        for item in self.items {
-            let homeViewModel = HomeViewModel(title: item.title!, poster: item.poster!)
-            view?.movies?.append(homeViewModel)
+        for item in checkedItems {
+            homeViewModel.append(HomeViewModel(title: item.title!, poster: item.poster!))
         }
-    }
-    
-    func searchResult(string: String) {
-        let auxItems = view?.movies
         
-        view?.filteredMovies = auxItems?.filter({ $0.title.prefix(string.count) == string })
+        view?.movies = homeViewModel
     }
 }

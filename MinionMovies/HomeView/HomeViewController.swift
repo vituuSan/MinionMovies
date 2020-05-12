@@ -12,7 +12,6 @@ import RealmSwift
 protocol ViewProtocol {
     var interactor: InteractorProtocol? { get }
     var movies: [HomeViewModel]? { get set }
-    var filteredMovies: [HomeViewModel]? { get set }
 }
 
 class HomeViewController: UIViewController, ViewProtocol {
@@ -21,17 +20,8 @@ class HomeViewController: UIViewController, ViewProtocol {
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    
-    private var searching = false
     var interactor: InteractorProtocol?
     var movies: [HomeViewModel]? = [HomeViewModel]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
-    var filteredMovies: [HomeViewModel]? = [HomeViewModel]() {
         didSet {
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
@@ -78,21 +68,12 @@ class HomeViewController: UIViewController, ViewProtocol {
 // MARK: UICollectionViewDataSource
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        if searching {
-            return filteredMovies?.count ?? 0
-        } else {
-            return movies?.count ?? 0
-        }
+        return movies?.count ?? 0
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
-            if searching {
-                movieCell.populate(with: filteredMovies?[indexPath.row].poster ?? "")
-            } else {
-                movieCell.populate(with: movies?[indexPath.row].poster ?? "")
-            }
-            
+            movieCell.populate(with: movies?[indexPath.row].poster ?? "")
             return movieCell
         }
         return MovieCell()
@@ -118,8 +99,6 @@ extension HomeViewController: UICollectionViewDelegate {
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         interactor?.searching(string: searchText)
-        
-        searching = true
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

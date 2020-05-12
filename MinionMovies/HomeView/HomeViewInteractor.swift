@@ -14,13 +14,12 @@ protocol InteractorProtocol {
     
     func theScreenIsLoading()
     func searching(string: String)
-    func doingResearch(boolean: Bool)
 }
 
 class HomeViewInteractor: InteractorProtocol {
     var presenter: PresenterProtocol?
     var worker: WorkerProtocol?
-    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
+    var items: [MovieDB]?
     
     init(presenter: PresenterProtocol?, worker: WorkerProtocol?) {
         self.presenter = presenter
@@ -33,22 +32,24 @@ class HomeViewInteractor: InteractorProtocol {
             case .failure(let error):
                 print(error)
             case .success(let receivedItems):
-                self?.presenter?.receiveItems(items: receivedItems)
-                
-                for item in receivedItems {
-                    self?.dbManager.add(object: item)
-                }
+                self?.items = receivedItems
+                self?.presenter?.show(items: receivedItems)
             }
         })
     }
     
     func searching(string: String) {
-        presenter?.searchResult(string: string)
-    }
-    
-    func  doingResearch(boolean: Bool) {
-        if boolean {
-            
+        var itemsToPresent = [MovieDB]()
+        for item in items! {
+            if item.title!.lowercased().contains(string.lowercased()) {
+                itemsToPresent.append(item)
+            }
+        }
+        
+        if string != "" || itemsToPresent.count != 0 {
+            presenter?.show(items: itemsToPresent)
+        } else {
+            presenter?.show(items: items)
         }
     }
 }

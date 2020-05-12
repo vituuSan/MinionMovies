@@ -9,9 +9,20 @@
 import Foundation
 
 protocol DataProviderProtocol {
-    var worker: WorkerProtocol? { get }
+    var dbManager: DBManager { get }
+    
+    func add(item: MovieDB)
 }
 
 class HomeViewDataProvider: DataProviderProtocol {
-    var worker: WorkerProtocol? = nil
+    var dbManager: DBManager
+    
+    
+    init(dbManager: DBManager) {
+        self.dbManager = dbManager
+    }
+    
+    func add(item: MovieDB) {
+        dbManager.add(object: item)
+    }
 }

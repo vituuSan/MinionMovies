@@ -9,17 +9,15 @@
 import Foundation
 
 protocol WorkerProtocol {
-//    var dataProvider: DataProviderProtocol? { get }
-//    var interactor: InteractorProtocol? { get }
+    var dataProvider: DataProviderProtocol? { get set }
     
     func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void)
 }
 
 class HomeViewWorker: WorkerProtocol {
-//    var dataProvider: DataProviderProtocol? = HomeViewDataProvider()
-//    var interactor: InteractorProtocol? =źHomeViewInteractor()
+    var dataProvider: DataProviderProtocol?
     private let session = URLSession.shared
-    private var movies: [MovieDB]?
+    private var items: [MovieDB]?
     
     func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void) {
         guard let checkedUrl = URL(string: urlString) else { return }
@@ -31,16 +29,16 @@ class HomeViewWorker: WorkerProtocol {
             }
             
             do {
-                self.movies = try JSONDecoder().decode([MovieDB].self, from: checkedData)
-                completionHandler(.success(self.movies!))
+                self.items = try JSONDecoder().decode([MovieDB].self, from: checkedData)
+                completionHandler(.success(self.items!))
+                
+                for item in self.items! {
+                    self.dataProvider?.add(item: item)
+                }
             } catch {
                 completionHandler(.failure(error))
             }
         })
         task.resume()
-    }
-    
-    func setItems() -> [MovieDB]? {
-        return movies
     }
 }

@@ -108,10 +108,10 @@
 		4A8DCD402459C74B00A5A617 /* HomeView */ = {
 			isa = PBXGroup;
 			children = (
+				4A8DCD472459CAC500A5A617 /* HomeViewDataProvider.swift */,
 				4A8DCD412459C77200A5A617 /* HomeViewWorker.swift */,
 				4A8DCD432459C96200A5A617 /* HomeViewInteractor.swift */,
 				4A8DCD452459C9F600A5A617 /* HomeViewPresenter.swift */,
-				4A8DCD472459CAC500A5A617 /* HomeViewDataProvider.swift */,
 				4AD8B39C2406B94600ACF001 /* HomeViewController.swift */,
 				4A18E7902465C8430015F89E /* HomeViewModel.swift */,
 				4A18E7922465DE990015F89E /* HomeViewConfigurator.swift */,

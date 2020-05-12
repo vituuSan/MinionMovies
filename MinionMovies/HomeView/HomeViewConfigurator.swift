@@ -16,6 +16,7 @@ final class HomeViewConfigurator {
         let presenter = HomeViewPresenter(view: viewController)
         let interactor = HomeViewInteractor(presenter: presenter, worker: HomeViewWorker())
         
+        interactor.worker?.dataProvider = HomeViewDataProvider(dbManager: DBManager(config: .basic))
         viewController.interactor = interactor
     }
 }
