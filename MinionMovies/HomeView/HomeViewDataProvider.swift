@@ -17,7 +17,6 @@ protocol DataProviderProtocol {
 class HomeViewDataProvider: DataProviderProtocol {
     var dbManager: DBManager
     
-    
     init(dbManager: DBManager) {
         self.dbManager = dbManager
     }

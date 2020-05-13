@@ -11,7 +11,7 @@
         <!--Movies-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController id="BYZ-38-t0r" customClass="HomeViewController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="Movies" useStoryboardIdentifierAsRestorationIdentifier="YES" id="BYZ-38-t0r" customClass="HomeViewController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="808"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -94,7 +94,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="collectionView" destination="DwM-yz-rAv" id="h58-YX-TcC"/>
-                        <outlet property="constraintTopCollectionView" destination="1Ay-Zs-V4w" id="Fyu-Mb-oNe"/>
+                        <outlet property="collectionViewTopConstraint" destination="1Ay-Zs-V4w" id="Fyu-Mb-oNe"/>
                         <outlet property="searchBar" destination="2pN-G9-JDF" id="9ck-NF-CYk"/>
                         <outlet property="searchBarTopConstraint" destination="OlT-sr-UXs" id="Gfd-8q-5Wg"/>
                     </connections>
@@ -306,7 +306,7 @@
         <!--Navigation Controller-->
         <scene sceneID="EFa-x6-mOp">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="6ft-dI-GOM" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6ft-dI-GOM" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="cck-3A-ZsK" customClass="NavigationBar" customModule="MinionMovies" customModuleProvider="target">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>

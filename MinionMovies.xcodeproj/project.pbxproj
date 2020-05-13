@@ -98,7 +98,6 @@
 		4A822464243CFD42002DBB1C /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				4A7FBDC2244E46A00076739C /* DBManager.swift */,
 				4A822462243CFD3D002DBB1C /* MovieDB.swift */,
 				4AA29CA8242D180500C50AF9 /* FavMovieDB.swift */,
 			);
@@ -115,6 +114,7 @@
 				4AD8B39C2406B94600ACF001 /* HomeViewController.swift */,
 				4A18E7902465C8430015F89E /* HomeViewModel.swift */,
 				4A18E7922465DE990015F89E /* HomeViewConfigurator.swift */,
+				4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */,
 			);
 			path = HomeView;
 			sourceTree = "<group>";
@@ -163,9 +163,9 @@
 				4AC86ACA2450BFE100B45A9D /* Views */,
 				4A822464243CFD42002DBB1C /* Models */,
 				4AD8B3982406B94600ACF001 /* AppDelegate.swift */,
-				4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */,
-				4AD8B3AC2406BB1800ACF001 /* MovieCell.swift */,
+				4A7FBDC2244E46A00076739C /* DBManager.swift */,
 				4A832ED924104659005D8FB9 /* DesignableButton.swift */,
+				4AD8B39A2406B94600ACF001 /* SceneDelegate.swift */,
 				4AD8B39E2406B94600ACF001 /* Main.storyboard */,
 				4AD8B3A12406B94800ACF001 /* Assets.xcassets */,
 				4AD8B3A32406B94800ACF001 /* LaunchScreen.storyboard */,

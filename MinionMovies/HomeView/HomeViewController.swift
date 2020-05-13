@@ -15,7 +15,7 @@ protocol ViewProtocol {
 }
 
 class HomeViewController: UIViewController, ViewProtocol {
-    @IBOutlet private weak var constraintTopCollectionView: NSLayoutConstraint!
+    @IBOutlet private weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
@@ -30,39 +30,39 @@ class HomeViewController: UIViewController, ViewProtocol {
     }
     
     // MARK: Initializers
-    init(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
-        super.init(nibName: nil, bundle: nil)
-        
-        configure(configurator: configurator)
-    }
-    
-    required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        
-        configure(configurator: HomeViewConfigurator.sharedInstance)
-    }
+//    init(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
+//        super.init(nibName: nil, bundle: nil)
+//
+//        configure(configurator: configurator)
+//    }
+//
+//    required init?(coder: NSCoder) {
+//        super.init(coder: coder)
+//
+//        configure(configurator: HomeViewConfigurator.sharedInstance)
+//    }
     
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         interactor?.theScreenIsLoading()
     }
     
     @IBAction func showSearchBar(_ sender: Any) {
         if searchBar.isHidden {
             searchBar.isHidden = false
-            constraintTopCollectionView.constant = 0
+            collectionViewTopConstraint.constant = 0
             view.layoutIfNeeded()
         } else if searchBar.isHidden == false {
             searchBar.isHidden = true
-            constraintTopCollectionView.constant = -56
+            collectionViewTopConstraint.constant = -56
             view.layoutIfNeeded()
         }
     }
     
-    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
-        configurator.configure(viewController: self)
-    }
+//    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
+//        configurator.configure(viewController: self)
+//    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -72,11 +72,11 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell {
-            movieCell.populate(with: movies?[indexPath.row].poster ?? "")
-            return movieCell
-        }
-        return MovieCell()
+        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell else { return MovieCell() }
+        
+        movieCell.populate(with: movies?[indexPath.row].poster ?? "")
+        return movieCell
+        
     }
 }
 
