@@ -20,8 +20,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let presenter = HomeViewPresenter(view: controller)
         let interactor = HomeViewInteractor(presenter: presenter, worker: HomeViewWorker())
        
-        interactor.worker?.dataProvider = HomeViewDataProvider(dbManager: DBManager(config: .basic))
         controller.interactor = interactor
+        interactor.worker?.dataProvider = HomeViewDataProvider(dbManager: DBManager(config: .basic))
         
         let navigationController = storyboard.instantiateViewController(withIdentifier: "Navigation") as! UINavigationController
         navigationController.viewControllers = [controller] 
@@ -30,6 +30,4 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         return true
     }
-
 }
-

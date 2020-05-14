@@ -9,18 +9,18 @@
 import UIKit
 import RealmSwift
 
-protocol ViewProtocol {
-    var interactor: InteractorProtocol? { get }
+protocol HomeViewProtocol {
+    var interactor: HomeViewInteractorProtocol? { get }
     var movies: [HomeViewModel]? { get set }
 }
 
-class HomeViewController: UIViewController, ViewProtocol {
+class HomeViewController: UIViewController, HomeViewProtocol {
     @IBOutlet private weak var collectionViewTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBarTopConstraint: NSLayoutConstraint!
     @IBOutlet private weak var searchBar: UISearchBar!
     @IBOutlet private weak var collectionView: UICollectionView!
     
-    var interactor: InteractorProtocol?
+    var interactor: HomeViewInteractorProtocol?
     var movies: [HomeViewModel]? = [HomeViewModel]() {
         didSet {
             DispatchQueue.main.async {
@@ -29,22 +29,9 @@ class HomeViewController: UIViewController, ViewProtocol {
         }
     }
     
-    // MARK: Initializers
-//    init(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
-//        super.init(nibName: nil, bundle: nil)
-//
-//        configure(configurator: configurator)
-//    }
-//
-//    required init?(coder: NSCoder) {
-//        super.init(coder: coder)
-//
-//        configure(configurator: HomeViewConfigurator.sharedInstance)
-//    }
-    
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
-        print(Realm.Configuration.defaultConfiguration.fileURL)
+        
         interactor?.theScreenIsLoading()
     }
     
@@ -59,10 +46,6 @@ class HomeViewController: UIViewController, ViewProtocol {
             view.layoutIfNeeded()
         }
     }
-    
-//    private func configure(configurator: HomeViewConfigurator = HomeViewConfigurator.sharedInstance) {
-//        configurator.configure(viewController: self)
-//    }
 }
 
 // MARK: UICollectionViewDataSource
@@ -72,7 +55,7 @@ extension HomeViewController: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? MovieCell else { return MovieCell() }
+        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? HomeViewCell else { return HomeViewCell() }
         
         movieCell.populate(with: movies?[indexPath.row].poster ?? "")
         return movieCell
@@ -83,7 +66,7 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? MovieDetailController else { return }
+        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? DetailsViewController else { return }
 //        movieDetail.movie = movies[indexPath.row]
         searchBar.endEditing(true)
         

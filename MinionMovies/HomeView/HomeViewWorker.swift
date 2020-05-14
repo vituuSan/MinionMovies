@@ -8,14 +8,14 @@
 
 import Foundation
 
-protocol WorkerProtocol {
-    var dataProvider: DataProviderProtocol? { get set }
+protocol HomeViewWorkerProtocol {
+    var dataProvider: HomeViewDataProviderProtocol? { get set }
     
     func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void)
 }
 
-class HomeViewWorker: WorkerProtocol {
-    var dataProvider: DataProviderProtocol?
+class HomeViewWorker: HomeViewWorkerProtocol {
+    var dataProvider: HomeViewDataProviderProtocol?
     private let session = URLSession.shared
     private var items: [MovieDB]?
     

@@ -9,8 +9,16 @@
 import UIKit
 import RealmSwift
 
-class MovieDetailController: UIViewController {
+protocol DetailsViewControllerProtocol {
+    var interactor: DetailsViewInteractorProtocol? { get set }
+    
+    func chooseImageOfFavButton(boolean: Bool)
+    func showTrailer(url: URL)
+    func setupPoster(with image: UIImage)
+    func setupBackground(image: UIImage)
+}
 
+class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var posterMovie: UIImageView!
     @IBOutlet private weak var nameMovie: UILabel!
@@ -25,8 +33,9 @@ class MovieDetailController: UIViewController {
     @IBOutlet private weak var star5: UIImageView!
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
+    var interactor: DetailsViewInteractorProtocol?
     var movie: MovieDB?
-    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
+//    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -42,27 +51,29 @@ class MovieDetailController: UIViewController {
         setupLayout()
     }
     
-    @IBAction func toggleFavMovie(_ sender: Any) {
-        guard let checkedMovie = movie else { return }
-        if !dbManager.check(object: checkedMovie) {
-            dbManager.add(object: checkedMovie)
-        } else {
-            dbManager.delete(object: checkedMovie)
-        }
-        chooseImageOfFavButton()
+    @IBAction func buttonFavMovie(_ sender: Any) {
+//        guard let checkedMovie = movie else { return }
+        interactor?.addOrRemoveFromFavorites(item: movie)
+//        if !dbManager.check(object: checkedMovie) {
+//            dbManager.add(object: checkedMovie)
+//        } else {
+//            dbManager.delete(object: checkedMovie)
+//        }
+//        chooseImageOfFavButton()
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
-        guard let checkedMovie = movie,
-            let url = URL(string: checkedMovie.trailer ?? "") else { return }
-        UIApplication.shared.open(url)
+//        guard let checkedMovie = movie,
+//            let url = URL(string: checkedMovie.trailer ?? "") else { return }
+//        UIApplication.shared.open(url)
+        interactor?.trailerButtonWasClicked()
     }
     
     func setupLayout() {
         guard let checkedMovie = self.movie else { return }
-        createBackground(with: checkedMovie.images ?? List<String>())
-        chooseImageOfFavButton()
-        createPoster(with: checkedMovie.poster ?? "")
+//        setupBackgroundImage(with: checkedMovie.images ?? List<String>())
+//        chooseImageOfFavButton()
+//        createPoster(with: checkedMovie.poster ?? "")
         
         nameMovie.text = checkedMovie.title
         createEvaluation(with: checkedMovie.metascore ?? "")
@@ -84,28 +95,26 @@ class MovieDetailController: UIViewController {
         plot.text = checkedMovie.plot
     }
     
-    func chooseImageOfFavButton() {
-        guard let checkedMovie = movie else { return }
-        
-        if dbManager.check(object: checkedMovie) {
-            favButton.image = UIImage(named: "marked")
-        } else {
-            favButton.image = UIImage(named: "mark")
-        }
+    func showTrailer(url: URL) {
+        UIApplication.shared.open(url)
     }
     
-    func createBackground(with urlsOfImages: List<String>) {
-        if let checkedUrl = URL(string: urlsOfImages[0]) {
-            guard let data = try? Data(contentsOf: checkedUrl) else { return }
-            backgroundImage.image = UIImage(data: data)
-        }
+    func chooseImageOfFavButton(boolean: Bool) {
+        let string = boolean ? "marked" : "mark"
+        favButton.image = UIImage(named: string)
+//        if dbManager.check(object: checkedMovie) {
+//            favButton.image = UIImage(named: "marked")
+//        } else {
+//            favButton.image = UIImage(named: "mark")
+//        }
     }
     
-    func createPoster(with urlOfPoster: String) {
-        if let checkedUrl = URL(string: urlOfPoster) {
-            guard let data = try? Data(contentsOf: checkedUrl) else { return }
-            posterMovie.image = UIImage(data: data)
-        }
+    func setupBackground(image: UIImage) {
+        backgroundImage.image = image
+    }
+    
+    func setupPoster(with image: UIImage) {
+        posterMovie.image = image
     }
     
     func createEvaluation(with metascore: String) {

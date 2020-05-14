@@ -8,16 +8,16 @@
 
 import Foundation
 
-protocol PresenterProtocol {
-    var view: ViewProtocol? { get }
+protocol HomeViewPresenterProtocol {
+    var view: HomeViewProtocol? { get }
     
     func show(items: [MovieDB]?)
 }
 
-class HomeViewPresenter: PresenterProtocol {
-    var view: ViewProtocol?
+class HomeViewPresenter: HomeViewPresenterProtocol {
+    var view: HomeViewProtocol?
     
-    init(view: ViewProtocol?) {
+    init(view: HomeViewProtocol?) {
         self.view = view
     }
     

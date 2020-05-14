@@ -26,7 +26,7 @@
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
                                 <cells>
-                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="TlI-ug-cmy" customClass="MovieCell" customModule="MinionMovies" customModuleProvider="target">
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="MovieCell" id="TlI-ug-cmy" customClass="HomeViewCell" customModule="MinionMovies" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="192" height="300"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="Bwg-gD-iUg">
@@ -103,10 +103,10 @@
             </objects>
             <point key="canvasLocation" x="1042.0289855072465" y="138.61607142857142"/>
         </scene>
-        <!--Movie Detail Controller-->
+        <!--Details View Controller-->
         <scene sceneID="nYc-K8-dne">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailController" interfaceStyle="dark" id="mI5-dc-kK4" customClass="MovieDetailController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MovieDetailController" interfaceStyle="dark" id="mI5-dc-kK4" customClass="DetailsViewController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WHy-3A-mIq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -279,7 +279,7 @@
                     <navigationItem key="navigationItem" id="NQC-eY-ejb">
                         <barButtonItem key="rightBarButtonItem" image="mark" style="plain" id="G6W-xg-AfF">
                             <connections>
-                                <action selector="toggleFavMovie:" destination="mI5-dc-kK4" id="jKJ-3n-sUW"/>
+                                <action selector="buttonFavMovie:" destination="mI5-dc-kK4" id="jKJ-3n-sUW"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -308,7 +308,7 @@
             <objects>
                 <navigationController storyboardIdentifier="Navigation" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="6ft-dI-GOM" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="cck-3A-ZsK" customClass="NavigationBar" customModule="MinionMovies" customModuleProvider="target">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" barStyle="black" translucent="NO" id="cck-3A-ZsK">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -318,12 +318,12 @@
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="GKg-c0-0ks"/>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="07a-m0-n9g"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="YEV-Qk-YmW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="181" y="139"/>
+            <point key="canvasLocation" x="125" y="139"/>
         </scene>
     </scenes>
     <resources>

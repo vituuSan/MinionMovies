@@ -20,9 +20,10 @@ enum ConfigurationType {
     case inMemory
 }
 
-class DBManager: DBManagerProtocol {
+class DBManager {
     
     var config = Realm.Configuration()
+    let realm = try! Realm()
     
     init(config: ConfigurationType) {
         switch config {
@@ -35,7 +36,6 @@ class DBManager: DBManagerProtocol {
     
     func add(object: Object) {
         do {
-            let realm = try Realm()
             
             try realm.write {
                 realm.add(object, update: .modified)
@@ -47,7 +47,6 @@ class DBManager: DBManagerProtocol {
     
     func delete(object: Object) {
         do {
-            let realm = try Realm()
             
             try realm.write{
                 realm.delete(object)
@@ -57,19 +56,15 @@ class DBManager: DBManagerProtocol {
         }
     }
     
-    func check(object: Object) -> Bool {
+    func check(object: Object, type: Object.Type) -> Bool {
         
-        // nao vai dar certo, provavelmente
-        if object.isEqual(MovieDB()) || object.isEqual(FavMovieDB()) {
-            return true
-        } else {
-            return false
-        }
+        let objects = realm.objects(type)
+        
+        return objects.contains(object)
     }
     
     func retrieveAllObjects(type: Object.Type) -> [Object] {
         
-        let realm = try! Realm()
         var allObjects: [Object] = []
         
         var realmResults = realm.objects(type)

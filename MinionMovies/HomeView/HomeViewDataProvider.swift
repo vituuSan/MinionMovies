@@ -8,13 +8,13 @@
 
 import Foundation
 
-protocol DataProviderProtocol {
+protocol HomeViewDataProviderProtocol {
     var dbManager: DBManager { get }
     
     func add(item: MovieDB)
 }
 
-class HomeViewDataProvider: DataProviderProtocol {
+class HomeViewDataProvider: HomeViewDataProviderProtocol {
     var dbManager: DBManager
     
     init(dbManager: DBManager) {

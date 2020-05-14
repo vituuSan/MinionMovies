@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MovieCell: UICollectionViewCell {
+class HomeViewCell: UICollectionViewCell {
     
     @IBOutlet private weak var imageView: UIImageView!
     

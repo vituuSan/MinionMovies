@@ -8,20 +8,20 @@
 
 import Foundation
 
-protocol InteractorProtocol {
-    var presenter: PresenterProtocol? { get }
-    var worker: WorkerProtocol? { get }
+protocol HomeViewInteractorProtocol {
+    var presenter: HomeViewPresenterProtocol? { get }
+    var worker: HomeViewWorkerProtocol? { get }
     
     func theScreenIsLoading()
     func searching(string: String)
 }
 
-class HomeViewInteractor: InteractorProtocol {
-    var presenter: PresenterProtocol?
-    var worker: WorkerProtocol?
+class HomeViewInteractor: HomeViewInteractorProtocol {
+    var presenter: HomeViewPresenterProtocol?
+    var worker: HomeViewWorkerProtocol?
     var items: [MovieDB]?
     
-    init(presenter: PresenterProtocol?, worker: WorkerProtocol?) {
+    init(presenter: HomeViewPresenterProtocol?, worker: HomeViewWorkerProtocol?) {
         self.presenter = presenter
         self.worker = worker
     }
