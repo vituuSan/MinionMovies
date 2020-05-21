@@ -37,25 +37,17 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     
     func buttonFavMovieWasClicked() {
         guard case favMovie.id = movie?.id else { return }
-        
-        if checkItemInDB() {
-            worker?.delete(item: favMovie)
-        } else {
-            worker?.add(item: favMovie)
-        }
+        checkItemInDB() ? worker?.delete(item: favMovie) : worker?.add(item: favMovie)
+
         setupFavButtonImage()
     }
     
     func setupFavButtonImage() {
-        if checkItemInDB() {
-            presenter?.toggleFavButtonImage(boolean: true)
-        } else {
-            presenter?.toggleFavButtonImage(boolean: false)
-        }
+        checkItemInDB() ? presenter?.toggleFavButtonImage(boolean: true) : presenter?.toggleFavButtonImage(boolean: false)
     }
     
     func checkItemInDB() -> Bool {
-        if worker?.check(item: favMovie) ?? false {
+        if worker?.check(item: favMovie.id) ?? false {
             return true
         } else {
             return false
@@ -63,12 +55,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     func theScreenIsLoading() {
-        
-        if checkItemInDB() {
-            presenter?.toggleFavButtonImage(boolean: true)
-        } else {
-            presenter?.toggleFavButtonImage(boolean: false)
-        }
+        setupFavButtonImage()
         presenter?.show(item: movie!)
     }
     

@@ -13,7 +13,7 @@ protocol DetailsViewWorkerProtocol {
     
     func add(item: FavMovieDB)
     func delete(item: FavMovieDB)
-    func check(item: FavMovieDB) -> Bool
+    func check(item: String) -> Bool
     func getItem(id: String) -> MovieDB
 }
 
@@ -32,7 +32,7 @@ class DetailsViewWorker: DetailsViewWorkerProtocol {
         dataProvider?.delete(item: item)
     }
     
-    func check(item: FavMovieDB) -> Bool {
+    func check(item: String) -> Bool {
         return dataProvider?.check(item: item) ?? false
     }
     

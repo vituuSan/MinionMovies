@@ -12,8 +12,8 @@ import RealmSwift
 protocol DBManagerProtocol {
     func add(object: Object)
     func delete(object: Object)
-    func check(object: Object) -> Bool
-    func retrieveSpecificItem(id: String, type: Object.Type) -> Object
+    func check(objectId: String, type: Object.Type) -> Bool
+    func retrieveSpecificItem(objectId: String, type: Object.Type) -> Object
 }
 
 enum ConfigurationType {
@@ -51,21 +51,20 @@ class DBManager {
             
             try realm.write{
                 realm.delete(object)
-                realm.refresh()
             }
         } catch let error as NSError {
             print(error)
         }
     }
     
-    func check(object: Object, type: Object.Type) -> Bool {
-        let objects = realm.objects(type)
+    func check(objectId: String, type: Object.Type) -> Bool {
+        let objects = realm.objects(type).filter("id == '\(objectId)'")
         
-        return objects.contains(object)
+        return objects.count > 0
     }
     
-    func retrieveSpecificItem(id: String, type: Object.Type) -> Object {
-        let objects = realm.objects(type).filter("id = '\(id)'")
+    func retrieveSpecificItem(objectId: String, type: Object.Type) -> Object {
+        let objects = realm.objects(type).filter("id = '\(objectId)'")
         
         return objects.first!
     }
