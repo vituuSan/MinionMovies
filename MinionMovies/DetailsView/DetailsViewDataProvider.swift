@@ -12,25 +12,34 @@ protocol DetailsViewDataProviderProtocol {
     func add(item: FavMovieDB)
     func delete(item: FavMovieDB)
     func check(item: FavMovieDB) -> Bool
+    func getSpecificItem(with id: String) -> MovieDB
 }
 
 class DetailsViewDataProvider: DetailsViewDataProviderProtocol {
     
-    private var dbManager: DBManager
+    private var config: ConfigurationType
     
-    init(dbManager: DBManager) {
-        self.dbManager = dbManager
+    init(config: ConfigurationType) {
+        self.config = config
     }
     
     func add(item: FavMovieDB) {
-        
+        let dbManager = DBManager(config: config)
+        dbManager.add(object: item)
     }
     
     func delete(item: FavMovieDB) {
-        
+        let dbManager = DBManager(config: config)
+        dbManager.delete(object: item)
     }
     
     func check(item: FavMovieDB) -> Bool {
+        let dbManager = DBManager(config: config)
         return dbManager.check(object: item, type: FavMovieDB.self)
+    }
+    
+    func getSpecificItem(with id: String) -> MovieDB {
+        let dbManager = DBManager(config: config)
+        return dbManager.retrieveSpecificItem(id: id, type: MovieDB.self) as! MovieDB
     }
 }

@@ -13,10 +13,8 @@ struct DetailsViewModel {
     var poster: UIImage
     var title: String
     var evaluation: String
-    var stars: Double
-    var buttonTrailer: URL
+    var stars: String
     var yearAndDuration: String
-    var resolutionIs4k: Bool
-    var hdr: Bool
+    var resolution: String
     var plot: String
 }

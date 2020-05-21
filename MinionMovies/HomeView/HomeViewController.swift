@@ -66,8 +66,14 @@ extension HomeViewController: UICollectionViewDataSource {
 // MARK: UICollectionViewDelegate
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieDetail = storyboard?.instantiateViewController(identifier: "MovieDetailController") as? DetailsViewController else { return }
-//        movieDetail.movie = movies[indexPath.row]
+        guard let movieDetail = storyboard?.instantiateViewController(identifier: "DetailsViewController") as? DetailsViewController else { return }
+        //enviar só o id do filme
+        movieDetail.id = movies![indexPath.row].id
+        let presenter = DetailsViewPresenter(view: movieDetail)
+        let dataProvider = DetailsViewDataProvider(config: .basic)
+        let worker = DetailsViewWorker(dataProvider: dataProvider)
+        movieDetail.interactor = DetailsViewInteractor(presenter: presenter, worker: worker)
+        
         searchBar.endEditing(true)
         
         self.navigationController?.pushViewController(movieDetail, animated: true)

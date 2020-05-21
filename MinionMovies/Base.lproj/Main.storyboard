@@ -106,7 +106,7 @@
         <!--Details View Controller-->
         <scene sceneID="nYc-K8-dne">
             <objects>
-                <viewController storyboardIdentifier="MovieDetailController" interfaceStyle="dark" id="mI5-dc-kK4" customClass="DetailsViewController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="DetailsViewController" interfaceStyle="dark" id="mI5-dc-kK4" customClass="DetailsViewController" customModule="MinionMovies" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="WHy-3A-mIq">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -287,7 +287,6 @@
                         <outlet property="backgroundImage" destination="rJ3-sR-UTJ" id="Mad-QG-CWJ"/>
                         <outlet property="evaluation" destination="ors-W8-M1W" id="lUI-vg-7CR"/>
                         <outlet property="favButton" destination="G6W-xg-AfF" id="4Mx-9R-o7L"/>
-                        <outlet property="nameMovie" destination="aty-ez-ZHl" id="hlZ-8g-3BG"/>
                         <outlet property="plot" destination="RPK-VL-KCI" id="yJd-sz-xeS"/>
                         <outlet property="posterMovie" destination="vYJ-T5-Ksb" id="ddM-nS-nD4"/>
                         <outlet property="resolution" destination="EH9-Za-YSe" id="vYF-xv-J4U"/>
@@ -296,6 +295,7 @@
                         <outlet property="star3" destination="gem-Gy-SoU" id="wEV-UB-Tpq"/>
                         <outlet property="star4" destination="08X-G8-C1v" id="2nN-dS-Zfe"/>
                         <outlet property="star5" destination="g1e-vT-A4U" id="Kae-GI-KMD"/>
+                        <outlet property="titleMovie" destination="aty-ez-ZHl" id="hlZ-8g-3BG"/>
                         <outlet property="yearAndDuration" destination="lfR-3i-wTn" id="HdP-i3-k14"/>
                     </connections>
                 </viewController>

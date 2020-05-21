@@ -9,6 +9,7 @@
 import Foundation
 
 struct HomeViewModel {
+    var id: String
     var title: String
     var poster: String
 }

@@ -32,9 +32,8 @@ class HomeViewWorker: HomeViewWorkerProtocol {
                 self.items = try JSONDecoder().decode([MovieDB].self, from: checkedData)
                 completionHandler(.success(self.items!))
                 
-                for item in self.items! {
-                    self.dataProvider?.add(item: item)
-                }
+                self.dataProvider?.add(items: self.items!)
+                
             } catch {
                 completionHandler(.failure(error))
             }

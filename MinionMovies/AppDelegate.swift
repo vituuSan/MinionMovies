@@ -21,7 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         let interactor = HomeViewInteractor(presenter: presenter, worker: HomeViewWorker())
        
         controller.interactor = interactor
-        interactor.worker?.dataProvider = HomeViewDataProvider(dbManager: DBManager(config: .basic))
+        interactor.worker?.dataProvider = HomeViewDataProvider(config: .basic)
         
         let navigationController = storyboard.instantiateViewController(withIdentifier: "Navigation") as! UINavigationController
         navigationController.viewControllers = [controller] 

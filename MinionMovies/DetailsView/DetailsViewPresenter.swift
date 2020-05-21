@@ -13,15 +13,28 @@ protocol DetailsViewPresenterProtocol {
     
     func showTrailer(urlString: String)
     func toggleFavButtonImage(boolean: Bool)
-    func setupBackgroundImage(urlString: String)
+    func show(item: MovieDB)
 }
 
 class DetailsViewPresenter: DetailsViewPresenterProtocol {
     var view: DetailsViewControllerProtocol?
-    var detailsMovieModel: DetailsViewModel?
     
     init(view: DetailsViewControllerProtocol) {
         self.view = view
+    }
+    
+    func show(item: MovieDB) {
+        let detailsMovieModel = DetailsViewModel(backgroundImage: createImage(urlString: item.poster!),
+            poster: createImage(urlString: item.poster!),
+            title: item.title!,
+            evaluation: item.metascore!,
+            stars: item.metascore!,
+            yearAndDuration: item.year! + "  " + item.runtime!,
+            resolution: createResolution(item: item),
+            plot: item.plot!)
+        
+        view?.movieModel = detailsMovieModel
+        createStars(with: item.metascore!)
     }
     
     func showTrailer(urlString: String) {
@@ -29,17 +42,36 @@ class DetailsViewPresenter: DetailsViewPresenterProtocol {
         view?.showTrailer(url: url)
     }
     
-    func createPoster(urlImage: String) {
-        guard let image = UIImage(named: urlImage) else { return }
-        view?.setupPoster(with: image)
-    }
-    
     func toggleFavButtonImage(boolean: Bool) {
-        view?.chooseImageOfFavButton(boolean: boolean)
+        view?.setupFavButtonImage(string: boolean ? "marked" : "mark")
     }
     
-    func setupBackgroundImage(urlString: String) {
-        guard let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) else { return }
-        view?.setupBackground(image: image)
+    private func createImage(urlString: String) -> UIImage {
+        guard let url = URL(string: urlString), let data = try? Data(contentsOf: url), let image = UIImage(data: data) else { return UIImage() }
+        return image
+    }
+    
+    private func createResolution(item: MovieDB) -> String {
+        let is4K = item.resolutionIs4k ?? false ? "4K" : ""
+        let hdr = item.hdr ?? false ? "HDR" : ""
+        return is4K + "  " + hdr
+    }
+    
+    private func createStars(with metascore: String) {
+        guard var number = Double(metascore) else { return }
+        var i = 1
+
+        while i <= 5 {
+            if number / 20 >= 1 {
+//                images[i - 1]?.image = UIImage(named: "bright-star")
+                view?.setupStars(index: i - 1, image: UIImage(named: "bright-star")!)
+            } else if number / 20 >= 0.5 {
+//                images[i - 1]?.image = UIImage(named: "kindOfbright-star")
+                view?.setupStars(index: i - 1, image: UIImage(named: "kindOfbright-star")!)
+            }
+            
+            number -= 20
+            i += 1
+        }
     }
 }

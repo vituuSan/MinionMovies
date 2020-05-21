@@ -9,19 +9,20 @@
 import Foundation
 
 protocol HomeViewDataProviderProtocol {
-    var dbManager: DBManager { get }
-    
-    func add(item: MovieDB)
+    func add(items: [MovieDB])
 }
 
 class HomeViewDataProvider: HomeViewDataProviderProtocol {
-    var dbManager: DBManager
+    private var config: ConfigurationType
     
-    init(dbManager: DBManager) {
-        self.dbManager = dbManager
+    init(config: ConfigurationType) {
+        self.config = config
     }
     
-    func add(item: MovieDB) {
-        dbManager.add(object: item)
+    func add(items: [MovieDB]) {
+        let dbManager = DBManager(config: config)
+        items.forEach { item in
+            dbManager.add(object: item)
+        }
     }
 }

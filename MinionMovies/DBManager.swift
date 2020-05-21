@@ -13,6 +13,7 @@ protocol DBManagerProtocol {
     func add(object: Object)
     func delete(object: Object)
     func check(object: Object) -> Bool
+    func retrieveSpecificItem(id: String, type: Object.Type) -> Object
 }
 
 enum ConfigurationType {
@@ -50,6 +51,7 @@ class DBManager {
             
             try realm.write{
                 realm.delete(object)
+                realm.refresh()
             }
         } catch let error as NSError {
             print(error)
@@ -57,17 +59,20 @@ class DBManager {
     }
     
     func check(object: Object, type: Object.Type) -> Bool {
-        
         let objects = realm.objects(type)
         
         return objects.contains(object)
     }
     
+    func retrieveSpecificItem(id: String, type: Object.Type) -> Object {
+        let objects = realm.objects(type).filter("id = '\(id)'")
+        
+        return objects.first!
+    }
+    
     func retrieveAllObjects(type: Object.Type) -> [Object] {
-        
         var allObjects: [Object] = []
-        
-        var realmResults = realm.objects(type)
+        let realmResults = realm.objects(type)
         
         for object in realmResults {
             allObjects.append(object)

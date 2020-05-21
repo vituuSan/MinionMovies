@@ -11,17 +11,17 @@ import RealmSwift
 
 protocol DetailsViewControllerProtocol {
     var interactor: DetailsViewInteractorProtocol? { get set }
+    var movieModel: DetailsViewModel? { get set }
     
-    func chooseImageOfFavButton(boolean: Bool)
+    func setupFavButtonImage(string: String)
     func showTrailer(url: URL)
-    func setupPoster(with image: UIImage)
-    func setupBackground(image: UIImage)
+    func setupStars(index: Int, image: UIImage)
 }
 
 class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     @IBOutlet private weak var backgroundImage: UIImageView!
     @IBOutlet private weak var posterMovie: UIImageView!
-    @IBOutlet private weak var nameMovie: UILabel!
+    @IBOutlet private weak var titleMovie: UILabel!
     @IBOutlet private weak var evaluation: UILabel!
     @IBOutlet private weak var yearAndDuration: UILabel!
     @IBOutlet private weak var resolution: UILabel!
@@ -34,8 +34,12 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     @IBOutlet private weak var favButton: UIBarButtonItem!
     
     var interactor: DetailsViewInteractorProtocol?
-    var movie: MovieDB?
-//    internal var dbManager: DBManagerProtocol = DBManager(config: .basic)
+    var id: String?
+    var movieModel: DetailsViewModel? {
+        didSet {
+            setupLayout()
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -48,73 +52,40 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        setupLayout()
+        interactor?.id = id
+        interactor?.theScreenIsLoading()
     }
     
     @IBAction func buttonFavMovie(_ sender: Any) {
-//        guard let checkedMovie = movie else { return }
-        interactor?.addOrRemoveFromFavorites(item: movie)
-//        if !dbManager.check(object: checkedMovie) {
-//            dbManager.add(object: checkedMovie)
-//        } else {
-//            dbManager.delete(object: checkedMovie)
-//        }
-//        chooseImageOfFavButton()
+        interactor?.buttonFavMovieWasClicked()
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
-//        guard let checkedMovie = movie,
-//            let url = URL(string: checkedMovie.trailer ?? "") else { return }
-//        UIApplication.shared.open(url)
         interactor?.trailerButtonWasClicked()
     }
     
     func setupLayout() {
-        guard let checkedMovie = self.movie else { return }
-//        setupBackgroundImage(with: checkedMovie.images ?? List<String>())
-//        chooseImageOfFavButton()
-//        createPoster(with: checkedMovie.poster ?? "")
-        
-        nameMovie.text = checkedMovie.title
-        createEvaluation(with: checkedMovie.metascore ?? "")
-        evaluation.text = "(\(checkedMovie.metascore ?? ""))"
-        yearAndDuration.text = "\(checkedMovie.year ?? "")  \(checkedMovie.runtime ?? "")"
-        
-        if checkedMovie.resolutionIs4k ?? false {
-            if checkedMovie.hdr ?? false {
-                resolution.text = "4k  HDR"
-            } else {
-                resolution.text = "4k"
-            }
-        } else if checkedMovie.hdr ?? false {
-            resolution.text = "HDR"
-        } else {
-            resolution.text = ""
-        }
-        
-        plot.text = checkedMovie.plot
+        backgroundImage.image = movieModel?.backgroundImage
+        posterMovie.image = movieModel?.poster
+        titleMovie.text = movieModel?.title
+        evaluation.text = movieModel?.evaluation
+//        createEvaluation(with: movieModel!.resolution)
+        yearAndDuration.text = movieModel?.yearAndDuration
+        resolution.text = movieModel?.resolution
+        plot.text = movieModel?.plot
     }
     
     func showTrailer(url: URL) {
         UIApplication.shared.open(url)
     }
     
-    func chooseImageOfFavButton(boolean: Bool) {
-        let string = boolean ? "marked" : "mark"
+    func setupFavButtonImage(string: String) {
         favButton.image = UIImage(named: string)
-//        if dbManager.check(object: checkedMovie) {
-//            favButton.image = UIImage(named: "marked")
-//        } else {
-//            favButton.image = UIImage(named: "mark")
-//        }
     }
     
-    func setupBackground(image: UIImage) {
-        backgroundImage.image = image
-    }
-    
-    func setupPoster(with image: UIImage) {
-        posterMovie.image = image
+    func setupStars(index: Int, image: UIImage) {
+        let images = [star1, star2, star3, star4, star5]
+        images[index]?.image = image
     }
     
     func createEvaluation(with metascore: String) {
