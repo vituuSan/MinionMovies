@@ -21,11 +21,9 @@ protocol DetailsViewInteractorProtocol {
 class DetailsViewInteractor: DetailsViewInteractorProtocol {
     var presenter: DetailsViewPresenterProtocol?
     var worker: DetailsViewWorkerProtocol?
-    let favMovie = FavMovieDB()
     var movie: MovieDB?
     var id: String? {
         didSet {
-            favMovie.id = id!
             movie = worker?.getItem(id: id!)
         }
     }
@@ -36,7 +34,8 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     func buttonFavMovieWasClicked() {
-//        guard case favMovie.id = movie?.id else { return }
+        let favMovie = FavMovieDB()
+        favMovie.id = id!
         checkItemInDB() ? worker?.delete(item: id!) : worker?.add(item: favMovie)
 
         setupFavButtonImage()
@@ -47,7 +46,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     private func checkItemInDB() -> Bool {
-        if worker?.check(item: favMovie.id) ?? false {
+        if worker?.check(item: id!) ?? false {
             return true
         } else {
             return false
