@@ -31,7 +31,7 @@ class HomeViewController: UIViewController, HomeViewProtocol {
     
     override func viewDidAppear(_ animated: Bool) {
         searchBar.searchTextField.textColor = .white
-        
+        print(Realm.Configuration.defaultConfiguration.fileURL)
         interactor?.theScreenIsLoading()
     }
     

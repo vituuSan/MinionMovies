@@ -63,10 +63,8 @@ class DetailsViewPresenter: DetailsViewPresenterProtocol {
 
         while i <= 5 {
             if number / 20 >= 1 {
-//                images[i - 1]?.image = UIImage(named: "bright-star")
                 view?.setupStars(index: i - 1, image: UIImage(named: "bright-star")!)
             } else if number / 20 >= 0.5 {
-//                images[i - 1]?.image = UIImage(named: "kindOfbright-star")
                 view?.setupStars(index: i - 1, image: UIImage(named: "kindOfbright-star")!)
             }
             

@@ -46,11 +46,11 @@ class DBManager {
         }
     }
     
-    func delete(object: Object) {
+    func delete(objectId: String, type: Object.Type) {
         do {
             
             try realm.write{
-                realm.delete(object)
+                realm.delete(realm.objects(type).filter("id == '\(objectId)'"))
             }
         } catch let error as NSError {
             print(error)
