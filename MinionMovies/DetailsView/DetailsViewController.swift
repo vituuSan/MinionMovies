@@ -52,7 +52,7 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        interactor?.id = id
+        interactor?.id = id ?? ""
         interactor?.theScreenIsLoading()
     }
     

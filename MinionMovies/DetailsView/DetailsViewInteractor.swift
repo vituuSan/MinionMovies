@@ -11,7 +11,7 @@ import Foundation
 protocol DetailsViewInteractorProtocol {
     var presenter: DetailsViewPresenterProtocol? { get set }
     var worker: DetailsViewWorkerProtocol? { get set }
-    var id: String? { get set }
+    var id: String { get set }
     
     func buttonFavMovieWasClicked()
     func theScreenIsLoading()
@@ -22,11 +22,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     var presenter: DetailsViewPresenterProtocol?
     var worker: DetailsViewWorkerProtocol?
     var movie: MovieDB?
-    var id: String? {
-        didSet {
-            fecthMovie(with: id!)
-        }
-    }
+    var id: String = ""
     
     init(presenter: DetailsViewPresenterProtocol, worker: DetailsViewWorkerProtocol) {
         self.presenter = presenter
@@ -39,8 +35,8 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     
     func buttonFavMovieWasClicked() {
         let favMovie = FavMovieDB()
-        favMovie.id = id ?? ""
-        checkItemInDB() ? worker?.deleteMovie(with: id ?? "") : worker?.add(item: favMovie)
+        favMovie.id = id
+        checkItemInDB() ? worker?.deleteMovie(with: id) : worker?.add(item: favMovie)
 
         setupFavButtonImage()
     }
@@ -50,7 +46,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     private func checkItemInDB() -> Bool {
-        if worker?.checkMovie(with: id ?? "") ?? false {
+        if worker?.checkMovie(with: id) ?? false {
             return true
         } else {
             return false
@@ -58,6 +54,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     func theScreenIsLoading() {
+        fecthMovie(with: id)
         setupFavButtonImage()
         presenter?.show(item: movie!)
     }
