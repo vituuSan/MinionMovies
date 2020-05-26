@@ -27,7 +27,7 @@ class HomeViewPresenter: HomeViewPresenterProtocol {
         var homeViewModel = [HomeViewModel]()
         
         for item in checkedItems {
-            homeViewModel.append(HomeViewModel(id: item.id, title: item.title!, poster: item.poster!))
+            homeViewModel.append(HomeViewModel(id: item.id, title: item.title ?? "", poster: item.poster ?? ""))
         }
         
         view?.movies = homeViewModel

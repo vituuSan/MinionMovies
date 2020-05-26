@@ -25,16 +25,16 @@ class DetailsViewPresenter: DetailsViewPresenterProtocol {
     
     func show(item: MovieDB) {
         let detailsMovieModel = DetailsViewModel(backgroundImage: createImage(urlString: item.poster!),
-            poster: createImage(urlString: item.poster!),
-            title: item.title!,
-            evaluation: item.metascore!,
-            stars: item.metascore!,
-            yearAndDuration: item.year! + "  " + item.runtime!,
+            poster: createImage(urlString: item.poster ?? ""),
+            title: item.title ?? "",
+            evaluation: item.metascore ?? "",
+            stars: item.metascore ?? "",
+            yearAndDuration: (item.year ?? "") + "  " + (item.runtime ?? ""),
             resolution: createResolution(item: item),
-            plot: item.plot!)
+            plot: item.plot ?? "")
         
         view?.movieModel = detailsMovieModel
-        createStars(with: item.metascore!)
+        createStars(with: item.metascore ?? "")
     }
     
     func showTrailer(urlString: String) {

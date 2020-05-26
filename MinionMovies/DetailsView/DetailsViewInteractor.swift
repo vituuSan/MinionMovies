@@ -24,7 +24,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     var movie: MovieDB?
     var id: String? {
         didSet {
-            movie = worker?.getItem(id: id!)
+            fecthMovie(with: id!)
         }
     }
     
@@ -33,10 +33,14 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
         self.worker = worker
     }
     
+    private func fecthMovie(with id: String) {
+        movie = worker?.getMovie(with: id)
+    }
+    
     func buttonFavMovieWasClicked() {
         let favMovie = FavMovieDB()
-        favMovie.id = id!
-        checkItemInDB() ? worker?.delete(item: id!) : worker?.add(item: favMovie)
+        favMovie.id = id ?? ""
+        checkItemInDB() ? worker?.deleteMovie(with: id ?? "") : worker?.add(item: favMovie)
 
         setupFavButtonImage()
     }
@@ -46,7 +50,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     private func checkItemInDB() -> Bool {
-        if worker?.check(item: id!) ?? false {
+        if worker?.checkMovie(with: id ?? "") ?? false {
             return true
         } else {
             return false

@@ -86,21 +86,4 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
         let images = [star1, star2, star3, star4, star5]
         images[index]?.image = image
     }
-    
-    func createEvaluation(with metascore: String) {
-        guard var number = Double(metascore) else { return }
-        let images = [star1, star2, star3, star4, star5]
-        var i = 1
-
-        while i <= 5 {
-            if number / 20 >= 1 {
-                images[i - 1]?.image = UIImage(named: "bright-star")
-            } else if number / 20 >= 0.5 {
-                images[i - 1]?.image = UIImage(named: "kindOfbright-star")
-            }
-            
-            number -= 20
-            i += 1
-        }
-    }
 }

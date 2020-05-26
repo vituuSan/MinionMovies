@@ -12,9 +12,9 @@ protocol DetailsViewWorkerProtocol {
     var dataProvider: DetailsViewDataProviderProtocol? { get set }
     
     func add(item: FavMovieDB)
-    func delete(item: String)
-    func check(item: String) -> Bool
-    func getItem(id: String) -> MovieDB
+    func deleteMovie(with id: String)
+    func checkMovie(with id: String) -> Bool
+    func getMovie(with id: String) -> MovieDB
 }
 
 class DetailsViewWorker: DetailsViewWorkerProtocol {
@@ -28,15 +28,15 @@ class DetailsViewWorker: DetailsViewWorkerProtocol {
         dataProvider?.add(item: item)
     }
     
-    func delete(item: String) {
-        dataProvider?.delete(item: item)
+    func deleteMovie(with id: String) {
+        dataProvider?.deleteMovie(with: id)
     }
     
-    func check(item: String) -> Bool {
-        return dataProvider?.check(item: item) ?? false
+    func checkMovie(with id: String) -> Bool {
+        return dataProvider?.checkMovie(with: id) ?? false
     }
     
-    func getItem(id: String) -> MovieDB {
-        return dataProvider?.getSpecificItem(with: id) ?? MovieDB()
+    func getMovie(with id: String) -> MovieDB {
+        return dataProvider?.getMovie(with: id) ?? MovieDB()
     }
 }

@@ -13,7 +13,7 @@ protocol HomeViewInteractorProtocol {
     var worker: HomeViewWorkerProtocol? { get }
     
     func theScreenIsLoading()
-    func searching(string: String)
+    func searching(title: String)
 }
 
 class HomeViewInteractor: HomeViewInteractorProtocol {
@@ -38,15 +38,16 @@ class HomeViewInteractor: HomeViewInteractorProtocol {
         })
     }
     
-    func searching(string: String) {
+    func searching(title: String) {
+        guard let checkedItems = items else { return }
         var itemsToPresent = [MovieDB]()
-        for item in items! {
-            if item.title!.lowercased().contains(string.lowercased()) {
+        for item in checkedItems {
+            if item.title?.lowercased().contains(title.lowercased()) ?? false {
                 itemsToPresent.append(item)
             }
         }
         
-        if string != "" || itemsToPresent.count != 0 {
+        if title != "" || itemsToPresent.count != 0 {
             presenter?.show(items: itemsToPresent)
         } else {
             presenter?.show(items: items)

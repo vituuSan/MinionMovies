@@ -85,7 +85,7 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        interactor?.searching(string: searchText)
+        interactor?.searching(title: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
