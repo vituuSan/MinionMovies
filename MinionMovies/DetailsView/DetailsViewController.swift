@@ -69,7 +69,6 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
         posterMovie.image = movieModel?.poster
         titleMovie.text = movieModel?.title
         evaluation.text = movieModel?.evaluation
-//        createEvaluation(with: movieModel!.resolution)
         yearAndDuration.text = movieModel?.yearAndDuration
         resolution.text = movieModel?.resolution
         plot.text = movieModel?.plot
