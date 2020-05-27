@@ -57,7 +57,7 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     }
     
     @IBAction func buttonFavMovie(_ sender: Any) {
-        interactor?.buttonFavMovieWasClicked()
+        interactor?.buttonFavMovieWasTapped()
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {

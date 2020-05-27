@@ -14,7 +14,7 @@ protocol DetailsViewWorkerProtocol {
     func add(item: FavMovieDB)
     func deleteMovie(with id: String)
     func checkMovie(with id: String) -> Bool
-    func getMovie(with id: String) -> MovieDB
+    func fetchMovie(with id: String) -> MovieDB
 }
 
 class DetailsViewWorker: DetailsViewWorkerProtocol {
@@ -36,7 +36,7 @@ class DetailsViewWorker: DetailsViewWorkerProtocol {
         return dataProvider?.checkMovie(with: id) ?? false
     }
     
-    func getMovie(with id: String) -> MovieDB {
-        return dataProvider?.getMovie(with: id) ?? MovieDB()
+    func fetchMovie(with id: String) -> MovieDB {
+        return dataProvider?.fetchMovie(with: id) ?? MovieDB()
     }
 }

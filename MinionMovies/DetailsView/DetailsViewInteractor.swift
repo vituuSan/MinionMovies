@@ -13,7 +13,7 @@ protocol DetailsViewInteractorProtocol {
     var worker: DetailsViewWorkerProtocol? { get set }
     var id: String { get set }
     
-    func buttonFavMovieWasClicked()
+    func buttonFavMovieWasTapped()
     func theScreenIsLoading()
     func trailerButtonWasClicked()
 }
@@ -30,10 +30,10 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     private func fecthMovie(with id: String) {
-        movie = worker?.getMovie(with: id)
+        movie = worker?.fetchMovie(with: id)
     }
     
-    func buttonFavMovieWasClicked() {
+    func buttonFavMovieWasTapped() {
         let favMovie = FavMovieDB()
         favMovie.id = id
         checkItemInDB() ? worker?.deleteMovie(with: id) : worker?.add(item: favMovie)
