@@ -10,6 +10,7 @@ import Foundation
 
 protocol HomeViewDataProviderProtocol {
     func add(items: [MovieDB])
+    func retriveAllObjects() -> [MovieDB]
 }
 
 class HomeViewDataProvider: HomeViewDataProviderProtocol {
@@ -24,5 +25,10 @@ class HomeViewDataProvider: HomeViewDataProviderProtocol {
         items.forEach { item in
             dbManager.add(object: item)
         }
+    }
+    
+    func retriveAllObjects() -> [MovieDB] {
+        let dbManager = DBManager(config: config)
+        return dbManager.retrieveAllObjects(type: MovieDB.self) as? [MovieDB] ?? []
     }
 }

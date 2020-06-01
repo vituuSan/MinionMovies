@@ -13,13 +13,12 @@ protocol HomeViewInteractorProtocol {
     var worker: HomeViewWorkerProtocol? { get }
     
     func theScreenIsLoading()
-    func searching(title: String)
+    func search(title: String)
 }
 
 class HomeViewInteractor: HomeViewInteractorProtocol {
     var presenter: HomeViewPresenterProtocol?
     var worker: HomeViewWorkerProtocol?
-    var items: [MovieDB]?
     
     init(presenter: HomeViewPresenterProtocol?, worker: HomeViewWorkerProtocol?) {
         self.presenter = presenter
@@ -32,25 +31,18 @@ class HomeViewInteractor: HomeViewInteractorProtocol {
             case .failure(let error):
                 print(error)
             case .success(let receivedItems):
-                self?.items = receivedItems
                 self?.presenter?.show(items: receivedItems)
             }
         })
     }
     
-    func searching(title: String) {
-        guard let checkedItems = items else { return }
-        var itemsToPresent = [MovieDB]()
-        for item in checkedItems {
-            if item.title?.lowercased().contains(title.lowercased()) ?? false {
-                itemsToPresent.append(item)
-            }
-        }
+    func search(title: String) {
+        let searchResult = (worker?.retrieveAllObjects().filter { $0.title?.lowercased().contains(title.lowercased()) ?? false }) ?? nil
         
-        if title != "" || itemsToPresent.count != 0 {
-            presenter?.show(items: itemsToPresent)
+        if title != "" || searchResult?.count != 0 {
+            presenter?.show(items: searchResult)
         } else {
-            presenter?.show(items: items)
+            presenter?.show(items: worker?.retrieveAllObjects())
         }
     }
 }

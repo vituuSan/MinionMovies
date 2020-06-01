@@ -12,7 +12,7 @@ protocol DetailsViewDataProviderProtocol {
     func add(item: FavMovieDB)
     func deleteMovie(with id: String)
     func checkMovie(with id: String) -> Bool
-    func fetchMovie(with id: String) -> MovieDB
+    func fetchMovie(with id: String) -> MovieDB?
 }
 
 class DetailsViewDataProvider: DetailsViewDataProviderProtocol {
@@ -35,11 +35,11 @@ class DetailsViewDataProvider: DetailsViewDataProviderProtocol {
     
     func checkMovie(with id: String) -> Bool {
         let dbManager = DBManager(config: config)
-        return dbManager.check(objectId: id, type: FavMovieDB.self)
+        return (dbManager.retrieveObject(id: id, type: FavMovieDB.self) != nil) ? true : false
     }
     
-    func fetchMovie(with id: String) -> MovieDB {
+    func fetchMovie(with id: String) -> MovieDB? {
         let dbManager = DBManager(config: config)
-        return dbManager.retrieveSpecificItem(objectId: id, type: MovieDB.self) as! MovieDB
+        return dbManager.retrieveObject(id: id, type: MovieDB.self) as? MovieDB
     }
 }

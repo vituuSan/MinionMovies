@@ -12,6 +12,7 @@ protocol HomeViewWorkerProtocol {
     var dataProvider: HomeViewDataProviderProtocol? { get set }
     
     func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void)
+    func retrieveAllObjects() -> [MovieDB]
 }
 
 class HomeViewWorker: HomeViewWorkerProtocol {
@@ -39,5 +40,9 @@ class HomeViewWorker: HomeViewWorkerProtocol {
             }
         })
         task.resume()
+    }
+    
+    func retrieveAllObjects() -> [MovieDB] {
+        return dataProvider?.retriveAllObjects() ?? []
     }
 }

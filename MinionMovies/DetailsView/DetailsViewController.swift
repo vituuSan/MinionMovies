@@ -61,7 +61,7 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     }
     
     @IBAction func trailerButton(_ sender: UIButton) {
-        interactor?.trailerButtonWasClicked()
+        interactor?.trailerButtonWasTapped()
     }
     
     func setupLayout() {

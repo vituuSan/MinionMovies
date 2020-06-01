@@ -10,10 +10,12 @@ import Foundation
 import RealmSwift
 
 protocol DBManagerProtocol {
+    init(config: ConfigurationType)
+    
     func add(object: Object)
-    func delete(object: Object)
-    func check(objectId: String, type: Object.Type) -> Bool
-    func retrieveSpecificItem(objectId: String, type: Object.Type) -> Object
+    func delete(objectId: String, type: Object.Type)
+    func retrieveObject(id: String, type: Object.Type) -> Object?
+    func retrieveAllObjects(type: Object.Type) -> [Object]
 }
 
 enum ConfigurationType {
@@ -21,12 +23,11 @@ enum ConfigurationType {
     case inMemory
 }
 
-class DBManager {
-    
+class DBManager: DBManagerProtocol {
     var config = Realm.Configuration()
     let realm = try! Realm()
     
-    init(config: ConfigurationType) {
+    required init(config: ConfigurationType) {
         switch config {
         case .basic:
             self.config = Realm.Configuration()
@@ -57,16 +58,10 @@ class DBManager {
         }
     }
     
-    func check(objectId: String, type: Object.Type) -> Bool {
-        let objects = realm.objects(type).filter("id == '\(objectId)'")
+    func retrieveObject(id: String, type: Object.Type) -> Object? {
+        let objects = realm.objects(type).filter("id = '\(id)'")
         
-        return objects.count > 0
-    }
-    
-    func retrieveSpecificItem(objectId: String, type: Object.Type) -> Object {
-        let objects = realm.objects(type).filter("id = '\(objectId)'")
-        
-        return objects.first!
+        return objects.first
     }
     
     func retrieveAllObjects(type: Object.Type) -> [Object] {

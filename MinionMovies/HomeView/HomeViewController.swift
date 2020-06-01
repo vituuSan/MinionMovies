@@ -66,7 +66,7 @@ extension HomeViewController: UICollectionViewDataSource {
 extension HomeViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let movieDetail = storyboard?.instantiateViewController(identifier: "DetailsViewController") as? DetailsViewController else { return }
-        movieDetail.id = movies![indexPath.row].id
+        movieDetail.id = movies?[indexPath.row].id
         let presenter = DetailsViewPresenter(view: movieDetail)
         let dataProvider = DetailsViewDataProvider(config: .basic)
         let worker = DetailsViewWorker(dataProvider: dataProvider)
@@ -85,7 +85,7 @@ extension HomeViewController: UICollectionViewDelegate {
 // MARK: UISearchBarDelegate
 extension HomeViewController: UISearchBarDelegate {
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        interactor?.searching(title: searchText)
+        interactor?.search(title: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {

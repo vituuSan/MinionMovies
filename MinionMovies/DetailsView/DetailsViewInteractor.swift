@@ -15,7 +15,7 @@ protocol DetailsViewInteractorProtocol {
     
     func buttonFavMovieWasTapped()
     func theScreenIsLoading()
-    func trailerButtonWasClicked()
+    func trailerButtonWasTapped()
 }
 
 class DetailsViewInteractor: DetailsViewInteractorProtocol {
@@ -46,11 +46,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
     }
     
     private func checkItemInDB() -> Bool {
-        if worker?.checkMovie(with: id) ?? false {
-            return true
-        } else {
-            return false
-        }
+        return worker?.checkMovie(with: id) ?? false
     }
     
     func theScreenIsLoading() {
@@ -59,7 +55,7 @@ class DetailsViewInteractor: DetailsViewInteractorProtocol {
         presenter?.show(item: movie!)
     }
     
-    func trailerButtonWasClicked() {
+    func trailerButtonWasTapped() {
         guard let checkedMovie = movie else { return }
         presenter?.showTrailer(urlString: checkedMovie.trailer!)
     }
