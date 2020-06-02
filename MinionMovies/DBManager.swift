@@ -25,13 +25,14 @@ enum ConfigurationType {
 
 class DBManager: DBManagerProtocol {
     var config = Realm.Configuration()
+    var realm: Realm
     
     required init(config: ConfigurationType) {
         switch config {
         case .basic:
-            self.config = Realm.Configuration()
+            self.realm = try! Realm()
         case .inMemory:
-            self.config = Realm.Configuration(inMemoryIdentifier: "inMemory")
+            self.realm = try! Realm(configuration: Realm.Configuration(inMemoryIdentifier: "inMemory"))
         }
     }
     
