@@ -25,7 +25,6 @@ enum ConfigurationType {
 
 class DBManager: DBManagerProtocol {
     var config = Realm.Configuration()
-    let realm = try! Realm()
     
     required init(config: ConfigurationType) {
         switch config {
@@ -37,6 +36,7 @@ class DBManager: DBManagerProtocol {
     }
     
     func add(object: Object) {
+        let realm = try! Realm(configuration: config)
         do {
             
             try realm.write {
@@ -48,6 +48,7 @@ class DBManager: DBManagerProtocol {
     }
     
     func delete(objectId: String, type: Object.Type) {
+        let realm = try! Realm(configuration: config)
         do {
             
             try realm.write{
@@ -59,12 +60,14 @@ class DBManager: DBManagerProtocol {
     }
     
     func retrieveObject(id: String, type: Object.Type) -> Object? {
+        let realm = try! Realm(configuration: config)
         let objects = realm.objects(type).filter("id = '\(id)'")
         
         return objects.first
     }
     
     func retrieveAllObjects(type: Object.Type) -> [Object] {
+        let realm = try! Realm(configuration: config)
         var allObjects: [Object] = []
         let realmResults = realm.objects(type)
         
