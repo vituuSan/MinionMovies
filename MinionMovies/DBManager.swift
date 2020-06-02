@@ -24,7 +24,6 @@ enum ConfigurationType {
 }
 
 class DBManager: DBManagerProtocol {
-    var config = Realm.Configuration()
     var realm: Realm
     
     required init(config: ConfigurationType) {
