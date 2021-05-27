@@ -9,40 +9,32 @@
 import Foundation
 
 protocol HomeViewWorkerProtocol {
-    var dataProvider: HomeViewDataProviderProtocol? { get set }
-    
-    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void)
-    func retrieveAllObjects() -> [MovieDB]
+    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[Movie], Error>) -> Void)
 }
 
 class HomeViewWorker: HomeViewWorkerProtocol {
-    var dataProvider: HomeViewDataProviderProtocol?
     private let session = URLSession.shared
-    private var items: [MovieDB]?
     
-    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[MovieDB], Error>) -> Void) {
-        guard let checkedUrl = URL(string: urlString) else { return }
-        let error = NSError()
-        let task = URLSession.shared.dataTask(with: checkedUrl, completionHandler: { (data, _, _) in
-            guard let checkedData = data else {
-                completionHandler(.failure(error))
+    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<[Movie], Error>) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
+            
+            guard let data = data else {
+                completionHandler(.failure(error ?? NSError()))
                 return
             }
             
             do {
-                self.items = try JSONDecoder().decode([MovieDB].self, from: checkedData)
-                completionHandler(.success(self.items ?? []))
+                let response = try JSONSerialization.jsonObject(with: data, options: .mutableContainers) as? [String: Any]
+                let results = try JSONSerialization.data(withJSONObject: response?["results"] ?? [:], options: .prettyPrinted)
+                let items = try JSONDecoder().decode([Movie].self, from: results)
+                completionHandler(.success(items))
                 
-                self.dataProvider?.add(items: self.items ?? [])
-                
-            } catch {
+            } catch let error {
                 completionHandler(.failure(error))
             }
         })
         task.resume()
-    }
-    
-    func retrieveAllObjects() -> [MovieDB] {
-        return dataProvider?.retriveAllObjects() ?? []
     }
 }

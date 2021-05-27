@@ -15,18 +15,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey : Any]? = nil) -> Bool {
         self.window = UIWindow(frame: UIScreen.main.bounds)
         
-        let storyboard = UIStoryboard.init(name: "Main", bundle: nil)
-        let controller = storyboard.instantiateViewController(identifier: "Movies") as! HomeViewController
+        let controller = HomeViewController(nibName: "HomeViewController", bundle: nil)
         let presenter = HomeViewPresenter(view: controller)
         let interactor = HomeViewInteractor(presenter: presenter, worker: HomeViewWorker())
-       
+
         controller.interactor = interactor
-        interactor.worker?.dataProvider = HomeViewDataProvider(config: .basic)
+        let navigation = UINavigationController(rootViewController: controller)
         
-        let navigationController = storyboard.instantiateViewController(withIdentifier: "Navigation") as! UINavigationController
-        navigationController.viewControllers = [controller] 
-        self.window?.rootViewController = navigationController
-        self.window?.makeKeyAndVisible()
+        window?.rootViewController = navigation
+        window?.makeKeyAndVisible()
         
         return true
     }

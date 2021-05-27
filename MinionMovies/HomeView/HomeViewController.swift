@@ -7,88 +7,79 @@
 //
 
 import UIKit
-import RealmSwift
 
-protocol HomeViewProtocol {
+protocol HomeViewProtocol: UIViewController {
     var interactor: HomeViewInteractorProtocol? { get }
-    var movies: [HomeViewModel]? { get set }
+    var movies: [Movie] { get set }
 }
 
 class HomeViewController: UIViewController, HomeViewProtocol {
-    @IBOutlet private weak var collectionViewTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var searchBarTopConstraint: NSLayoutConstraint!
-    @IBOutlet private weak var searchBar: UISearchBar!
-    @IBOutlet private weak var collectionView: UICollectionView!
+    @IBOutlet weak var tableView: UITableView!
     
     var interactor: HomeViewInteractorProtocol?
-    var movies: [HomeViewModel]? = [HomeViewModel]() {
+    var movies: [Movie] = [] {
         didSet {
             DispatchQueue.main.async {
-                self.collectionView.reloadData()
+                self.hideLoading()
+                self.tableView.reloadData()
             }
         }
     }
     
-    override func viewDidAppear(_ animated: Bool) {
-        searchBar.searchTextField.textColor = .white
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.white
+        
+        self.title = "Movies"
+        self.view.backgroundColor = .cyan.withAlphaComponent(0.8)
+        
+        tableView.register(UINib(nibName: "HomeViewCell", bundle: nil), forCellReuseIdentifier: "HomeViewCell")
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.backgroundColor = .clear
+        
+        self.showLoading()
+        
         interactor?.theScreenIsLoading()
     }
+}
+
+extension HomeViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
     
-    @IBAction func showSearchBar(_ sender: Any) {
-        if searchBar.isHidden {
-            searchBar.isHidden = false
-            collectionViewTopConstraint.constant = 0
-            view.layoutIfNeeded()
-        } else if searchBar.isHidden == false {
-            searchBar.isHidden = true
-            collectionViewTopConstraint.constant = -56
-            view.layoutIfNeeded()
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return movies.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        if let cell = tableView.dequeueReusableCell(withIdentifier: "HomeViewCell") as? HomeViewCell {
+            cell.setup(movie: movies[indexPath.section])
+            return cell
         }
-    }
-}
-
-// MARK: UICollectionViewDataSource
-extension HomeViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return movies?.count ?? 0
+        
+        return UITableViewCell()
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let movieCell = collectionView.dequeueReusableCell(withReuseIdentifier: "MovieCell", for: indexPath) as? HomeViewCell else { return HomeViewCell() }
-        
-        movieCell.populate(with: movies?[indexPath.row].poster ?? "")
-        return movieCell
-        
-    }
-}
-
-// MARK: UICollectionViewDelegate
-extension HomeViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        guard let movieDetail = storyboard?.instantiateViewController(identifier: "DetailsViewController") as? DetailsViewController else { return }
-        movieDetail.id = movies?[indexPath.row].id
-        let presenter = DetailsViewPresenter(view: movieDetail)
-        let dataProvider = DetailsViewDataProvider(config: .basic)
-        let worker = DetailsViewWorker(dataProvider: dataProvider)
-        movieDetail.interactor = DetailsViewInteractor(presenter: presenter, worker: worker)
-        
-        searchBar.endEditing(true)
-        
-        self.navigationController?.pushViewController(movieDetail, animated: true)
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let controller = DetailsViewController(nibName: "DetailsViewController", bundle: nil)
+        let presenter = DetailsViewPresenter(view: controller)
+        let interactor = DetailsViewInteractor(presenter: presenter, worker: DetailsViewWorker())
+        interactor.id = self.movies[indexPath.section].id ?? 0
+        controller.interactor = interactor
+        self.navigationController?.pushViewController(controller, animated: true)
     }
     
-    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
-        searchBar.endEditing(true)
-    }
-}
-
-// MARK: UISearchBarDelegate
-extension HomeViewController: UISearchBarDelegate {
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        interactor?.search(title: searchText)
+    // Settings to cell's spacing
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let headerView = UIView()
+        headerView.backgroundColor = UIColor.clear
+        return headerView
     }
     
-    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchBar.endEditing(true)
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 2
     }
 }

@@ -11,53 +11,51 @@ import Foundation
 protocol DetailsViewInteractorProtocol {
     var presenter: DetailsViewPresenterProtocol? { get set }
     var worker: DetailsViewWorkerProtocol? { get set }
-    var id: String { get set }
+    var id: Int { get set }
     
-    func buttonFavMovieWasTapped()
     func theScreenIsLoading()
-    func trailerButtonWasTapped()
+    func homepageButtonWasTapped()
 }
 
 class DetailsViewInteractor: DetailsViewInteractorProtocol {
     var presenter: DetailsViewPresenterProtocol?
     var worker: DetailsViewWorkerProtocol?
-    var movie: MovieDB?
-    var id: String = ""
+    var movie: MovieDetails?
+    var id: Int = 0
     
     init(presenter: DetailsViewPresenterProtocol, worker: DetailsViewWorkerProtocol) {
         self.presenter = presenter
         self.worker = worker
     }
     
-    private func fecthMovie(with id: String) {
-        movie = worker?.fetchMovie(with: id)
-    }
-    
-    func buttonFavMovieWasTapped() {
-        let favMovie = FavMovieDB()
-        favMovie.id = id
-        checkItemInDB() ? worker?.deleteMovie(with: id) : worker?.add(item: favMovie)
-
-        setupFavButtonImage()
-    }
-    
-    func setupFavButtonImage() {
-        checkItemInDB() ? presenter?.toggleFavButtonImage(boolean: true) : presenter?.toggleFavButtonImage(boolean: false)
-    }
-    
-    private func checkItemInDB() -> Bool {
-        return worker?.checkMovie(with: id) ?? false
-    }
-    
     func theScreenIsLoading() {
-        fecthMovie(with: id)
-        setupFavButtonImage()
-        presenter?.show(item: movie!)
+        worker?.makeGetRequest(urlString: "https://api.themoviedb.org/3/movie/\(id)?api_key=27be02dff2f4dd49499f203c5bc3bd3e") { [weak self] result in
+            switch result {
+            case .success(let movie):
+                self?.movie = movie
+                self?.presenter?.show(item: movie)
+                self?.loadImage()
+                
+            case .failure(let error):
+                self?.presenter?.showAlert(message: error.localizedDescription, type: .error)
+            }
+        }
     }
     
-    func trailerButtonWasTapped() {
+    private func loadImage() {
+        MinionMoviesService.fetchImage(path: movie?.poster ?? "") { [weak self] result in
+            switch result {
+            case .success(let image):
+                self?.presenter?.show(image: image)
+            case .failure(let error):
+                self?.presenter?.showAlert(message: error.localizedDescription, type: .error)
+            }
+        }
+    }
+    
+    func homepageButtonWasTapped() {
         guard let checkedMovie = movie else { return }
-        presenter?.showTrailer(urlString: checkedMovie.trailer!)
+        presenter?.showTrailer(urlString: checkedMovie.homepage!)
     }
 }
 

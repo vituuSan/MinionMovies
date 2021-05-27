@@ -9,33 +9,23 @@
 import UIKit
 import RealmSwift
 
-protocol DetailsViewControllerProtocol {
+protocol DetailsViewControllerProtocol: UIViewController {
     var interactor: DetailsViewInteractorProtocol? { get set }
-    var movieModel: DetailsViewModel? { get set }
+    var movie: MovieDetails { get set }
     
-    func setupFavButtonImage(string: String)
     func showTrailer(url: URL)
-    func setupStars(index: Int, image: UIImage)
+    func show(image: UIImage)
 }
 
 class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
-    @IBOutlet private weak var backgroundImage: UIImageView!
-    @IBOutlet private weak var posterMovie: UIImageView!
-    @IBOutlet private weak var titleMovie: UILabel!
-    @IBOutlet private weak var evaluation: UILabel!
-    @IBOutlet private weak var yearAndDuration: UILabel!
-    @IBOutlet private weak var resolution: UILabel!
-    @IBOutlet private weak var plot: UITextView!
-    @IBOutlet private weak var star1: UIImageView!
-    @IBOutlet private weak var star2: UIImageView!
-    @IBOutlet private weak var star3: UIImageView!
-    @IBOutlet private weak var star4: UIImageView!
-    @IBOutlet private weak var star5: UIImageView!
-    @IBOutlet private weak var favButton: UIBarButtonItem!
+    @IBOutlet weak var backgroundImage: UIImageView!
+    @IBOutlet weak var labelTitle: UILabel!
+    @IBOutlet weak var textViewOverview: UITextView!
+    @IBOutlet weak var collectionView: UICollectionView!
+    @IBOutlet weak var homepageButton: UIButton!
     
     var interactor: DetailsViewInteractorProtocol?
-    var id: String?
-    var movieModel: DetailsViewModel? {
+    var movie: MovieDetails = MovieDetails() {
         didSet {
             setupLayout()
         }
@@ -43,47 +33,89 @@ class DetailsViewController: UIViewController, DetailsViewControllerProtocol {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .cyan.withAlphaComponent(0.8)
         
+        self.navigationController?.navigationBar.tintColor = .white
         self.navigationController?.navigationBar.setBackgroundImage(UIImage(), for: UIBarMetrics.default)
         self.navigationController?.navigationBar.shadowImage = UIImage()
         self.navigationController?.navigationBar.isTranslucent = true
         self.navigationController?.view.backgroundColor = UIColor.clear
-    }
-    
-    override func viewDidAppear(_ animated: Bool) {
-        interactor?.id = id ?? ""
+        
+        self.showLoading()
+        
+        collectionView.delegate = self
+        collectionView.dataSource = self
+        collectionView.register(UINib(nibName: "DetailsViewCell", bundle: nil), forCellWithReuseIdentifier: "DetailsViewCell")
+        
+        setupButtonHomepage()
+        
         interactor?.theScreenIsLoading()
     }
     
-    @IBAction func buttonFavMovie(_ sender: Any) {
-        interactor?.buttonFavMovieWasTapped()
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.view.backgroundColor = UIColor.white
     }
     
-    @IBAction func trailerButton(_ sender: UIButton) {
-        interactor?.trailerButtonWasTapped()
+    func setupButtonHomepage() {
+        self.homepageButton.layer.shadowOpacity = 0.23
+        self.homepageButton.layer.shadowRadius = 4
+        self.homepageButton.layer.shadowOffset = CGSize(width: 0, height: 0)
+        self.homepageButton.layer.shadowColor = UIColor.black.cgColor
+        self.homepageButton.backgroundColor = .white
+        self.homepageButton.layer.cornerRadius = 10
+        self.homepageButton.tintColor = .black
     }
     
     func setupLayout() {
-        backgroundImage.image = movieModel?.backgroundImage
-        posterMovie.image = movieModel?.poster
-        titleMovie.text = movieModel?.title
-        evaluation.text = movieModel?.evaluation
-        yearAndDuration.text = movieModel?.yearAndDuration
-        resolution.text = movieModel?.resolution
-        plot.text = movieModel?.plot
+        DispatchQueue.main.async {
+            self.hideLoading()
+            self.labelTitle.text = self.movie.title
+            self.textViewOverview.text = self.movie.overview
+            self.collectionView.reloadData()
+        }
     }
     
     func showTrailer(url: URL) {
         UIApplication.shared.open(url)
     }
     
-    func setupFavButtonImage(string: String) {
-        favButton.image = UIImage(named: string)
+    func show(image: UIImage) {
+        DispatchQueue.main.async {
+            self.backgroundImage.image = image
+        }
     }
     
-    func setupStars(index: Int, image: UIImage) {
-        let images = [star1, star2, star3, star4, star5]
-        images[index]?.image = image
+    @IBAction func homepageButtonTap(_ sender: Any) {
+        interactor?.homepageButtonWasTapped()
     }
+}
+
+extension DetailsViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return movie.genres.count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "DetailsViewCell", for: indexPath) as? DetailsViewCell {
+            cell.backgroundColor = .clear
+            
+            cell.backView.layer.cornerRadius = 25
+//            cell.backView.clipsToBounds = false
+//            cell.backView.layer.masksToBounds = false
+            cell.backView.layer.shadowOpacity = 0.5
+            cell.backView.layer.shadowRadius = 15
+            cell.backView.layer.shadowOffset = CGSize(width: 5.0, height: 5.0)
+            cell.backView.layer.shadowColor = UIColor.black.cgColor
+            cell.backView.backgroundColor = .white
+            
+            cell.setup(title: movie.genres[indexPath.row].name ?? "")
+            return cell
+        }
+        return UICollectionViewCell()
+    }
+    
+    
 }

@@ -11,7 +11,8 @@ import Foundation
 protocol HomeViewPresenterProtocol {
     var view: HomeViewProtocol? { get }
     
-    func show(items: [MovieDB]?)
+    func show(items: [Movie]?)
+    func showAlert(message: String, type: AlertType)
 }
 
 class HomeViewPresenter: HomeViewPresenterProtocol {
@@ -21,15 +22,19 @@ class HomeViewPresenter: HomeViewPresenterProtocol {
         self.view = view
     }
     
-    func show(items: [MovieDB]?) {
+    func show(items: [Movie]?) {
         guard let checkedItems = items else { return }
         
-        var homeViewModel = [HomeViewModel]()
+        var movies = [Movie]()
         
         for item in checkedItems {
-            homeViewModel.append(HomeViewModel(id: item.id, title: item.title ?? "", poster: item.poster ?? ""))
+            movies.append(item)
         }
         
-        view?.movies = homeViewModel
+        view?.movies = movies
+    }
+    
+    func showAlert(message: String, type: AlertType) {
+        view?.showAlert(message: message, type: type)
     }
 }

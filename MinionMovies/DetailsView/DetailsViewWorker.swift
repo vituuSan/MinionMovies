@@ -9,34 +9,29 @@
 import Foundation
 
 protocol DetailsViewWorkerProtocol {
-    var dataProvider: DetailsViewDataProviderProtocol? { get set }
-    
-    func add(item: FavMovieDB)
-    func deleteMovie(with id: String)
-    func checkMovie(with id: String) -> Bool
-    func fetchMovie(with id: String) -> MovieDB
+    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<MovieDetails, Error>) -> Void)
 }
 
 class DetailsViewWorker: DetailsViewWorkerProtocol {
-    var dataProvider: DetailsViewDataProviderProtocol?
     
-    init(dataProvider: DetailsViewDataProviderProtocol) {
-        self.dataProvider = dataProvider
-    }
-    
-    func add(item: FavMovieDB) {
-        dataProvider?.add(item: item)
-    }
-    
-    func deleteMovie(with id: String) {
-        dataProvider?.deleteMovie(with: id)
-    }
-    
-    func checkMovie(with id: String) -> Bool {
-        return dataProvider?.checkMovie(with: id) ?? false
-    }
-    
-    func fetchMovie(with id: String) -> MovieDB {
-        return dataProvider?.fetchMovie(with: id) ?? MovieDB()
+    func makeGetRequest(urlString: String, completionHandler: @escaping(Result<MovieDetails, Error>) -> Void) {
+        guard let url = URL(string: urlString) else { return }
+        
+        let task = URLSession.shared.dataTask(with: url, completionHandler: { (data, _, error) in
+            
+            guard let data = data else {
+                completionHandler(.failure(error ?? NSError()))
+                return
+            }
+            
+            do {
+                let items = try JSONDecoder().decode(MovieDetails.self, from: data)
+                completionHandler(.success(items))
+                
+            } catch let error {
+                completionHandler(.failure(error))
+            }
+        })
+        task.resume()
     }
 }

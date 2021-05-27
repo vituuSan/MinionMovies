@@ -13,7 +13,6 @@ protocol HomeViewInteractorProtocol {
     var worker: HomeViewWorkerProtocol? { get }
     
     func theScreenIsLoading()
-    func search(title: String)
 }
 
 class HomeViewInteractor: HomeViewInteractorProtocol {
@@ -26,23 +25,16 @@ class HomeViewInteractor: HomeViewInteractorProtocol {
     }
     
     func theScreenIsLoading() {
-        worker?.makeGetRequest(urlString: "http://localhost:8080/response.json", completionHandler: { [weak self] result in
+        let url = ServiceConstants.Discover.movie + MinionMoviesService.apiKey
+        worker?.makeGetRequest(urlString: url,
+                               completionHandler: { [weak self] result in
             switch result {
-            case .failure(let error):
-                print(error)
             case .success(let receivedItems):
                 self?.presenter?.show(items: receivedItems)
+            case .failure(let error):
+                print(error.localizedDescription)
+//                self?.presenter?.showAlert(message: error.localizedDescription, type: .error)
             }
         })
-    }
-    
-    func search(title: String) {
-        let searchResult = (worker?.retrieveAllObjects().filter { $0.title?.lowercased().contains(title.lowercased()) ?? false }) ?? nil
-        
-        if title != "" || searchResult?.count != 0 {
-            presenter?.show(items: searchResult)
-        } else {
-            presenter?.show(items: worker?.retrieveAllObjects())
-        }
     }
 }
